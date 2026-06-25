@@ -165,6 +165,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="sbtn" onclick="saveMeas()">Guardar medidas de hoy</button>
   <div id="mhist" style="padding:8px 16px 16px;font-size:12px;color:var(--t3);"></div>
 </div>
+<div class="slbl">Reporte semanal para coach</div>
+<div style="padding:0 16px 12px;">
+  <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+    <div style="font-size:12px;color:var(--t2);margin-bottom:10px;line-height:1.5;">Genera un resumen de tu semana para compartir con tu coach y recibir feedback personalizado.</div>
+    <div style="margin-bottom:10px;">
+      <label style="font-size:11px;color:var(--t3);display:block;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">¿Cómo te sentiste esta semana?</label>
+      <textarea id="weekly-note" placeholder="Energía, sueño, antojos, dolores, cómo te sentiste en general..." style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg);color:var(--t1);min-height:80px;resize:none;outline:none;font-family:inherit;"></textarea>
+    </div>
+    <button class="gbtn" onclick="genReport()">Generar reporte semanal 📋</button>
+  </div>
+</div>
+<div id="report-out" style="display:none;padding:0 16px 16px;">
+  <div style="padding:12px 14px;background:#F0FBF7;border:1px solid var(--gb);border-radius:14px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span style="font-size:12px;font-weight:700;color:var(--gd);">Reporte listo ✓</span>
+      <button onclick="copyReport()" style="font-size:12px;color:var(--gd);font-weight:700;background:none;border:none;cursor:pointer;">Copiar 📋</button>
+    </div>
+    <pre id="report-text" style="font-size:11px;color:var(--t1);white-space:pre-wrap;word-break:break-word;line-height:1.6;font-family:inherit;margin:0;"></pre>
+  </div>
+</div>
 <div id="s-cardio" class="screen">
   <div class="ph"><h2>Cardio y NEAT</h2><p>Registra tu actividad</p></div>
   <div class="slbl">Registrar sesión</div>
@@ -330,6 +350,193 @@ function toggleMultiZone(){const sm=document.getElementById('simple-mode'),mm=do
 function updMZTotal(){const vals=['mz1','mz2','mz3','mz4','mz5'].map(id=>parseInt(document.getElementById(id).value)||0);document.getElementById('mztotal').textContent=vals.reduce((a,b)=>a+b,0);}
 function saveCardio(){const tipo=document.getElementById('ctipo').value;const isMulti=document.getElementById('multi-mode').style.display==='block';let e;if(isMulti){const z1=parseInt(document.getElementById('mz1').value)||0,z2=parseInt(document.getElementById('mz2').value)||0,z3=parseInt(document.getElementById('mz3').value)||0,z4=parseInt(document.getElementById('mz4').value)||0,z5=parseInt(document.getElementById('mz5').value)||0;const dur=z1+z2+z3+z4+z5;if(!dur){toast('Ingresa al menos una zona');return;}const md=document.getElementById('mdate').value||dk();e={date:md,tipo,zona:'multi',dur,z1,z2,z3,z4,z5,fc:document.getElementById('mfc').value};['mz1','mz2','mz3','mz4','mz5','mfc'].forEach(id=>document.getElementById(id).value='');document.getElementById('mztotal').textContent='0';document.getElementById('mdate').value=dk();}else{const dur=parseInt(document.getElementById('cdur').value)||0;if(!dur){toast('Ingresa la duración');return;}const cd=document.getElementById('cdate').value||dk();e={date:cd,tipo,zona:document.getElementById('czona').value,dur,fc:document.getElementById('cfc').value};document.getElementById('cdur').value='';document.getElementById('cfc').value='';document.getElementById('cdate').value=dk();}ST.cardio.push(e);sv();rC();toast('Cardio guardado ✓');}
 function rC(){const wks=wk();const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);const z3=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);document.getElementById('wcz2').textContent=z2+' min';document.getElementById('wcz3').textContent=z3+' min';document.getElementById('wcses').textContent=ST.cardio.filter(c=>wks.includes(c.date)).length;const rec=ST.cardio.slice(-5).reverse();function renderCardioEntry(c){if(c.zona==='multi'){const zonas=['Z1','Z2','Z3','Z4','Z5'],vals=[c.z1,c.z2,c.z3,c.z4,c.z5];const splits=zonas.map((z,i)=>vals[i]?`<span style="background:var(--gl);color:var(--gd);padding:1px 6px;border-radius:10px;font-size:11px;font-weight:700;">${z}: ${vals[i]}'</span>`:'').filter(Boolean).join(' ');return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone z3">Multi-zona</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">${splits}</div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min total</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone ${(c.zona.includes('Zona 1')||c.zona.includes('Zona 2'))?'z2':'z3'}">${c.zona}</span></div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}document.getElementById('chist').innerHTML=rec.length===0?'<div class="emp">Sin sesiones registradas</div>':rec.map(renderCardioEntry).join('');}
+function genReport(){
+  const wks=wk();
+  const today=new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const weekStart=new Date();weekStart.setDate(weekStart.getDate()-weekStart.getDay());
+  const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
+  const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit'});
+
+  // Sessions
+  const doneW=ST.done.filter(d=>wks.includes(d));
+  const sesNames={0:'Dom · Glúteos full',1:'Lun · Glúteos+Isquios',2:'Mar · Spinning+Espalda',3:'Mié · Glúteos+Cuád',4:'Jue · Espalda+Core'};
+  const expectedDays=[0,1,2,3,4];
+  const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
+  const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
+
+  // Volume and loads per exercise
+  let exLines=[];
+  wks.forEach(d=>{
+    const dn=new Date(d+'T12:00:00').getDay();
+    const exs=SCH[dn]?.ex||[];
+    const chkD=ST.chk[d]||{};
+    exs.forEach((ex,ei)=>{
+      const sets=[];
+      for(let si=1;si<=ex.s;si++){
+        const cd=chkD[ei+'-'+si];
+        if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);
+      }
+      if(sets.length>0){
+        const pr=ST.prs[ex.n];
+        const prNote=pr&&pr.date===d?' ⬆️RP':'';
+        exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);
+      }
+    });
+  });
+
+  // Cardio
+  const cardioW=ST.cardio.filter(c=>wks.includes(c.date));
+  const z2=cardioW.reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
+  const z3=cardioW.reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);
+  const z1=cardioW.reduce((a,c)=>a+(c.zona==='multi'?(c.z1||0):c.zona.includes('Zona 1')?c.dur:0),0);
+  let cardioLines=[];
+  cardioW.forEach(c=>{
+    if(c.zona==='multi'){
+      const splits=['Z1','Z2','Z3','Z4','Z5'].map((z,i)=>c[`z${i+1}`]?`${z}:${c[`z${i+1}`]}'`:'').filter(Boolean).join(' ');
+      cardioLines.push(`  ${c.date} · ${c.tipo} · ${splits} · ${c.dur}min total${c.fc?' · '+c.fc+'bpm':''}`);
+    }else{
+      cardioLines.push(`  ${c.date} · ${c.tipo} · ${c.zona} · ${c.dur}min${c.fc?' · '+c.fc+'bpm':''}`);
+    }
+  });
+
+  // Steps
+  const stepsW=wks.map(d=>ST.steps[d]||0);
+  const avgSteps=Math.round(stepsW.reduce((a,b)=>a+b,0)/7);
+  const maxSteps=Math.max(...stepsW);
+  const minSteps=Math.min(...stepsW.filter(s=>s>0));
+
+  // PRs this week
+  const prsW=Object.entries(ST.prs).filter(([n,v])=>wks.includes(v.date));
+
+  // Volume
+  const vc={};
+  wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
+
+  // Note
+  const note=document.getElementById('weekly-note').value.trim();
+
+  // Build report
+  let r='';
+  r+='═══════════════════════════════
+';
+  r+='📊 REPORTE SEMANAL KELLY FIT
+';
+  r+=`Semana: ${fmt(weekStart)} – ${fmt(weekEnd)}
+`;
+  r+='═══════════════════════════════
+
+';
+
+  r+='🏋️ ENTRENAMIENTOS
+';
+  r+=`Completadas: ${completedDays.length}/5 sesiones
+`;
+  if(completedDays.length>0)r+=`✅ ${completedDays.map(d=>sesNames[d]).join('
+✅ ')}
+`;
+  if(missedDays.length>0)r+=`❌ ${missedDays.map(d=>sesNames[d]).join('
+❌ ')}
+`;
+  r+='
+';
+
+  if(exLines.length>0){
+    r+='📦 CARGAS REGISTRADAS
+';
+    r+=exLines.join('
+')+'
+
+';
+  }
+
+  if(prsW.length>0){
+    r+='🏆 RÉCORDS ESTA SEMANA
+';
+    prsW.forEach(([n,v])=>r+=`  ${n}: ${v.kg}kg × ${v.r}
+`);
+    r+='
+';
+  }
+
+  r+='📊 VOLUMEN POR GRUPO
+';
+  const volNames={gj:'Glúteo mayor',gm:'Glúteo medio',isq:'Isquiotibiales',e:'Espalda',c:'Core',b:'Bíceps',tri:'Tríceps',q:'Cuádriceps'};
+  Object.entries(vc).forEach(([z,cnt])=>{
+    const name=volNames[z]||z;
+    r+=`  ${name}: ${cnt} series
+`;
+  });
+  r+='
+';
+
+  r+='🚴 CARDIO
+';
+  r+=`Zona 1: ${z1} min
+`;
+  r+=`Zona 2: ${z2} min (meta 140)
+`;
+  r+=`Zona 3-5: ${z3} min (máx 90)
+`;
+  if(cardioLines.length>0)r+=cardioLines.join('
+')+'
+';
+  r+='
+';
+
+  r+='👟 PASOS
+';
+  r+=`Promedio: ${avgSteps.toLocaleString('es-CO')} pasos/día
+`;
+  if(maxSteps>0)r+=`Máximo: ${maxSteps.toLocaleString('es-CO')} | Mínimo: ${(minSteps||0).toLocaleString('es-CO')}
+`;
+  r+='
+';
+
+  if(note){
+    r+='💬 CÓMO ME SENTÍ
+';
+    r+=note+'
+
+';
+  }
+
+  const lm=ST.meas?.[ST.meas.length-1];
+  if(lm&&wks.includes(lm.date)){
+    r+='📏 MEDIDAS (última toma)
+';
+    if(lm.cintura)r+=`  Cintura: ${lm.cintura} cm
+`;
+    if(lm.cadera)r+=`  Cadera: ${lm.cadera} cm
+`;
+    if(lm.muslo)r+=`  Muslo: ${lm.muslo} cm
+`;
+    if(lm.peso)r+=`  Peso: ${lm.peso} kg
+`;
+    r+='
+';
+  }
+
+  r+='═══════════════════════════════
+';
+  r+='Generado por Kelly Fit App';
+
+  document.getElementById('report-text').textContent=r;
+  document.getElementById('report-out').style.display='block';
+  document.getElementById('report-out').scrollIntoView({behavior:'smooth'});
+}
+
+function copyReport(){
+  const text=document.getElementById('report-text').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>toast('Reporte copiado ✓'));
+  }else{
+    const ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    toast('Reporte copiado ✓');
+  }
+}
+
 load();
 </script>
 </body>
