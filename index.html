@@ -188,6 +188,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div id="exblocks" style="padding-bottom:8px;"></div>
   <button onclick="deleteW()" style="margin:4px 16px 0;width:calc(100% - 32px);padding:10px;background:#FFF0F0;color:#8B1A1A;border:1px solid #FFCDD2;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;">🗑 Borrar registro de esta fecha</button>
+  <div id="delete-confirm" style="display:none;margin:6px 16px 0;padding:12px 14px;background:#FFF0F0;border:1px solid #FFCDD2;border-radius:12px;">
+    <div style="font-size:13px;color:#8B1A1A;font-weight:600;margin-bottom:8px;">¿Borrar el registro del <span id="delete-confirm-date"></span>?</div>
+    <div style="font-size:12px;color:#8B1A1A;margin-bottom:10px;">Se eliminarán las series y el entrenamiento completado de ese día.</div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="confirmDeleteW()" style="flex:1;padding:9px;background:#8B1A1A;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Sí, borrar</button>
+      <button onclick="document.getElementById('delete-confirm').style.display='none'" style="flex:1;padding:9px;background:var(--bg);color:var(--t2);border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Cancelar</button>
+    </div>
+  </div>
   <button class="fb" onclick="finishW()">Finalizar sesión ✓</button>
   <div style="height:16px;"></div>
 </div>
@@ -905,9 +913,15 @@ function deleteW(){
   const hasDone=ST.done.includes(dky);
   const hasChk=ST.chk[dky]&&Object.keys(ST.chk[dky]).length>0;
   if(!hasDone&&!hasChk){toast('No hay registro para esta fecha');return;}
-  if(!confirm('¿Borrar el registro del '+dky+'? Se eliminarán las series y el entrenamiento completado.'))return;
+  const box=document.getElementById('delete-confirm');
+  box.style.display=box.style.display==='block'?'none':'block';
+  document.getElementById('delete-confirm-date').textContent=dky;
+}
+function confirmDeleteW(){
+  const dky=dkW();
   ST.done=ST.done.filter(d=>d!==dky);
   delete ST.chk[dky];
+  document.getElementById('delete-confirm').style.display='none';
   sv();rW();rHome();toast('Registro borrado ✓');
 }
 load();
