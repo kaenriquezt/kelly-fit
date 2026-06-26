@@ -921,8 +921,10 @@ function confirmDeleteW(){
   const dky=dkW();
   ST.done=ST.done.filter(d=>d!==dky);
   delete ST.chk[dky];
+  // Also delete PRs registered on this date
+  Object.keys(ST.prs).forEach(k=>{if(ST.prs[k].date===dky)delete ST.prs[k];});
   document.getElementById('delete-confirm').style.display='none';
-  sv();rW();rHome();toast('Registro borrado ✓');
+  sv();rW();rP();rHome();toast('Registro y récords borrados ✓');
 }
 load();
 </script>
