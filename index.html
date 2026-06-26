@@ -927,15 +927,7 @@ function confirmDeleteW(){
   document.getElementById('delete-confirm').style.display='none';
   sv();rW();rP();rHome();toast('Registro y récords borrados ✓');
 }
-function debugST(){
-  const out=document.getElementById('debug-out');
-  out.style.display=out.style.display==='none'?'block':'none';
-  out.textContent='done:'+JSON.stringify(ST.done)+'
-
-chk keys:'+JSON.stringify(Object.keys(ST.chk))+'
-
-wk():'+JSON.stringify(wk());
-}
+function debugST(){const out=document.getElementById('debug-out');out.style.display=out.style.display==='none'?'block':'none';out.textContent='DONE: '+JSON.stringify(ST.done)+'  CHK: '+JSON.stringify(Object.keys(ST.chk))+'  WK: '+JSON.stringify(wk());}
 load();
 </script>
 </body>
