@@ -128,8 +128,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cc-rule-amber{background:var(--al);color:#633806;}
 .cc-rule-blue{background:var(--pl);color:var(--pd);}
 .ct{width:100%;border-collapse:collapse;}
-.ct th{font-size:10px;color:var(--t3);padding:6px 10px;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);}
-.ct td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--t1);vertical-align:middle;}
+.ct th{font-size:10px;color:var(--t3);padding:5px 8px;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);}
+.ct td{font-size:12px;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--t1);vertical-align:top;}
+.ct{table-layout:fixed;}
+.ct th:nth-child(1),.ct td:nth-child(1){width:45%;}
+.ct th:nth-child(2),.ct td:nth-child(2){width:25%;}
+.ct th:nth-child(3),.ct td:nth-child(3){width:30%;}
 .ct tr:last-child td{border-bottom:none;}
 .badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap;}
 .bx{background:var(--gl);color:var(--gd);}
@@ -261,13 +265,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">☀️ Desayuno · 7am</div><div class="cc-macro">30P · 25C · 10G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carbos complejos únicamente · fibra soluble prioritaria</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas / harina de avena</td><td><span class="badge bx">Complejo</span></td><td>40–55g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tostada integral / multicereal</td><td><span class="badge bx">Complejo</span></td><td>30–40g (1–2 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Premezcla pancakes Karavansay</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK con proteína</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Solo complemento</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas / harina de avena<br><span class="badge bx">Complejo</span></td><td>40–55g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Arepa maíz blanco<br><span class="badge bx">Complejo</span></td><td>65–80g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral / multicereal<br><span class="badge bx">Complejo</span></td><td>30–40g (1–2 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Premezcla pancakes Karavansay<br><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK+proteína</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Complemento</span></td></tr>
         </table>
         <div class="carbo-note">Secuencia: jugo verde → proteína/grasa → carbo. Vegetales no cuentan.</div>
       </div>
@@ -277,12 +281,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍎 Snack AM · 10am</div><div class="cc-macro">20P · 20C · 8G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carbos complejos · pequeña carga de energía sostenida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Fruta entera (manzana / pera)</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK · fibra</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Mezcla Divertida / Trail Mix</td><td><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Solo topping</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera (manzana / pera)<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK+fibra</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <tr><td>Mezcla Divertida / Trail Mix<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ ⚠️ Topping</span></td></tr>
         </table>
         <div class="carbo-note">Hello Fit (fibra) sí permitido aquí — solo prohibido en pre-entreno PM.</div>
       </div>
@@ -292,13 +296,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍽️ Almuerzo · 12m</div><div class="cc-macro">35P · 50C · 12G</div></div>
         <div class="cc-rule cc-rule-green">✅ Mayor carga del día · combinar complejo + almidón resistente</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>60g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★ Colesterol</span></td></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>100–140g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
-        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>120–160g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>140–180g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Pasta (spaghetti / tornillos arroz)</td><td><span class="badge bx">Complejo</span></td><td>60–80g seco</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Solo complemento</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)<br><span class="badge bx">Complejo</span></td><td>60g crudo</td><td><span class="badge bf2">⭐ Fibra sol. ★</span></td></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>100–140g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
+        <tr><td>Arroz blanco<br><span class="badge bx">Complejo</span></td><td>120–160g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>140–180g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Pasta (spaghetti / tornillos arroz)<br><span class="badge bx">Complejo</span></td><td>60–80g seco</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Complemento</span></td></tr>
         </table>
         <div class="carbo-note">Secuencia: crema/sopa → proteína → carbo. Vegetales ilimitados sin contar.</div>
       </div>
@@ -309,13 +313,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · 4pm</div><div class="cc-macro">15P · 25C · 5G</div></div>
         <div class="cc-rule cc-rule-red">❌ Prohibido: Hello Fit (fibra) · grasas altas · comidas pesadas</div>
         <div class="cc-rule cc-rule-amber">⚡ Digestión rápida · energía disponible en 30–60 min</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">✅ Ideal · digestión fácil</span></td></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">✅ OK</span></td></tr>
-        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK · energía rápida</span></td></tr>
-        <tr><td>Pan baguette / tostada</td><td><span class="badge bm">Mixto</span></td><td>25–35g</td><td><span class="badge bm">OK</span></td></tr>
-        <tr><td>Uvas pasas</td><td><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Solo si falta energía</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Arepa maíz blanco<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK energía</span></td></tr>
+        <tr><td>Pan baguette / tostada<br><span class="badge bm">Mixto</span></td><td>25–35g</td><td><span class="badge bm">OK</span></td></tr>
+        <tr><td>Uvas pasas<br><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Solo si falta energía</span></td></tr>
         </table>
         <div class="carbo-note">Grasa máx 5g total. Sin fibra suplementaria. Comer 60–90 min antes del entreno.</div>
       </div>
@@ -325,12 +329,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-post">
         <div class="cc-head"><div class="cc-title">🌙 Cena post-entreno · 7–8pm</div><div class="cc-macro">25P · 15C · 10G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga reducida · recuperación sin pico insulínico nocturno</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón resistente · ideal</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK · si es cena tipo desayuno</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 60g</td><td><span class="badge bw">⚠️ Solo si faltan carbs</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK · si es cena tipo desayuno</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 60g</td><td><span class="badge bw">⚠️ ⚠️ Si faltan C</span></td></tr>
         </table>
         <div class="carbo-note">Jugo verde antes de cenar. La proteína y grasa ya recuperan el músculo — los 15C son suficientes.</div>
       </div>
@@ -350,13 +354,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-pre">
         <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · ~8:30am</div><div class="cc-macro">20P · 40C · 5G</div></div>
         <div class="cc-rule cc-rule-red">❌ Sin fibra pesada · sin grasas altas · digestión rápida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>55–70g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>130–160g</td><td><span class="badge bx">✅ Digestión fácil</span></td></tr>
-        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">✅ OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK · energía rápida</span></td></tr>
-        <tr><td>Pan baguette / tostada</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK</span></td></tr>
-        <tr><td>Uvas pasas</td><td><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Topping energía</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>55–70g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>130–160g</td><td><span class="badge bx">✅ Dig. fácil</span></td></tr>
+        <tr><td>Arepa maíz blanco<br><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK energía</span></td></tr>
+        <tr><td>Pan baguette / tostada<br><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK</span></td></tr>
+        <tr><td>Uvas pasas<br><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Topping</span></td></tr>
         </table>
         <div class="carbo-note">Comer 60–90 min antes. Grasa máx 5g. Sin legumbres ni plátano verde aquí.</div>
       </div>
@@ -365,13 +369,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-post">
         <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">35P · 60C · 15G</div></div>
         <div class="cc-rule cc-rule-green">✅ La comida más importante de la semana · máxima carga permitida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★★</span></td></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>120–160g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
-        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>140–180g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>160–200g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 100g</td><td><span class="badge bx">✅ Bienvenido post-entreno</span></td></tr>
-        <tr><td>Pasta / yuca</td><td><span class="badge bx">Complejo</span></td><td>70–90g seco</td><td><span class="badge bx">OK</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)<br><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra sol.★★</span></td></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>120–160g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
+        <tr><td>Arroz blanco<br><span class="badge bx">Complejo</span></td><td>140–180g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>160–200g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 100g</td><td><span class="badge bx">✅ Post-ent.</span></td></tr>
+        <tr><td>Pasta / yuca<br><span class="badge bx">Complejo</span></td><td>70–90g seco</td><td><span class="badge bx">OK</span></td></tr>
         </table>
         <div class="carbo-note">Ventana anabólica activa. Prioriza fibra soluble para potenciar perfil lipídico.</div>
       </div>
@@ -380,11 +384,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍎 Snack PM · ~4pm</div><div class="cc-macro">20P · 20C · 8G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carga moderada · sostenida hasta la cena</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
         </table>
       </div>
     </div>
@@ -392,11 +396,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🌙 Cena · ~7–8pm</div><div class="cc-macro">25P · 15C · 10G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga reducida · cierre del día de entreno</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK · cena tipo desayuno</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK cena</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
         </table>
         <div class="carbo-note">Jugo verde antes de cenar siempre.</div>
       </div>
@@ -417,13 +421,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">☀️ Desayuno</div><div class="cc-macro">25P · 30C · 10G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carbos complejos · distribuir energía lineal todo el día</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>45–55g</td><td><span class="badge bf2">⭐ Fibra soluble ★ Colesterol</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>110–140g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Premezcla pancakes Karavansay</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK ocasional</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g en descanso</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>45–55g</td><td><span class="badge bf2">⭐ Fibra sol. ★</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>110–140g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Arepa maíz blanco<br><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Premezcla pancakes Karavansay<br><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK ocasional</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ ⚠️ Máx 70g</span></td></tr>
         </table>
       </div>
     </div>
@@ -431,12 +435,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍎 Snack AM</div><div class="cc-macro">20P · 20C · 8G</div></div>
         <div class="cc-rule cc-rule-green">✅ Sin demanda muscular activa · priorizar fibra y proteína</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Mezcla Divertida / Trail Mix</td><td><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Solo topping</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <tr><td>Mezcla Divertida / Trail Mix<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ ⚠️ Topping</span></td></tr>
         </table>
       </div>
     </div>
@@ -444,12 +448,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍽️ Almuerzo</div><div class="cc-macro">30P · 40C · 12G</div></div>
         <div class="cc-rule cc-rule-green">✅ Menor carga que días de entreno · priorizar fibra soluble</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★★ Colesterol</span></td></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>80–120g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
-        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>100–130g cocido</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>120–150g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g en descanso</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)<br><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Fibra sol.★★ Colesterol</span></td></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>80–120g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
+        <tr><td>Arroz blanco<br><span class="badge bx">Complejo</span></td><td>100–130g cocido</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>120–150g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ ⚠️ Máx 70g</span></td></tr>
         </table>
         <div class="carbo-note">Día de comida libre sábado: una sola comida libre, cena ligera ese día.</div>
       </div>
@@ -458,10 +462,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🍎 Snack PM</div><div class="cc-macro">15P · 15C · 8G</div></div>
         <div class="cc-rule cc-rule-amber">⚡ Carga mínima · no hay entreno · solo mantenimiento tiroideo</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und pequeña</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>15–20g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Yogurt Tres Zeros</td><td><span class="badge bs">Simple</span></td><td>100g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und pequeña</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>15–20g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros<br><span class="badge bs">Simple</span></td><td>100g</td><td><span class="badge bm">Con proteína</span></td></tr>
         </table>
       </div>
     </div>
@@ -469,12 +473,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="carbo-card carbo-card-normal">
         <div class="cc-head"><div class="cc-title">🌙 Cena</div><div class="cc-macro">25P · 15C · 10G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga mínima nocturna · sin entreno previo</div>
-        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal · almidón resistente</span></td></tr>
-        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Avena</td><td><span class="badge bx">Complejo</span></td><td>25–30g</td><td><span class="badge bx">OK · si cena tipo desayuno</span></td></tr>
-        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>15–25g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 50g</td><td><span class="badge bw">⚠️ Mínimo en descanso</span></td></tr>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Avena<br><span class="badge bx">Complejo</span></td><td>25–30g</td><td><span class="badge bx">OK cena</span></td></tr>
+        <tr><td>Tostada integral<br><span class="badge bx">Complejo</span></td><td>15–25g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 50g</td><td><span class="badge bw">⚠️ Mínimo en descanso</span></td></tr>
         </table>
         <div class="carbo-note">Sábado con tragos: cena ligera siempre. Jugo verde antes siempre.</div>
       </div>
