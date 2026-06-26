@@ -6,15 +6,15 @@
 <title>Kelly Fit</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-:root{--green:#1D9E75;--gl:#E1F5EE;--gd:#085041;--gb:#5DCAA5;--pur:#7F77DD;--pl:#EEEDFE;--pd:#3C3489;--amb:#BA7517;--al:#FAEEDA;--gry:#F1EFE8;--gryd:#444441;--bg:#F7F7F5;--card:#FFFFFF;--border:#E8E6E0;--t1:#1A1A18;--t2:#6B6B66;--t3:#9E9E99;}
+:root{--green:#1D9E75;--gl:#E1F5EE;--gd:#085041;--gb:#5DCAA5;--pur:#7F77DD;--pl:#EEEDFE;--pd:#3C3489;--amb:#BA7517;--al:#FAEEDA;--gry:#F1EFE8;--gryd:#444441;--bg:#F7F7F5;--card:#FFFFFF;--border:#E8E6E0;--t1:#1A1A18;--t2:#6B6B66;--t3:#9E9E99;--teal:#0891B2;--tl:#E0F7FA;--rose:#BE185D;--rl:#FFF0F6;}
 html,body{width:100%;height:100%;overflow-x:hidden;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);font-size:15px;}
 .app{width:100%;max-width:100%;padding-bottom:80px;min-height:100vh;}
 .screen{display:none;}.screen.active{display:block;}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;padding:8px 0 env(safe-area-inset-bottom,4px);z-index:200;}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:4px 0;color:var(--t3);font-size:10px;font-weight:600;}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;padding:6px 0 env(safe-area-inset-bottom,4px);z-index:200;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:4px 0;color:var(--t3);font-size:9px;font-weight:600;}
 .nb.active{color:var(--gd);}
-.nb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.nb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 .ph{padding:14px 16px 10px;background:var(--card);border-bottom:1px solid var(--border);}
 .ph h2{font-size:18px;font-weight:700;color:var(--t1);}
 .ph p{font-size:13px;color:var(--t2);margin-top:2px;}
@@ -25,9 +25,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dc.opt{opacity:0.7;}
 .cards{padding:12px 16px;display:flex;flex-direction:column;gap:8px;}
 .sc{padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;border-left:3px solid var(--border);}
-.sc.sf{border-left-color:var(--green);}.sc.sc2{border-left-color:var(--pur);}.sc.sn{border-left-color:var(--amb);}.sc.so{border-left-color:#C8C8C0;opacity:0.85;}
+.sc.sf{border-left-color:var(--green);}.sc.sc2{border-left-color:var(--pur);}.sc.sn{border-left-color:var(--amb);}.sc.sr2{border-left-color:var(--teal);}.sc.so{border-left-color:#C8C8C0;opacity:0.85;}
 .sbadge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:5px;}
-.bf{background:var(--gl);color:var(--gd);}.bc{background:var(--pl);color:var(--pd);}.bn{background:var(--al);color:var(--amb);}.bo{background:var(--gry);color:var(--gryd);}
+.bf{background:var(--gl);color:var(--gd);}.bc{background:var(--pl);color:var(--pd);}.bn{background:var(--al);color:var(--amb);}.bo{background:var(--gry);color:var(--gryd);}.bt{background:var(--tl);color:var(--teal);}
 .stitle{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:3px;}
 .smeta{font-size:12px;color:var(--t2);margin-bottom:8px;line-height:1.4;}
 .gbtn{width:100%;padding:9px;background:var(--gl);color:var(--gd);border:1px solid var(--gb);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;}
@@ -81,7 +81,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vc{font-size:11px;color:var(--t2);width:42px;text-align:right;font-weight:600;}
 .pri{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin:0 16px 6px;}
 .pn{font-size:13px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pm{font-size:11px;color:var(--t3);margin-top:1px;}
 .pkg{font-size:16px;font-weight:700;color:var(--gd);}
 .pd2{font-size:11px;color:var(--t3);}
 .mf{padding:0 16px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
@@ -109,28 +108,72 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .date-bar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--card);border-bottom:1px solid var(--border);}
 .date-bar span{font-size:12px;color:var(--t2);flex-shrink:0;}
 .date-bar input{flex:1;padding:5px 8px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--t1);}
-#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#085041;color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;}
+/* CARBOS */
+.ctab-row{display:flex;gap:6px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+.ctab-row::-webkit-scrollbar{display:none;}
+.cmeal-tabs{display:flex;gap:6px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border);background:var(--bg);}
+.cmeal-tabs::-webkit-scrollbar{display:none;}
+.cmtab{flex-shrink:0;padding:5px 12px;border-radius:20px;border:1px solid var(--border);font-size:11px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--t2);}
+.cmtab.active{background:var(--pur);color:#fff;border-color:var(--pur);}
+.carbo-card{margin:8px 16px 0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.carbo-card-pre{border-left:3px solid var(--amb);}
+.carbo-card-post{border-left:3px solid var(--green);}
+.carbo-card-normal{border-left:3px solid var(--pur);}
+.cc-head{padding:10px 14px 8px;border-bottom:1px solid var(--border);}
+.cc-title{font-size:13px;font-weight:700;color:var(--t1);}
+.cc-macro{font-size:11px;color:var(--t2);margin-top:2px;}
+.cc-rule{font-size:11px;padding:5px 10px;border-radius:6px;margin:8px 14px 0;}
+.cc-rule-green{background:var(--gl);color:var(--gd);}
+.cc-rule-red{background:#FFF0F0;color:#8B1A1A;}
+.cc-rule-amber{background:var(--al);color:#633806;}
+.cc-rule-blue{background:var(--pl);color:var(--pd);}
+.ct{width:100%;border-collapse:collapse;}
+.ct th{font-size:10px;color:var(--t3);padding:6px 10px;text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--border);}
+.ct td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--t1);vertical-align:middle;}
+.ct tr:last-child td{border-bottom:none;}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap;}
+.bx{background:var(--gl);color:var(--gd);}
+.bm{background:var(--al);color:#633806;}
+.bs{background:var(--pl);color:var(--pd);}
+.br{background:var(--gry);color:var(--gryd);}
+.bw{background:#FFF0F0;color:#8B1A1A;}
+.bf2{background:#E0F7FA;color:#0891B2;}
+.carbo-note{margin:6px 14px 10px;font-size:11px;color:var(--t3);line-height:1.5;}
+.med-tags{display:flex;gap:6px;flex-wrap:wrap;padding:6px 16px 10px;}
+.med-tag{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;}
+.mt-hypo{background:#E6F1FB;color:#0C447C;}
+.mt-col{background:var(--al);color:#633806;}
+/* RECOVERY */
+.rec-btn{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin:0 16px 8px;cursor:pointer;}
+.rec-btn.done{background:var(--gl);border-color:var(--gb);}
+.rec-label{font-size:14px;font-weight:600;color:var(--t1);}
+.rec-sub{font-size:11px;color:var(--t2);margin-top:2px;}
+.rec-check{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t3);flex-shrink:0;}
+.rec-btn.done .rec-check{background:var(--green);border-color:var(--green);color:#fff;}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--gd);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;}
 #toast.show{opacity:1;}
-#loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;font-size:14px;color:var(--t3);}
 </style>
 </head>
 <body>
-<div id="loading">Cargando Kelly Fit…</div>
-<div class="app" id="app" style="display:none;">
+<div class="app">
+
+<!-- HOME -->
 <div id="s-home" class="screen active">
   <div class="ph"><h2 id="hg">Cargando…</h2><p id="hs">—</p></div>
   <div class="dstrip" id="ds"></div>
   <div class="cards" id="hc"></div>
   <div class="sbox">
     <div class="srow"><span class="sv" id="stv">0</span><button class="sedit" onclick="toggleStepInput()">+ registrar pasos</button></div>
-    <div class="sl" id="stl">pasos hoy · meta: 8.000</div>
+    <div class="sl" id="stl">pasos hoy</div>
     <div class="tr"><div class="tf" id="stf" style="width:0%"></div></div>
     <div id="step-input-row" style="display:none;margin-top:10px;gap:8px;align-items:center;">
-      <input id="step-inp" type="number" inputmode="numeric" placeholder="ej. 7500" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:var(--bg);color:var(--t1);">
+      <input id="step-inp" type="number" inputmode="numeric" placeholder="ej. 7500" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:var(--bg);color:var(--t1);outline:none;">
       <button onclick="saveSteps()" style="padding:8px 14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Guardar</button>
     </div>
   </div>
 </div>
+
+<!-- WORKOUT -->
 <div id="s-workout" class="screen">
   <div class="ph"><h2 id="wt">Rutina</h2><p id="ws">—</p></div>
   <div class="dstrip" id="wds"></div>
@@ -143,48 +186,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="fb" onclick="finishW()">Finalizar sesión ✓</button>
   <div style="height:16px;"></div>
 </div>
-<div id="s-progress" class="screen">
-  <div class="ph"><h2>Progreso</h2><p>Semana actual</p></div>
-  <div class="mg">
-    <div class="mc"><div class="mv" id="ps">0</div><div class="mlb">sesiones</div><div class="ms">esta semana</div></div>
-    <div class="mc"><div class="mv" id="pz">0</div><div class="mlb">min Zona 2</div><div class="ms">meta 140</div></div>
-    <div class="mc"><div class="mv" id="pp">0</div><div class="mlb">pasos prom.</div><div class="ms">meta 8.000</div></div>
-    <div class="mc"><div class="mv" id="pg">0</div><div class="mlb">series glúteo</div><div class="ms">acumuladas</div></div>
-  </div>
-  <div class="slbl">Volumen semanal</div>
-  <div id="vbars" class="vols-wrap" style="margin-bottom:12px;"></div>
-  <div class="slbl">Récords personales</div>
-  <div id="prlist" style="margin-bottom:12px;"><div class="emp">Completa tu primera sesión</div></div>
-  <div class="slbl">Medidas corporales</div>
-  <div class="mf">
-    <div class="mr2"><span class="mla">Cintura</span><input class="mi" type="number" inputmode="decimal" id="mcin" placeholder="cm"><span class="mu">cm</span></div>
-    <div class="mr2"><span class="mla">Cadera</span><input class="mi" type="number" inputmode="decimal" id="mcad" placeholder="cm"><span class="mu">cm</span></div>
-    <div class="mr2"><span class="mla">Muslo</span><input class="mi" type="number" inputmode="decimal" id="mmus" placeholder="cm"><span class="mu">cm</span></div>
-    <div class="mr2"><span class="mla">Peso</span><input class="mi" type="number" inputmode="decimal" id="mpes" placeholder="kg"><span class="mu">kg</span></div>
-  </div>
-  <button class="sbtn" onclick="saveMeas()">Guardar medidas de hoy</button>
-  <div id="mhist" style="padding:8px 16px 16px;font-size:12px;color:var(--t3);"></div>
-</div>
-<div class="slbl">Reporte semanal para coach</div>
-<div style="padding:0 16px 12px;">
-  <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-    <div style="font-size:12px;color:var(--t2);margin-bottom:10px;line-height:1.5;">Genera un resumen de tu semana para compartir con tu coach y recibir feedback personalizado.</div>
-    <div style="margin-bottom:10px;">
-      <label style="font-size:11px;color:var(--t3);display:block;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;">¿Cómo te sentiste esta semana?</label>
-      <textarea id="weekly-note" placeholder="Energía, sueño, antojos, dolores, cómo te sentiste en general..." style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg);color:var(--t1);min-height:80px;resize:none;outline:none;font-family:inherit;"></textarea>
-    </div>
-    <button class="gbtn" onclick="genReport()">Generar reporte semanal 📋</button>
-  </div>
-</div>
-<div id="report-out" style="display:none;padding:0 16px 16px;">
-  <div style="padding:12px 14px;background:#F0FBF7;border:1px solid var(--gb);border-radius:14px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <span style="font-size:12px;font-weight:700;color:var(--gd);">Reporte listo ✓</span>
-      <button onclick="copyReport()" style="font-size:12px;color:var(--gd);font-weight:700;background:none;border:none;cursor:pointer;">Copiar 📋</button>
-    </div>
-    <pre id="report-text" style="font-size:11px;color:var(--t1);white-space:pre-wrap;word-break:break-word;line-height:1.6;font-family:inherit;margin:0;"></pre>
-  </div>
-</div>
+
+<!-- CARDIO -->
 <div id="s-cardio" class="screen">
   <div class="ph"><h2>Cardio y NEAT</h2><p>Registra tu actividad</p></div>
   <div class="slbl">Registrar sesión</div>
@@ -206,12 +209,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="multi-mode" style="display:none;margin-top:8px;">
       <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Minutos por zona</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
-        <div class="cfl"><label>Z1 · 94–113</label><input type="number" inputmode="numeric" id="mz1" placeholder="0" min="0" oninput="updMZTotal()"></div>
-        <div class="cfl"><label>Z2 · 113–132</label><input type="number" inputmode="numeric" id="mz2" placeholder="0" min="0" oninput="updMZTotal()"></div>
-        <div class="cfl"><label>Z3 · 132–150</label><input type="number" inputmode="numeric" id="mz3" placeholder="0" min="0" oninput="updMZTotal()"></div>
-        <div class="cfl"><label>Z4 · 150–169</label><input type="number" inputmode="numeric" id="mz4" placeholder="0" min="0" oninput="updMZTotal()"></div>
-        <div class="cfl"><label>Z5 · 169–188</label><input type="number" inputmode="numeric" id="mz5" placeholder="0" min="0" oninput="updMZTotal()"></div>
-        <div class="cfl"><label>FC prom. (bpm)</label><input type="number" inputmode="numeric" id="mfc" placeholder="—"></div>
+        <div class="cfl"><label>Z1·94–113</label><input type="number" inputmode="numeric" id="mz1" placeholder="0" min="0" oninput="updMZTotal()"></div>
+        <div class="cfl"><label>Z2·113–132</label><input type="number" inputmode="numeric" id="mz2" placeholder="0" min="0" oninput="updMZTotal()"></div>
+        <div class="cfl"><label>Z3·132–150</label><input type="number" inputmode="numeric" id="mz3" placeholder="0" min="0" oninput="updMZTotal()"></div>
+        <div class="cfl"><label>Z4·150–169</label><input type="number" inputmode="numeric" id="mz4" placeholder="0" min="0" oninput="updMZTotal()"></div>
+        <div class="cfl"><label>Z5·169–188</label><input type="number" inputmode="numeric" id="mz5" placeholder="0" min="0" oninput="updMZTotal()"></div>
+        <div class="cfl"><label>FC prom.</label><input type="number" inputmode="numeric" id="mfc" placeholder="—"></div>
         <div class="cfl"><label>Fecha</label><input type="date" id="mdate"></div>
       </div>
       <div style="font-size:12px;color:var(--t2);margin-bottom:8px;">Total: <strong id="mztotal">0</strong> min</div>
@@ -229,313 +232,668 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div id="chist"><div class="emp">Sin sesiones registradas</div></div>
   <div style="height:16px;"></div>
 </div>
+
+<!-- CARBOS -->
+<div id="s-carbos" class="screen">
+  <div class="ph"><h2>Guía de Carbohidratos</h2><p>Qué comer · cuándo · cuánto</p></div>
+  <div class="med-tags">
+    <span class="med-tag mt-hypo">🦋 Hipotiroidismo: mín 110g C/día</span>
+    <span class="med-tag mt-col">❤️ Colesterol: solo grasas insaturadas</span>
+  </div>
+  <div class="ctab-row">
+    <button class="dc active" onclick="setCDay('pm',this)">L–J · 5pm</button>
+    <button class="dc" onclick="setCDay('am',this)">Dom · AM</button>
+    <button class="dc" onclick="setCDay('rest',this)">Vie–Sáb</button>
+  </div>
+
+  <!-- L-J PM -->
+  <div id="cday-pm">
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Lunes a Jueves · entreno 5pm · <strong>135g C totales</strong></div>
+    <div class="cmeal-tabs">
+      <button class="cmtab active" onclick="setCMeal('pm','des',this)">Desayuno</button>
+      <button class="cmtab" onclick="setCMeal('pm','snk',this)">Snack AM</button>
+      <button class="cmtab" onclick="setCMeal('pm','alm',this)">Almuerzo</button>
+      <button class="cmtab" onclick="setCMeal('pm','pre',this)">Pre-entreno</button>
+      <button class="cmtab" onclick="setCMeal('pm','cen',this)">Cena post</button>
+    </div>
+
+    <div id="pm-des" class="cmeal-panel">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 7am</div><div class="cc-macro">30P · 25C · 10G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Carbos complejos únicamente · fibra soluble prioritaria</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas / harina de avena</td><td><span class="badge bx">Complejo</span></td><td>40–55g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral / multicereal</td><td><span class="badge bx">Complejo</span></td><td>30–40g (1–2 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Premezcla pancakes Karavansay</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK con proteína</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Solo complemento</span></td></tr>
+        </table>
+        <div class="carbo-note">Secuencia: jugo verde → proteína/grasa → carbo. Vegetales no cuentan.</div>
+      </div>
+    </div>
+
+    <div id="pm-snk" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍎 Snack AM · 10am</div><div class="cc-macro">20P · 20C · 8G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Carbos complejos · pequeña carga de energía sostenida</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera (manzana / pera)</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK · fibra</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <tr><td>Mezcla Divertida / Trail Mix</td><td><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Solo topping</span></td></tr>
+        </table>
+        <div class="carbo-note">Hello Fit (fibra) sí permitido aquí — solo prohibido en pre-entreno PM.</div>
+      </div>
+    </div>
+
+    <div id="pm-alm" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍽️ Almuerzo · 12m</div><div class="cc-macro">35P · 50C · 12G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Mayor carga del día · combinar complejo + almidón resistente</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>60g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★ Colesterol</span></td></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>100–140g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
+        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>120–160g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>140–180g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Pasta (spaghetti / tornillos arroz)</td><td><span class="badge bx">Complejo</span></td><td>60–80g seco</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Solo complemento</span></td></tr>
+        </table>
+        <div class="carbo-note">Secuencia: crema/sopa → proteína → carbo. Vegetales ilimitados sin contar.</div>
+      </div>
+    </div>
+
+    <div id="pm-pre" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-pre">
+        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · 4pm</div><div class="cc-macro">15P · 25C · 5G</div></div>
+        <div class="cc-rule cc-rule-red">❌ Prohibido: Hello Fit (fibra) · grasas altas · comidas pesadas</div>
+        <div class="cc-rule cc-rule-amber">⚡ Digestión rápida · energía disponible en 30–60 min</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">✅ Ideal · digestión fácil</span></td></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK · energía rápida</span></td></tr>
+        <tr><td>Pan baguette / tostada</td><td><span class="badge bm">Mixto</span></td><td>25–35g</td><td><span class="badge bm">OK</span></td></tr>
+        <tr><td>Uvas pasas</td><td><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Solo si falta energía</span></td></tr>
+        </table>
+        <div class="carbo-note">Grasa máx 5g total. Sin fibra suplementaria. Comer 60–90 min antes del entreno.</div>
+      </div>
+    </div>
+
+    <div id="pm-cen" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-post">
+        <div class="cc-head"><div class="cc-title">🌙 Cena post-entreno · 7–8pm</div><div class="cc-macro">25P · 15C · 10G</div></div>
+        <div class="cc-rule cc-rule-blue">💡 Carga reducida · recuperación sin pico insulínico nocturno</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón resistente · ideal</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK · si es cena tipo desayuno</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 60g</td><td><span class="badge bw">⚠️ Solo si faltan carbs</span></td></tr>
+        </table>
+        <div class="carbo-note">Jugo verde antes de cenar. La proteína y grasa ya recuperan el músculo — los 15C son suficientes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOM AM -->
+  <div id="cday-am" style="display:none;">
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno 10am · <strong>135g C totales</strong></div>
+    <div class="cmeal-tabs">
+      <button class="cmtab active" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
+      <button class="cmtab" onclick="setCMeal('am','alm',this)">Almuerzo post</button>
+      <button class="cmtab" onclick="setCMeal('am','snk',this)">Snack PM</button>
+      <button class="cmtab" onclick="setCMeal('am','cen',this)">Cena</button>
+    </div>
+    <div id="am-pre" class="cmeal-panel">
+      <div class="carbo-card carbo-card-pre">
+        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · ~8:30am</div><div class="cc-macro">20P · 40C · 5G</div></div>
+        <div class="cc-rule cc-rule-red">❌ Sin fibra pesada · sin grasas altas · digestión rápida</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>55–70g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>130–160g</td><td><span class="badge bx">✅ Digestión fácil</span></td></tr>
+        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">✅ OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK · energía rápida</span></td></tr>
+        <tr><td>Pan baguette / tostada</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK</span></td></tr>
+        <tr><td>Uvas pasas</td><td><span class="badge bs">Simple</span></td><td>máx 20g</td><td><span class="badge bm">Topping energía</span></td></tr>
+        </table>
+        <div class="carbo-note">Comer 60–90 min antes. Grasa máx 5g. Sin legumbres ni plátano verde aquí.</div>
+      </div>
+    </div>
+    <div id="am-alm" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-post">
+        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">35P · 60C · 15G</div></div>
+        <div class="cc-rule cc-rule-green">✅ La comida más importante de la semana · máxima carga permitida</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★★</span></td></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>120–160g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
+        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>140–180g cocido</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>160–200g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 100g</td><td><span class="badge bx">✅ Bienvenido post-entreno</span></td></tr>
+        <tr><td>Pasta / yuca</td><td><span class="badge bx">Complejo</span></td><td>70–90g seco</td><td><span class="badge bx">OK</span></td></tr>
+        </table>
+        <div class="carbo-note">Ventana anabólica activa. Prioriza fibra soluble para potenciar perfil lipídico.</div>
+      </div>
+    </div>
+    <div id="am-snk" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍎 Snack PM · ~4pm</div><div class="cc-macro">20P · 20C · 8G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Carga moderada · sostenida hasta la cena</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div id="am-cen" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🌙 Cena · ~7–8pm</div><div class="cc-macro">25P · 15C · 10G</div></div>
+        <div class="cc-rule cc-rule-blue">💡 Carga reducida · cierre del día de entreno</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK · cena tipo desayuno</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        </table>
+        <div class="carbo-note">Jugo verde antes de cenar siempre.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIE-SAB -->
+  <div id="cday-rest" style="display:none;">
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Viernes y Sábado · descanso · <strong>110g C totales</strong></div>
+    <div class="cmeal-tabs">
+      <button class="cmtab active" onclick="setCMeal('rest','des',this)">Desayuno</button>
+      <button class="cmtab" onclick="setCMeal('rest','snk',this)">Snack AM</button>
+      <button class="cmtab" onclick="setCMeal('rest','alm',this)">Almuerzo</button>
+      <button class="cmtab" onclick="setCMeal('rest','snk2',this)">Snack PM</button>
+      <button class="cmtab" onclick="setCMeal('rest','cen',this)">Cena</button>
+    </div>
+    <div id="rest-des" class="cmeal-panel">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">☀️ Desayuno</div><div class="cc-macro">25P · 30C · 10G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Carbos complejos · distribuir energía lineal todo el día</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>45–55g</td><td><span class="badge bf2">⭐ Fibra soluble ★ Colesterol</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>110–140g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Arepa maíz blanco</td><td><span class="badge bx">Complejo</span></td><td>65–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Premezcla pancakes Karavansay</td><td><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK ocasional</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g en descanso</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div id="rest-snk" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍎 Snack AM</div><div class="cc-macro">20P · 20C · 8G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Sin demanda muscular activa · priorizar fibra y proteína</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas</td><td><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>20–30g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros / Slim</td><td><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        <tr><td>Mezcla Divertida / Trail Mix</td><td><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Solo topping</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div id="rest-alm" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍽️ Almuerzo</div><div class="cc-macro">30P · 40C · 12G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Menor carga que días de entreno · priorizar fibra soluble</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Legumbres (lenteja / garbanzo)</td><td><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Fibra soluble ★★ Colesterol</span></td></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>80–120g</td><td><span class="badge bf2">⭐ Almidón resistente</span></td></tr>
+        <tr><td>Arroz blanco</td><td><span class="badge bx">Complejo</span></td><td>100–130g cocido</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>120–150g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g en descanso</span></td></tr>
+        </table>
+        <div class="carbo-note">Día de comida libre sábado: una sola comida libre, cena ligera ese día.</div>
+      </div>
+    </div>
+    <div id="rest-snk2" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🍎 Snack PM</div><div class="cc-macro">15P · 15C · 8G</div></div>
+        <div class="cc-rule cc-rule-amber">⚡ Carga mínima · no hay entreno · solo mantenimiento tiroideo</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Fruta entera</td><td><span class="badge bm">Mixto</span></td><td>1 und pequeña</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>15–20g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Yogurt Tres Zeros</td><td><span class="badge bs">Simple</span></td><td>100g</td><td><span class="badge bm">Con proteína</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div id="rest-cen" class="cmeal-panel" style="display:none;">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">🌙 Cena</div><div class="cc-macro">25P · 15C · 10G</div></div>
+        <div class="cc-rule cc-rule-blue">💡 Carga mínima nocturna · sin entreno previo</div>
+        <table class="ct"><tr><th>Alimento</th><th>Tipo</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Plátano verde cocido</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal · almidón resistente</span></td></tr>
+        <tr><td>Papa cocida</td><td><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Avena</td><td><span class="badge bx">Complejo</span></td><td>25–30g</td><td><span class="badge bx">OK · si cena tipo desayuno</span></td></tr>
+        <tr><td>Tostada integral</td><td><span class="badge bx">Complejo</span></td><td>15–25g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Plátano maduro</td><td><span class="badge bm">Mixto</span></td><td>máx 50g</td><td><span class="badge bw">⚠️ Mínimo en descanso</span></td></tr>
+        </table>
+        <div class="carbo-note">Sábado con tragos: cena ligera siempre. Jugo verde antes siempre.</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:16px;"></div>
+</div>
+
+<!-- PROGRESS -->
+<div id="s-progress" class="screen">
+  <div class="ph"><h2>Progreso</h2><p>Semana actual</p></div>
+  <div class="mg">
+    <div class="mc"><div class="mv" id="ps">0</div><div class="mlb">sesiones</div><div class="ms">esta semana</div></div>
+    <div class="mc"><div class="mv" id="pz">0</div><div class="mlb">min Zona 2</div><div class="ms">meta 140</div></div>
+    <div class="mc"><div class="mv" id="pp">0</div><div class="mlb">pasos prom.</div><div class="ms">meta 8.000</div></div>
+    <div class="mc"><div class="mv" id="pg">0</div><div class="mlb">series glúteo</div><div class="ms">acumuladas</div></div>
+  </div>
+  <div class="slbl">Volumen semanal</div>
+  <div id="vbars" class="vols-wrap" style="margin-bottom:12px;"></div>
+  <div class="slbl">Récords personales</div>
+  <div id="prlist" style="margin-bottom:12px;"><div class="emp">Completa tu primera sesión</div></div>
+  <div class="slbl">Medidas corporales</div>
+  <div class="mf">
+    <div class="mr2"><span class="mla">Cintura</span><input class="mi" type="number" inputmode="decimal" id="mcin" placeholder="cm"><span class="mu">cm</span></div>
+    <div class="mr2"><span class="mla">Cadera</span><input class="mi" type="number" inputmode="decimal" id="mcad" placeholder="cm"><span class="mu">cm</span></div>
+    <div class="mr2"><span class="mla">Muslo</span><input class="mi" type="number" inputmode="decimal" id="mmus" placeholder="cm"><span class="mu">cm</span></div>
+    <div class="mr2"><span class="mla">Peso</span><input class="mi" type="number" inputmode="decimal" id="mpes" placeholder="kg"><span class="mu">kg</span></div>
+  </div>
+  <button class="sbtn" onclick="saveMeas()">Guardar medidas de hoy</button>
+  <div id="mhist" style="padding:8px 16px;font-size:12px;color:var(--t3);"></div>
+  <div class="slbl">Reporte semanal para coach</div>
+  <div style="padding:0 16px 12px;">
+    <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+      <div style="font-size:12px;color:var(--t2);margin-bottom:10px;line-height:1.5;">Genera tu resumen semanal para compartirlo con tu coach.</div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:11px;color:var(--t3);display:block;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;">¿Cómo te sentiste esta semana?</label>
+        <textarea id="weekly-note" placeholder="Energía, sueño, antojos, dolores, cómo te sentiste en general..." style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg);color:var(--t1);min-height:80px;resize:none;outline:none;font-family:inherit;"></textarea>
+      </div>
+      <button class="gbtn" onclick="genReport()">Generar reporte semanal 📋</button>
+    </div>
+  </div>
+  <div id="report-out" style="display:none;padding:0 16px 16px;">
+    <div style="padding:12px 14px;background:#F0FBF7;border:1px solid var(--gb);border-radius:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:12px;font-weight:700;color:var(--gd);">Reporte listo ✓</span>
+        <button onclick="copyReport()" style="font-size:12px;color:var(--gd);font-weight:700;background:none;border:none;cursor:pointer;">Copiar 📋</button>
+      </div>
+      <pre id="report-text" style="font-size:11px;color:var(--t1);white-space:pre-wrap;word-break:break-word;line-height:1.6;font-family:inherit;margin:0;"></pre>
+    </div>
+  </div>
+  <div style="height:16px;"></div>
+</div>
+
+<!-- RECOVERY -->
+<div id="s-recovery" class="screen">
+  <div class="ph"><h2>Recuperación</h2><p>Registra tu sesión de hoy</p></div>
+  <div class="dstrip" id="rds"></div>
+  <div id="rec-date-bar" class="date-bar">
+    <span>Fecha:</span>
+    <input type="date" id="rdateinp" onchange="recDate=this.value;rRec();">
+    <span style="font-size:11px;color:var(--t3);" id="r-date-label"></span>
+  </div>
+  <div class="slbl" id="rec-rec-label">Recomendado hoy</div>
+  <div id="rec-suggest" style="padding:0 16px 4px;"></div>
+  <div class="slbl">Registrar</div>
+  <div id="rec-btns" style="padding:0 0 8px;"></div>
+  <div class="slbl">Resumen semanal</div>
+  <div id="rec-summary" style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:12px;"></div>
+  <div style="height:16px;"></div>
+</div>
+
 <nav class="bnav">
   <button class="nb active" onclick="nav('home',this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Hoy</button>
   <button class="nb" onclick="nav('workout',this)"><svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M8 6.5V4M16 6.5V4M8 20v-2.5M16 20v-2.5"/></svg>Rutina</button>
   <button class="nb" onclick="nav('cardio',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Cardio</button>
+  <button class="nb" onclick="nav('carbos',this)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12h8M12 8v8"/></svg>Carbos</button>
   <button class="nb" onclick="nav('progress',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
+  <button class="nb" onclick="nav('recovery',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Recup.</button>
 </nav>
 </div>
 <div id="toast"></div>
 <script>
 const DE=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const DS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-const GUIDE={"Monster walks + fire hydrant con banda":{t:"Monster walks: banda en pies o tobillos, rodillas y caderas ligeramente flexionadas. Camina lateral manteniendo tensión constante. Fire hydrant: cuadrupedia, levanta la rodilla hacia el lado sin rotar la cadera.",r:"Monster walks: ritmo libre. Fire hydrant: exhala al subir la rodilla, inhala al bajar.",e:"Rotar la pelvis al elevar la pierna. Pasos demasiado largos. Subir la rodilla más allá de 45°."},"Hip thrust con barra":{t:"Espalda media en banco (omóplatos sobre el borde), pies planos, rodillas a 90° arriba. Barra en el pliegue de la cadera con almohadilla. Empuja con los talones hasta que muslos y torso queden paralelos al suelo.",r:"Inhala abajo. Exhala fuerte al subir. Core activado todo el tiempo.",e:"Hiperextender la lumbar. Mirar al frente en vez de barbilla al pecho. No apretar glúteos arriba. Rodillas que colapsan."},"Back squat con barra":{t:"Barra en el trapecio, pies al ancho de hombros, puntas afuera 15–30°. Baja controlado con torso erguido, rodillas siguiendo los pies, talones en el suelo, hasta muslos paralelos o más abajo.",r:"Inhala y Valsalva antes de bajar. Exhala al pasar el punto más difícil al subir.",e:"Rodillas que colapsan al subir. Talones que se levantan. Torso que cae demasiado adelante."},"Peso muerto rumano":{t:"De pie, barra o mancuernas frente a los muslos. Rodillas ligeramente flexionadas y fijas. Bisagra desde la cadera empujando el glúteo hacia atrás. Baja hasta sentir tensión en isquios.",r:"Inhala y activa core antes de bajar. Exhala al subir en la segunda mitad.",e:"Redondear la espalda baja. Flexionar demasiado las rodillas. No empujar la cadera hacia atrás."},"Peso muerto rumano con barra":{t:"Igual que el rumano, barra pegada al cuerpo siempre. Bisagra desde la cadera empujando el glúteo hacia atrás.",r:"Inhala y activa core antes de bajar. Exhala al subir en la segunda mitad.",e:"Redondear la espalda. Flexionar demasiado las rodillas. Perder el pecho."},"Curl femoral tumbada en máquina":{t:"Boca abajo, rodillas al borde del pad. Rodillo sobre el tendón de Aquiles. Flexiona llevando talones hacia glúteos. La bajada lenta es la fase más importante.",r:"Exhala al flexionar (subir). Inhala al extender (bajar) de forma controlada.",e:"Levantar la cadera al subir. Bajar demasiado rápido. No llegar a extensión completa abajo."},"Abducción de cadera en máquina":{t:"Sentada, espalda apoyada, pads sobre las rodillas. Abre hacia los lados de forma controlada. Para mayor activación, inclínate ligeramente hacia adelante.",r:"Exhala al abrir. Inhala al cerrar de forma controlada.",e:"Cerrar demasiado rápido. Arquear la espalda. Usar impulso del torso."},"Abducción en máquina":{t:"Sentada, espalda apoyada, pads sobre las rodillas. Abre hacia los lados de forma controlada. Para mayor activación de glúteo medio, inclínate ligeramente hacia adelante.",r:"Exhala al abrir. Inhala al cerrar de forma controlada.",e:"Cerrar demasiado rápido. Arquear la espalda. Usar impulso del torso."},"Patada de glúteo en polea baja":{t:"Accesorio de tobillo en polea baja. De pie frente a la máquina, manos apoyadas. Torso estable, pelvis neutra. Extiende la pierna hacia atrás en línea recta.",r:"Exhala al extender la pierna hacia atrás. Inhala al volver.",e:"Inclinar el torso hacia adelante. Rotar la cadera al elevar. Usar impulso."},"Dead bug":{t:"Boca arriba, espalda baja pegada al suelo. Brazos al techo, caderas y rodillas a 90°. Baja simultáneamente brazo derecho hacia atrás y pierna izquierda hacia adelante sin despegar la lumbar.",r:"Exhala al extender brazo y pierna. Inhala al volver al centro.",e:"Despegar la zona lumbar. Ir demasiado rápido. No coordinar brazo y pierna opuestos."},"Face pulls con cable o banda":{t:"Polea o banda a altura de cara, agarre con cuerda. Tira hacia la cara separando las manos al llegar — codos por encima de las muñecas al final.",r:"Exhala al tirar hacia la cara. Inhala al extender de regreso.",e:"Tirar por debajo de los hombros. No separar las manos al final. Demasiado peso."},"Remo con barra agarre prono":{t:"Inclinado ~45°, espalda neutra, barra con agarre prono. Retrae primero los omóplatos, luego tira hacia el abdomen bajo.",r:"Inhala antes de jalar. Exhala durante el tirón. Core activado.",e:"Redondear la espalda. Balancearse con impulso. Jalar con brazos antes de retraer escápulas."},"Remo en polea baja agarre neutro":{t:"Sentada, rodillas ligeramente flexionadas, espalda erguida. Tira el agarre neutro hacia el abdomen bajo con codos pegados al cuerpo. Aprieta omóplatos juntos al llegar.",r:"Exhala al tirar. Inhala al extender. No contener la respiración.",e:"Balancear el torso hacia atrás. Hombros que se encogen al extender. No completar la retracción escapular."},"Jalón agarre estrecho neutro":{t:"Agarre neutro al ancho de hombros o menos. Torso inclinado 10–15° hacia atrás. Tira hacia el esternón bajando codos hacia las costillas. Inicia deprimiendo las escápulas.",r:"Exhala al jalar hacia abajo. Inhala al subir de forma controlada.",e:"Inclinar el torso demasiado. Usar impulso. No deprimir escápulas al inicio."},"Curl de bíceps con barra EZ":{t:"De pie, codos pegados a los costados y fijos. Agarre en el ángulo interior de la barra EZ. Sube flexionando solo los antebrazos. Baja en 2–3 segundos.",r:"Exhala al subir. Inhala al bajar.",e:"Mover los codos hacia adelante. Balancear el torso. Bajar demasiado rápido."},"Curl martillo con mancuernas":{t:"De pie o sentada, agarre neutro (palmas enfrentadas). Sube manteniendo el agarre neutro. Codos fijos. Baja controlado.",r:"Exhala al subir. Inhala al bajar.",e:"Rotar el agarre al subir. Mover los codos. Impulso del torso."},"Sentadilla búlgara con mancuernas":{t:"Pie trasero en banco, pie delantero suficientemente adelante. Baja controlado hasta que rodilla trasera casi toque el suelo, torso erguido.",r:"Inhala al bajar. Exhala al subir en el punto de mayor esfuerzo.",e:"Pie delantero demasiado cerca. Torso muy inclinado. Rodilla delantera que colapsa."},"Hip thrust unilateral en banco":{t:"Igual que el hip thrust bilateral pero con una sola pierna apoyada. Objetivo es calidad de contracción y conexión mente-músculo, no peso.",r:"Inhala abajo. Exhala fuerte al subir apretando el glúteo arriba.",e:"Rotar o inclinar la cadera. Hiperextender la lumbar. No apretar el glúteo arriba."},"Prensa pies altos y separados":{t:"Pies en la parte alta de la plataforma, más anchos que los hombros, puntas afuera. Baja controlado hasta que rodillas lleguen cerca del pecho sin que la lumbar se despegue del respaldo.",r:"Inhala al bajar. Exhala al empujar hacia arriba.",e:"Despegar la lumbar del respaldo. Pies demasiado bajos o juntos. Bloquear las rodillas."},"Sentadilla sumo goblet":{t:"Pies más anchos que los hombros, puntas afuera 45°. Mancuerna vertical con ambas manos a la altura del pecho. Baja con torso erguido hasta muslos paralelos o más abajo.",r:"Inhala al bajar. Exhala al subir.",e:"Rodillas que colapsan. Inclinarse demasiado adelante. No bajar suficiente."},"Plancha isométrica":{t:"Antebrazos y puntas de pies. Cuerpo en línea recta de cabeza a talones. Activa glúteos, abdomen y cuádriceps simultáneamente.",r:"Respiración diafragmática continua. Inhala profundo, exhala lento manteniendo la tensión.",e:"Dejar caer las caderas. Elevar las caderas en pirámide. Contener la respiración."},"Band pull-apart":{t:"De pie, banda al frente a altura de hombros, brazos extendidos. Separa las manos hacia los lados estirando la banda hasta la altura del pecho.",r:"Exhala al abrir. Inhala al cerrar.",e:"Doblar los codos. Elevar los hombros. Movimiento demasiado rápido."},"Remo unilateral con mancuerna":{t:"Rodilla y mano del mismo lado en un banco, espalda paralela al suelo. Tira la mancuerna hacia la cadera con el codo pegado al cuerpo. Inicia retrayendo el omóplato.",r:"Exhala al tirar hacia arriba. Inhala al bajar controlado.",e:"Rotar el torso para ayudarse. No llegar a extensión completa abajo."},"Pájaros inclinado con mancuernas":{t:"Inclinado 45°, espalda neutra. Mancuernas colgando con codos ligeramente flexionados y fijos. Abre los brazos hacia los lados hasta la altura de los hombros.",r:"Exhala al abrir los brazos. Inhala al bajar de forma controlada.",e:"Extender los codos al subir. Usar impulso. Subir brazos por encima de los hombros."},"Press inclinado con mancuernas":{t:"Banco a 30–45°. Mancuernas a los lados del pecho con codos a 45° del torso. Empuja hacia arriba y ligeramente hacia adentro.",r:"Inhala al bajar. Exhala al empujar hacia arriba.",e:"Codos a 90° del torso. No controlar la bajada. Arquear la espalda baja."},"Tríceps en polea agarre cuerda":{t:"De pie frente a la polea alta, cuerda con palmas enfrentadas. Codos pegados a los costados y fijos. Extiende los antebrazos hacia abajo separando los extremos al final.",r:"Exhala al extender hacia abajo. Inhala al subir.",e:"Mover los codos hacia adelante. No separar la cuerda al final. Inclinarse adelante."},"Pallof press en polea":{t:"De lado a la polea. Sostén el agarre con ambas manos frente al pecho. Extiende los brazos al frente lentamente — el core resiste la rotación. El torso no rota.",r:"Exhala al extender los brazos. Inhala al volver. Abdomen activado durante todo el set.",e:"Permitir que el torso rote. Mover los pies. Hombros que suben."},"Elevación de piernas colgada":{t:"Colgada de barra con agarre prono. Hombros activos. Desde extensión completa, sube las piernas juntas y rectas hasta la horizontal o más arriba.",r:"Exhala al subir las piernas. Inhala al bajar de forma controlada.",e:"Balancearse con impulso. Doblar demasiado las rodillas. No bajar controlado."},"Clamshell + donkey kicks con banda":{t:"Clamshell: tumbada de lado, banda sobre rodillas, abre la rodilla sin mover la pelvis. Donkey kicks: cuadrupedia, empuja el talón hacia el techo.",r:"Exhala al abrir o empujar el talón. Inhala al volver.",e:"Rotar la pelvis en clamshell. Arquear la espalda en donkey kicks."},"Zancadas caminando con mancuernas":{t:"Paso largo hacia adelante, baja la rodilla trasera hacia el suelo de forma controlada. Torso erguido. Empuja con el talón del pie delantero para avanzar.",r:"Inhala al bajar. Exhala al empujar hacia arriba y adelante.",e:"Pasos demasiado cortos. Torso inclinado. Rodilla delantera que colapsa."},"Peso muerto piernas rígidas":{t:"Rodillas casi extendidas desde el inicio. Baja solo hasta mantener espalda neutra — el estiramiento de isquios es el límite.",r:"Inhala y activa core antes de bajar. Exhala al subir.",e:"Redondear la espalda para bajar más. Hiperextender las rodillas."},"Step-up con mancuernas":{t:"Pie completo sobre el step. Empuja con el talón del pie elevado para subir. Sube hasta extensión completa de cadera y rodilla. Baja controlado.",r:"Exhala al subir. Inhala al bajar.",e:"Impulsarse con el pie del suelo. No extender completamente la cadera. Step demasiado bajo."},"Plancha lateral alternada":{t:"Antebrazo y borde del pie apoyados. Cuerpo en línea recta lateral. Activa el glúteo del lado de arriba. Mantén el tiempo indicado y alterna.",r:"Respiración diafragmática continua. No contengas el aire.",e:"Dejar caer la cadera. Rotar el torso. Apoyarse en el pie de arriba."},"Crunch en polea alta":{t:"Arrodillada frente a la polea, cuerda a los lados de la cabeza. Flexiona el tronco llevando los codos hacia las rodillas — el movimiento viene del abdomen.",r:"Exhala fuerte al flexionar. Inhala al volver.",e:"Tirar con los brazos. Usar impulso del torso. Hiperextender la lumbar al volver."},"Glute bridge con banda + clamshell":{t:"Tumbada boca arriba, rodillas flexionadas, banda sobre rodillas. Empuja las rodillas hacia afuera y eleva las caderas apretando glúteos. Mantén 1–2 seg arriba.",r:"Exhala al subir las caderas. Inhala al bajar.",e:"No empujar las rodillas hacia afuera. Hiperextender la lumbar. Apoyarse solo en los talones."},"Extensión cuádriceps en máquina":{t:"Sentada, espalda apoyada, rodillas al borde del asiento. El pad sobre el tobillo. Extiende hasta casi completa extensión — sin bloquear. Baja en 2–3 segundos.",r:"Exhala al extender. Inhala al bajar de forma controlada.",e:"Bajar demasiado rápido. Levantar las caderas. Bloquear las rodillas completamente."}};
+
+// ── RECOVERY SCHEDULE ──────────────────────────────────────────────
+const REC_SCH={
+  0:{rec:['Presoterapia piernas','Sauna 15–20 min','Piscina · natación suave o flotación'],note:'Post glúteos AM · reduce inflamación de piernas'},
+  1:{rec:['Presoterapia piernas','Sauna 15–20 min'],note:'Post glúteos+isquios · prioridad presoterapia'},
+  2:{rec:['Turco o sauna 10–15 min'],note:'Post spinning+espalda · relajación muscular'},
+  3:{rec:['Presoterapia piernas','Piscina · hidroterapia'],note:'Post glúteos+cuád · piernas muy activas'},
+  4:{rec:['Sauna 15–20 min','Turco'],note:'Cierre semana de fuerza · relajar SNS'},
+  5:{rec:['Presoterapia piernas · opcional','Piscina · descanso activo'],note:'Descanso · vaciado linfático semana'},
+  6:{rec:['Sauna o turco · opcional','Piscina · natación suave'],note:'Descanso · recuperación completa'}
+};
+
+const REC_TYPES=[
+  {id:'preso',label:'Presoterapia',sub:'Piernas · drenaje linfático',emoji:'🦵'},
+  {id:'sauna',label:'Sauna',sub:'15–20 min',emoji:'🔥'},
+  {id:'turco',label:'Turco',sub:'10–15 min',emoji:'💨'},
+  {id:'piscina',label:'Piscina',sub:'Natación suave o flotación',emoji:'🏊'},
+  {id:'masaje_dep',label:'Masaje deportivo',sub:'Mensual · recuperación muscular',emoji:'💆'},
+  {id:'masaje_dre',label:'Drenaje linfático',sub:'Mensual · zona abdominal',emoji:'✨'},
+  {id:'masaje_rel',label:'Masaje relajante',sub:'Mensual',emoji:'🌿'},
+  {id:'masaje_mol',label:'Masaje moldeador',sub:'Mensual',emoji:'⭕'},
+];
+
+const GUIDE={
+"Monster walks + fire hydrant con banda":{t:"Monster walks: banda en pies o tobillos, rodillas y caderas ligeramente flexionadas. Camina lateral manteniendo tensión constante. Fire hydrant: cuadrupedia, levanta la rodilla hacia el lado sin rotar la cadera.",r:"Monster walks: ritmo libre. Fire hydrant: exhala al subir la rodilla, inhala al bajar.",e:"Rotar la pelvis al elevar la pierna. Pasos demasiado largos. Subir la rodilla más allá de 45°."},
+"Hip thrust con barra":{t:"Espalda media en banco (omóplatos sobre el borde), pies planos, rodillas a 90° arriba. Barra en el pliegue de la cadera con almohadilla. Empuja con los talones hasta que muslos y torso queden paralelos al suelo.",r:"Inhala abajo. Exhala fuerte al subir. Core activado todo el tiempo.",e:"Hiperextender la lumbar. Mirar al frente en vez de barbilla al pecho. No apretar glúteos arriba. Rodillas que colapsan."},
+"Back squat con barra":{t:"Barra en el trapecio, pies al ancho de hombros, puntas afuera 15–30°. Baja controlado con torso erguido, rodillas siguiendo los pies, talones en el suelo, hasta muslos paralelos o más abajo.",r:"Inhala y Valsalva antes de bajar. Exhala al pasar el punto más difícil al subir.",e:"Rodillas que colapsan al subir. Talones que se levantan. Torso que cae demasiado adelante."},
+"Peso muerto rumano":{t:"De pie, barra o mancuernas frente a los muslos. Rodillas ligeramente flexionadas y fijas. Bisagra desde la cadera empujando el glúteo hacia atrás. Baja hasta sentir tensión en isquios.",r:"Inhala y activa core antes de bajar. Exhala al subir en la segunda mitad.",e:"Redondear la espalda baja. Flexionar demasiado las rodillas. No empujar la cadera hacia atrás."},
+"Peso muerto rumano con barra":{t:"Igual que el rumano, barra pegada al cuerpo siempre.",r:"Inhala y activa core antes de bajar. Exhala al subir en la segunda mitad.",e:"Redondear la espalda. Flexionar demasiado las rodillas. Perder el pecho."},
+"Curl femoral tumbada en máquina":{t:"Boca abajo, rodillas al borde del pad. Rodillo sobre el tendón de Aquiles. La bajada lenta es la fase más importante.",r:"Exhala al flexionar (subir). Inhala al extender (bajar) de forma controlada.",e:"Levantar la cadera al subir. Bajar demasiado rápido. No llegar a extensión completa abajo."},
+"Abducción de cadera en máquina":{t:"Sentada, espalda apoyada, pads sobre las rodillas. Abre hacia los lados de forma controlada. Para mayor activación, inclínate ligeramente hacia adelante.",r:"Exhala al abrir. Inhala al cerrar de forma controlada.",e:"Cerrar demasiado rápido. Arquear la espalda. Usar impulso del torso."},
+"Abducción en máquina":{t:"Sentada, espalda apoyada, pads sobre las rodillas. Abre hacia los lados de forma controlada. Para mayor activación de glúteo medio, inclínate ligeramente hacia adelante.",r:"Exhala al abrir. Inhala al cerrar de forma controlada.",e:"Cerrar demasiado rápido. Arquear la espalda. Usar impulso del torso."},
+"Patada de glúteo en polea baja":{t:"Accesorio de tobillo en polea baja. Torso estable, pelvis neutra. Extiende la pierna hacia atrás en línea recta.",r:"Exhala al extender la pierna hacia atrás. Inhala al volver.",e:"Inclinar el torso hacia adelante. Rotar la cadera al elevar. Usar impulso."},
+"Dead bug":{t:"Boca arriba, espalda baja pegada al suelo. Brazos al techo, caderas y rodillas a 90°. Baja simultáneamente brazo derecho hacia atrás y pierna izquierda sin despegar la lumbar.",r:"Exhala al extender brazo y pierna. Inhala al volver al centro.",e:"Despegar la zona lumbar. Ir demasiado rápido. No coordinar brazo y pierna opuestos."},
+"Face pulls con cable o banda":{t:"Polea o banda a altura de cara, agarre con cuerda. Tira hacia la cara separando las manos al llegar — codos por encima de las muñecas al final.",r:"Exhala al tirar hacia la cara. Inhala al extender de regreso.",e:"Tirar por debajo de los hombros. No separar las manos al final. Demasiado peso."},
+"Remo con barra agarre prono":{t:"Inclinado ~45°, espalda neutra. Retrae primero los omóplatos, luego tira hacia el abdomen bajo.",r:"Inhala antes de jalar. Exhala durante el tirón. Core activado.",e:"Redondear la espalda. Balancearse con impulso. Jalar con brazos antes de retraer escápulas."},
+"Remo en polea baja agarre neutro":{t:"Sentada, rodillas ligeramente flexionadas, espalda erguida. Tira hacia el abdomen bajo con codos pegados al cuerpo.",r:"Exhala al tirar. Inhala al extender.",e:"Balancear el torso hacia atrás. Hombros que se encogen al extender."},
+"Jalón agarre estrecho neutro":{t:"Agarre neutro al ancho de hombros. Torso inclinado 10–15° hacia atrás. Tira hacia el esternón. Inicia deprimiendo las escápulas.",r:"Exhala al jalar hacia abajo. Inhala al subir de forma controlada.",e:"Inclinar el torso demasiado. Usar impulso. No deprimir escápulas al inicio."},
+"Curl de bíceps con barra EZ":{t:"De pie, codos pegados y fijos. Agarre en el ángulo interior de la barra EZ. Sube flexionando solo los antebrazos. Baja en 2–3 segundos.",r:"Exhala al subir. Inhala al bajar.",e:"Mover los codos hacia adelante. Balancear el torso. Bajar demasiado rápido."},
+"Curl martillo con mancuernas":{t:"Agarre neutro (palmas enfrentadas). Sube manteniendo el agarre neutro. Codos fijos. Baja controlado.",r:"Exhala al subir. Inhala al bajar.",e:"Rotar el agarre al subir. Mover los codos. Impulso del torso."},
+"Sentadilla búlgara con mancuernas":{t:"Pie trasero en banco, pie delantero suficientemente adelante. Baja controlado hasta que rodilla trasera casi toque el suelo, torso erguido.",r:"Inhala al bajar. Exhala al subir en el punto de mayor esfuerzo.",e:"Pie delantero demasiado cerca. Torso muy inclinado. Rodilla delantera que colapsa."},
+"Hip thrust unilateral en banco":{t:"Igual que el hip thrust bilateral pero con una sola pierna apoyada. Objetivo es calidad de contracción, no peso.",r:"Inhala abajo. Exhala fuerte al subir apretando el glúteo arriba.",e:"Rotar o inclinar la cadera. Hiperextender la lumbar."},
+"Prensa pies altos y separados":{t:"Pies en la parte alta de la plataforma, más anchos que los hombros. Baja controlado sin que la lumbar se despegue del respaldo.",r:"Inhala al bajar. Exhala al empujar hacia arriba.",e:"Despegar la lumbar. Pies demasiado bajos o juntos. Bloquear las rodillas."},
+"Sentadilla sumo goblet":{t:"Pies más anchos que los hombros, puntas afuera 45°. Mancuerna vertical a la altura del pecho. Baja con torso erguido.",r:"Inhala al bajar. Exhala al subir.",e:"Rodillas que colapsan. Inclinarse demasiado adelante."},
+"Plancha isométrica":{t:"Antebrazos y puntas de pies. Cuerpo en línea recta. Activa glúteos, abdomen y cuádriceps.",r:"Respiración diafragmática continua. Inhala profundo, exhala lento.",e:"Dejar caer las caderas. Elevar las caderas. Contener la respiración."},
+"Band pull-apart":{t:"De pie, banda al frente a altura de hombros, brazos extendidos. Separa las manos hacia los lados hasta la altura del pecho.",r:"Exhala al abrir. Inhala al cerrar.",e:"Doblar los codos. Elevar los hombros. Movimiento demasiado rápido."},
+"Remo unilateral con mancuerna":{t:"Rodilla y mano del mismo lado en un banco, espalda paralela al suelo. Tira la mancuerna hacia la cadera. Inicia retrayendo el omóplato.",r:"Exhala al tirar hacia arriba. Inhala al bajar controlado.",e:"Rotar el torso. No llegar a extensión completa abajo."},
+"Pájaros inclinado con mancuernas":{t:"Inclinado 45°, espalda neutra. Mancuernas colgando con codos ligeramente flexionados. Abre los brazos hasta la altura de los hombros.",r:"Exhala al abrir los brazos. Inhala al bajar de forma controlada.",e:"Extender los codos al subir. Usar impulso. Subir brazos por encima de los hombros."},
+"Press inclinado con mancuernas":{t:"Banco a 30–45°. Mancuernas a los lados del pecho con codos a 45° del torso. Empuja hacia arriba.",r:"Inhala al bajar. Exhala al empujar hacia arriba.",e:"Codos a 90° del torso. No controlar la bajada. Arquear la espalda."},
+"Tríceps en polea agarre cuerda":{t:"De pie frente a la polea alta, cuerda con palmas enfrentadas. Codos pegados y fijos. Extiende los antebrazos hacia abajo separando los extremos al final.",r:"Exhala al extender hacia abajo. Inhala al subir.",e:"Mover los codos hacia adelante. No separar la cuerda al final."},
+"Pallof press en polea":{t:"De lado a la polea. Sostén el agarre con ambas manos frente al pecho. Extiende los brazos al frente — el core resiste la rotación.",r:"Exhala al extender los brazos. Inhala al volver.",e:"Permitir que el torso rote. Mover los pies."},
+"Elevación de piernas colgada":{t:"Colgada de barra con agarre prono. Hombros activos. Sube las piernas juntas y rectas hasta la horizontal o más arriba.",r:"Exhala al subir las piernas. Inhala al bajar de forma controlada.",e:"Balancearse con impulso. Doblar demasiado las rodillas."},
+"Clamshell + donkey kicks con banda":{t:"Clamshell: tumbada de lado, banda sobre rodillas, abre la rodilla sin mover la pelvis. Donkey kicks: cuadrupedia, empuja el talón hacia el techo.",r:"Exhala al abrir o empujar el talón. Inhala al volver.",e:"Rotar la pelvis en clamshell. Arquear la espalda en donkey kicks."},
+"Zancadas caminando con mancuernas":{t:"Paso largo hacia adelante, baja la rodilla trasera hacia el suelo de forma controlada. Torso erguido.",r:"Inhala al bajar. Exhala al empujar hacia arriba y adelante.",e:"Pasos demasiado cortos. Torso inclinado. Rodilla delantera que colapsa."},
+"Peso muerto piernas rígidas":{t:"Rodillas casi extendidas desde el inicio. Baja solo hasta mantener espalda neutra.",r:"Inhala y activa core antes de bajar. Exhala al subir.",e:"Redondear la espalda. Hiperextender las rodillas."},
+"Step-up con mancuernas":{t:"Pie completo sobre el step. Empuja con el talón del pie elevado para subir hasta extensión completa.",r:"Exhala al subir. Inhala al bajar.",e:"Impulsarse con el pie del suelo. No extender completamente la cadera."},
+"Plancha lateral alternada":{t:"Antebrazo y borde del pie apoyados. Cuerpo en línea recta lateral. Activa el glúteo del lado de arriba.",r:"Respiración diafragmática continua. No contengas el aire.",e:"Dejar caer la cadera. Rotar el torso."},
+"Crunch en polea alta":{t:"Arrodillada frente a la polea, cuerda a los lados de la cabeza. Flexiona el tronco llevando los codos hacia las rodillas.",r:"Exhala fuerte al flexionar. Inhala al volver.",e:"Tirar con los brazos. Usar impulso del torso."},
+"Glute bridge con banda + clamshell":{t:"Tumbada boca arriba, rodillas flexionadas, banda sobre rodillas. Empuja las rodillas hacia afuera y eleva las caderas apretando glúteos.",r:"Exhala al subir las caderas. Inhala al bajar.",e:"No empujar las rodillas hacia afuera. Hiperextender la lumbar."},
+"Extensión cuádriceps en máquina":{t:"Sentada, espalda apoyada. El pad sobre el tobillo. Extiende hasta casi completa extensión. Baja en 2–3 segundos.",r:"Exhala al extender. Inhala al bajar de forma controlada.",e:"Bajar demasiado rápido. Levantar las caderas. Bloquear las rodillas."}
+};
+
 const SCH={
 0:{t:'Glúteos full · sesión pesada',sb:'Domingo · 60 min · AM',ty:'force',st:7000,
   cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · recuperación activa'},
-  nt:'Estiramientos 15 min por la tarde',
-  ex:[
-    {n:'Monster walks + fire hydrant con banda',m:'Activación glúteo medio',s:2,r:'15',hi:false,z:'gm'},
-    {n:'Hip thrust con barra',m:'Glúteo mayor · PR semanal',s:5,r:'6–8',hi:true,z:'gj'},
-    {n:'Back squat con barra',m:'Glúteos + cuádriceps',s:4,r:'8–10',hi:true,z:'gj'},
-    {n:'Peso muerto rumano',m:'Isquios + glúteo',s:3,r:'10–12',hi:false,z:'isq'},
-    {n:'Abducción en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},
-    {n:'Extensión cuádriceps en máquina',m:'Definición pierna completa',s:3,r:'15',hi:false,z:'q'},
-    {n:'Pallof press en polea',m:'Core anti-rotacional · sin oblicuos',s:3,r:'10 c/lado',hi:false,z:'c'}
-  ]},
+  nt:'Presoterapia + sauna post-entreno · estiramientos 15 min',
+  ex:[{n:'Monster walks + fire hydrant con banda',m:'Activación glúteo medio',s:2,r:'15',hi:false,z:'gm'},{n:'Hip thrust con barra',m:'Glúteo mayor · PR semanal',s:5,r:'6–8',hi:true,z:'gj'},{n:'Back squat con barra',m:'Glúteos + cuádriceps',s:4,r:'8–10',hi:true,z:'gj'},{n:'Peso muerto rumano',m:'Isquios + glúteo',s:3,r:'10–12',hi:false,z:'isq'},{n:'Abducción en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},{n:'Extensión cuádriceps en máquina',m:'Definición pierna completa',s:3,r:'15',hi:false,z:'q'},{n:'Pallof press en polea',m:'Core anti-rotacional · sin oblicuos',s:3,r:'10 c/lado',hi:false,z:'c'}]},
 1:{t:'Glúteos + Isquios',sb:'Lunes · 60 min · 5pm',ty:'force',st:8000,
   cd:{tp:'Caminata inclinada',z:'Zona 2',d:25,nt:'Post-entreno · Zona 2'},
-  nt:'Caminata post-almuerzo 10 min',
-  ex:[
-    {n:'Glute bridge con banda + clamshell',m:'Activación glúteo',s:2,r:'15',hi:false,z:'gm'},
-    {n:'Hip thrust con barra',m:'Glúteo mayor · compuesto principal',s:4,r:'8–10',hi:true,z:'gj'},
-    {n:'Peso muerto rumano con barra',m:'Isquios + glúteo mayor',s:4,r:'8–10',hi:true,z:'isq'},
-    {n:'Curl femoral tumbada en máquina',m:'Isquiotibiales · aislamiento',s:3,r:'12–15',hi:false,z:'isq'},
-    {n:'Abducción de cadera en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},
-    {n:'Patada de glúteo en polea baja',m:'Glúteo mayor · aislamiento',s:3,r:'15 c/lado',hi:false,z:'gj'},
-    {n:'Dead bug',m:'Core profundo · sin carga lateral',s:3,r:'8 c/lado',hi:false,z:'c'}
-  ]},
+  nt:'Presoterapia post-entreno · caminata post-almuerzo 10 min',
+  ex:[{n:'Glute bridge con banda + clamshell',m:'Activación glúteo',s:2,r:'15',hi:false,z:'gm'},{n:'Hip thrust con barra',m:'Glúteo mayor · compuesto principal',s:4,r:'8–10',hi:true,z:'gj'},{n:'Peso muerto rumano con barra',m:'Isquios + glúteo mayor',s:4,r:'8–10',hi:true,z:'isq'},{n:'Curl femoral tumbada en máquina',m:'Isquiotibiales · aislamiento',s:3,r:'12–15',hi:false,z:'isq'},{n:'Abducción de cadera en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},{n:'Patada de glúteo en polea baja',m:'Glúteo mayor · aislamiento',s:3,r:'15 c/lado',hi:false,z:'gj'},{n:'Dead bug',m:'Core profundo · sin carga lateral',s:3,r:'8 c/lado',hi:false,z:'c'}]},
 2:{t:'Spinning + Espalda + Bíceps',sb:'Martes · Spinning + 45 min fuerza · 5pm',ty:'force',st:9000,
   cd:{tp:'Spinning',z:'multi',d:45,nt:'Spinning primero · luego fuerza'},
-  nt:'Spinning antes de la sesión de pesas',
-  ex:[
-    {n:'Face pulls con cable o banda',m:'Activación hombro posterior',s:2,r:'15',hi:false,z:'e'},
-    {n:'Remo con barra agarre prono',m:'Espalda media principal',s:3,r:'8–10',hi:true,z:'e'},
-    {n:'Jalón agarre estrecho neutro',m:'Dorsal · anchura espalda',s:3,r:'10–12',hi:true,z:'e'},
-    {n:'Pájaros inclinado con mancuernas',m:'Deltoides posterior · definición',s:3,r:'15',hi:false,z:'e'},
-    {n:'Curl de bíceps con barra EZ',m:'Bíceps · compuesto',s:3,r:'10–12',hi:false,z:'b'},
-    {n:'Curl martillo con mancuernas',m:'Braquial + bíceps · brazos tonificados',s:2,r:'12',hi:false,z:'b'}
-  ]},
+  nt:'Turco o sauna post-entreno · caminata post-almuerzo 20 min',
+  ex:[{n:'Face pulls con cable o banda',m:'Activación hombro posterior',s:2,r:'15',hi:false,z:'e'},{n:'Remo con barra agarre prono',m:'Espalda media principal',s:3,r:'8–10',hi:true,z:'e'},{n:'Jalón agarre estrecho neutro',m:'Dorsal · anchura espalda',s:3,r:'10–12',hi:true,z:'e'},{n:'Pájaros inclinado con mancuernas',m:'Deltoides posterior · definición',s:3,r:'15',hi:false,z:'e'},{n:'Curl de bíceps con barra EZ',m:'Bíceps · compuesto',s:3,r:'10–12',hi:false,z:'b'},{n:'Curl martillo con mancuernas',m:'Braquial + bíceps · brazos tonificados',s:2,r:'12',hi:false,z:'b'}]},
 3:{t:'Glúteos + Cuádriceps',sb:'Miércoles · 60 min · 5pm',ty:'force',st:8000,
   cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · piernas activas'},
-  nt:'Caminata post-almuerzo 10 min',
-  ex:[
-    {n:'Clamshell + donkey kicks con banda',m:'Activación glúteo completo',s:2,r:'15',hi:false,z:'gm'},
-    {n:'Sentadilla búlgara con mancuernas',m:'Glúteo + cuádriceps · unilateral',s:4,r:'10 c/lado',hi:true,z:'gj'},
-    {n:'Hip thrust unilateral en banco',m:'Glúteo mayor · conexión mente-músculo',s:3,r:'12 c/lado',hi:true,z:'gj'},
-    {n:'Prensa pies altos y separados',m:'Glúteos + isquios',s:3,r:'12–15',hi:false,z:'gj'},
-    {n:'Sentadilla sumo goblet',m:'Glúteo medio + aductores',s:3,r:'15',hi:false,z:'gm'},
-    {n:'Abducción en máquina',m:'Glúteo medio · cierre de sesión',s:3,r:'15–20',hi:false,z:'gm'},
-    {n:'Plancha isométrica',m:'Core estabilizador',s:3,r:'35s',hi:false,z:'c'}
-  ]},
+  nt:'Presoterapia post-entreno · piscina si puedes · caminata post-almuerzo 10 min',
+  ex:[{n:'Clamshell + donkey kicks con banda',m:'Activación glúteo completo',s:2,r:'15',hi:false,z:'gm'},{n:'Sentadilla búlgara con mancuernas',m:'Glúteo + cuádriceps · unilateral',s:4,r:'10 c/lado',hi:true,z:'gj'},{n:'Hip thrust unilateral en banco',m:'Glúteo mayor · conexión mente-músculo',s:3,r:'12 c/lado',hi:true,z:'gj'},{n:'Prensa pies altos y separados',m:'Glúteos + isquios',s:3,r:'12–15',hi:false,z:'gj'},{n:'Sentadilla sumo goblet',m:'Glúteo medio + aductores',s:3,r:'15',hi:false,z:'gm'},{n:'Abducción en máquina',m:'Glúteo medio · cierre de sesión',s:3,r:'15–20',hi:false,z:'gm'},{n:'Plancha isométrica',m:'Core estabilizador',s:3,r:'35s',hi:false,z:'c'}]},
 4:{t:'Espalda completa + Core',sb:'Jueves · 60 min · 5pm',ty:'force',st:9000,
   cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Post-entreno · Zona 2'},
-  nt:'Caminata post-almuerzo 20 min',
-  ex:[
-    {n:'Band pull-apart',m:'Activación escapular · postura',s:2,r:'20',hi:false,z:'e'},
-    {n:'Remo unilateral con mancuerna',m:'Espalda media principal',s:4,r:'10 c/lado',hi:true,z:'e'},
-    {n:'Remo en polea baja agarre neutro',m:'Retracción escapular · talle',s:3,r:'10–12',hi:true,z:'e'},
-    {n:'Press inclinado con mancuernas',m:'Pecho · mantenimiento',s:3,r:'12–15',hi:false,z:'p'},
-    {n:'Tríceps en polea agarre cuerda',m:'Brazos tonificados',s:3,r:'12–15',hi:false,z:'tri'},
-    {n:'Elevación de piernas colgada',m:'Recto abdominal inferior',s:3,r:'10–12',hi:false,z:'c'},
-    {n:'Dead bug',m:'Core profundo · sin oblicuos',s:3,r:'8 c/lado',hi:false,z:'c'}
-  ]},
-5:{t:'Descanso activo',sb:'Viernes · cardio opcional',ty:'opt',st:9000,
+  nt:'Sauna post-entreno · cierre semana de fuerza · caminata post-almuerzo 20 min',
+  ex:[{n:'Band pull-apart',m:'Activación escapular · postura',s:2,r:'20',hi:false,z:'e'},{n:'Remo unilateral con mancuerna',m:'Espalda media principal',s:4,r:'10 c/lado',hi:true,z:'e'},{n:'Remo en polea baja agarre neutro',m:'Retracción escapular · talle',s:3,r:'10–12',hi:true,z:'e'},{n:'Press inclinado con mancuernas',m:'Pecho · mantenimiento',s:3,r:'12–15',hi:false,z:'p'},{n:'Tríceps en polea agarre cuerda',m:'Brazos tonificados',s:3,r:'12–15',hi:false,z:'tri'},{n:'Elevación de piernas colgada',m:'Recto abdominal inferior',s:3,r:'10–12',hi:false,z:'c'},{n:'Dead bug',m:'Core profundo · sin oblicuos',s:3,r:'8 c/lado',hi:false,z:'c'}]},
+5:{t:'Descanso activo',sb:'Viernes · estudio · cardio opcional',ty:'opt',st:9000,
   cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Opcional · cualquier hora'},
-  nt:'Estudia tranquila · caminata si puedes',
+  nt:'Presoterapia · vaciado linfático semana · caminata 15 min',
   ex:[]},
 6:{t:'Descanso activo',sb:'Sábado · spinning opcional',ty:'opt',st:10000,
-  cd:{tp:'Spinning',z:'Zona 3',d:50,nt:'Opcional · aprovecha el día'},
-  nt:'Meta 10.000 pasos · spinning si quieres',
+  cd:{tp:'Spinning',z:'Zona 3',d:50,nt:'Opcional'},
+  nt:'Sauna o turco · piscina · meta 10.000 pasos · comida libre si quieres',
   ex:[]}
 };
 
-const VOLS=[{z:'gj',l:'Glúteo mayor',max:20,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:16,cl:'fh'},{z:'e',l:'Espalda media',max:14,cl:'fm'},{z:'c',l:'Core',max:12,cl:'fm'}];
-let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[]};
-let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10),homeDay=new Date().getDay();
+const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
+let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{}};
+let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
+let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
+let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
+
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-async function load(){
-  try{const r=await window.storage.get('kf5');if(r&&r.value)ST={...ST,...JSON.parse(r.value)};}
-  catch(e){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e2){}}
-  document.getElementById('loading').style.display='none';
-  document.getElementById('app').style.display='block';
-  document.getElementById('cdate').value=dk();
-  document.getElementById('mdate').value=dk();
-  rHome();
-}
-async function sv(){
-  try{await window.storage.set('kf5',JSON.stringify(ST));}
-  catch(e){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e2){}}
-}
+function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}rHome();}
+function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function dk(){return new Date().toISOString().slice(0,10);}
-function dkForDay(d){const n=new Date(),diff=d-n.getDay(),x=new Date(n);x.setDate(x.getDate()+diff);return x.toISOString().slice(0,10);}
+function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
 function dkW(){return wDate;}
 function wk(){const n=new Date(),dy=n.getDay(),k=[];for(let i=0;i<7;i++){const x=new Date(n);x.setDate(x.getDate()-dy+i);k.push(x.toISOString().slice(0,10));}return k;}
-function nav(s,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));document.getElementById('s-'+s).classList.add('active');btn.classList.add('active');if(s==='workout')rW();if(s==='progress')rP();if(s==='cardio')rC();}
-function rHome(){const t=new Date().getDay(),strip=document.getElementById('ds');strip.innerHTML='';for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{document.querySelectorAll('#ds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));rHD(d);})(i);strip.appendChild(b);}rHD(t);}
-function rHD(d){homeDay=d;const s=SCH[d],t=new Date().getDay(),it=d===t;document.getElementById('hg').textContent=(it?'Hoy, ':'')+DE[d][0].toUpperCase()+DE[d].slice(1);document.getElementById('hs').textContent=s.t;document.getElementById('stl').textContent='pasos del día · meta: '+s.st.toLocaleString('es-CO');const st=ST.steps[dkForDay(d)]||0;document.getElementById('stv').textContent=st.toLocaleString('es-CO');document.getElementById('stf').style.width=Math.min(100,Math.round(st/s.st*100))+'%';let h='';if(s.ex.length>0){const op=s.ty==='opt';h+=`<div class="sc sf${op?' so':''}"><span class="sbadge ${op?'bo':'bf'}">${op?'Opcional':'Fuerza'}</span><div class="stitle">${s.t}</div><div class="smeta">${s.sb} · ${s.ex.filter(e=>e.s>2).length} ejercicios principales</div><button class="gbtn" onclick="owD(${d})">Ver rutina y registrar →</button></div>`;}else h+=`<div class="sc so"><span class="sbadge bo">Descanso fuerza</span><div class="stitle">Sin entrenamiento hoy</div></div>`;const op2=s.ty==='opt';h+=`<div class="sc sc2${op2?' so':''}"><span class="sbadge bc">Cardio${op2?' · opcional':''}</span><div class="stitle">${s.cd.tp} · ${s.cd.d} min</div><div class="smeta">${s.cd.z} · ${s.cd.nt}</div></div>`;h+=`<div class="sc sn"><span class="sbadge bn">NEAT</span><div class="stitle">${s.nt}</div><div class="smeta">Meta del día: ${s.st.toLocaleString('es-CO')} pasos</div></div>`;document.getElementById('hc').innerHTML=h;}
+
+function nav(s,btn){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
+  document.getElementById('s-'+s).classList.add('active');btn.classList.add('active');
+  if(s==='workout')rW();if(s==='progress')rP();if(s==='cardio')rC();if(s==='recovery')rRec();
+}
+
+function rHome(){
+  const t=new Date().getDay(),strip=document.getElementById('ds');
+  strip.innerHTML='';
+  for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{document.querySelectorAll('#ds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));rHD(d);})(i);strip.appendChild(b);}
+  rHD(t);
+}
+
+function rHD(d){
+  homeDay=d;const s=SCH[d],t=new Date().getDay(),it=d===t;
+  document.getElementById('hg').textContent=(it?'Hoy, ':'')+DE[d][0].toUpperCase()+DE[d].slice(1);
+  document.getElementById('hs').textContent=s.t;
+  document.getElementById('stl').textContent='pasos del día · meta: '+s.st.toLocaleString('es-CO');
+  const st=ST.steps[dkForDay(d)]||0;
+  document.getElementById('stv').textContent=st.toLocaleString('es-CO');
+  document.getElementById('stf').style.width=Math.min(100,Math.round(st/s.st*100))+'%';
+  let h='';
+  if(s.ex.length>0){const op=s.ty==='opt';h+=`<div class="sc sf${op?' so':''}"><span class="sbadge ${op?'bo':'bf'}">${op?'Opcional':'Fuerza'}</span><div class="stitle">${s.t}</div><div class="smeta">${s.sb} · ${s.ex.filter(e=>e.s>2).length} ejercicios principales</div><button class="gbtn" onclick="owD(${d})">Ver rutina y registrar →</button></div>`;}
+  else h+=`<div class="sc so"><span class="sbadge bo">Descanso activo</span><div class="stitle">${s.t}</div></div>`;
+  const op2=s.ty==='opt';
+  h+=`<div class="sc sc2${op2?' so':''}"><span class="sbadge bc">Cardio${op2?' · opcional':''}</span><div class="stitle">${s.cd.tp} · ${s.cd.d} min</div><div class="smeta">${s.cd.z} · ${s.cd.nt}</div></div>`;
+  const rec=REC_SCH[d];
+  h+=`<div class="sc sr2"><span class="sbadge bt">Recuperación</span><div class="stitle">${rec.rec.join(' · ')}</div><div class="smeta">${rec.note}</div></div>`;
+  h+=`<div class="sc sn"><span class="sbadge bn">NEAT</span><div class="stitle">${s.nt}</div><div class="smeta">Meta del día: ${s.st.toLocaleString('es-CO')} pasos</div></div>`;
+  document.getElementById('hc').innerHTML=h;
+}
+
 function owD(d){wD=d;wDate=new Date().toISOString().slice(0,10);nav('workout',document.querySelectorAll('.nb')[1]);}
-function rW(){const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;const wds=document.getElementById('wds');wds.innerHTML='';[0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=new Date().toISOString().slice(0,10);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;const today=new Date().toISOString().slice(0,10),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};let h='';s.ex.forEach((ex,ei)=>{const pr=ST.prs[ex.n],g=GUIDE[ex.n];h+=`<div class="exb${ex.hi?' hi':''}"><div class="exh" onclick="tEx(${ei})"><div class="exhi"><div class="exn">${ex.n}</div><div class="exm">${ex.m}</div></div><span class="exch" id="cv${ei}">▸</span></div><div class="exbd" id="eb${ei}">`;if(g){h+=`<div class="guide-tabs"><button class="gtab active" onclick="gtab(event,${ei},'tecnica')">Técnica</button><button class="gtab" onclick="gtab(event,${ei},'respiracion')">Respiración</button><button class="gtab" onclick="gtab(event,${ei},'errores')">Errores</button></div><div class="guide-panel active" id="gp-${ei}-tecnica"><div class="guide-text">${g.t}</div></div><div class="guide-panel" id="gp-${ei}-respiracion"><div class="guide-text">${g.r}</div></div><div class="guide-panel" id="gp-${ei}-errores"><div class="error-text">${g.e}</div></div>`;}h+=`<div style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">`;if(pr)h+=`<div class="pw">Anterior: <strong>${pr.kg}kg × ${pr.r}</strong><span class="prtag">RP</span></div>`;h+=`<div class="ch"><span>Serie</span><span>Kg</span><span>Reps</span><span></span></div>`;for(let si=1;si<=ex.s;si++){const ck=ei+'-'+si,cd=ST.chk[dky]?.[ck];h+=`<div class="sr"><span class="sn2">${si}</span><input class="si" type="number" inputmode="decimal" step="0.5" id="k${ei}-${si}" placeholder="${pr?pr.kg:'kg'}" value="${cd?cd.kg:''}" oninput="aS(${ei},${si})"><input class="si" type="text" inputmode="text" id="r${ei}-${si}" placeholder="${ex.r}" value="${cd?cd.r:''}" oninput="aS(${ei},${si})"><button class="sk${cd?' done':''}" id="ck${ei}-${si}" onclick="tS(${ei},${si})">✓</button></div>`;}h+=`</div></div></div>`;});con.innerHTML=h;}
+
+function rW(){
+  const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;
+  const wds=document.getElementById('wds');wds.innerHTML='';
+  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=new Date().toISOString().slice(0,10);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
+  const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;
+  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
+  const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
+  let h='';
+  s.ex.forEach((ex,ei)=>{const pr=ST.prs[ex.n],g=GUIDE[ex.n];
+    h+=`<div class="exb${ex.hi?' hi':''}"><div class="exh" onclick="tEx(${ei})"><div class="exhi"><div class="exn">${ex.n}</div><div class="exm">${ex.m}</div></div><span class="exch" id="cv${ei}">▸</span></div><div class="exbd" id="eb${ei}">`;
+    if(g){h+=`<div class="guide-tabs"><button class="gtab active" onclick="gtab(event,${ei},'tecnica')">Técnica</button><button class="gtab" onclick="gtab(event,${ei},'respiracion')">Respiración</button><button class="gtab" onclick="gtab(event,${ei},'errores')">Errores</button></div><div class="guide-panel active" id="gp-${ei}-tecnica"><div class="guide-text">${g.t}</div></div><div class="guide-panel" id="gp-${ei}-respiracion"><div class="guide-text">${g.r}</div></div><div class="guide-panel" id="gp-${ei}-errores"><div class="error-text">${g.e}</div></div>`;}
+    h+=`<div style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">`;
+    if(pr)h+=`<div class="pw">Anterior: <strong>${pr.kg}kg × ${pr.r}</strong><span class="prtag">RP</span></div>`;
+    h+=`<div class="ch"><span>Serie</span><span>Kg</span><span>Reps</span><span></span></div>`;
+    for(let si=1;si<=ex.s;si++){const ck=ei+'-'+si,cd=ST.chk[dky]?.[ck];h+=`<div class="sr"><span class="sn2">${si}</span><input class="si" type="number" inputmode="decimal" step="0.5" id="k${ei}-${si}" placeholder="${pr?pr.kg:'kg'}" value="${cd?cd.kg:''}" oninput="aS(${ei},${si})"><input class="si" type="text" inputmode="text" id="r${ei}-${si}" placeholder="${ex.r}" value="${cd?cd.r:''}" oninput="aS(${ei},${si})"><button class="sk${cd?' done':''}" id="ck${ei}-${si}" onclick="tS(${ei},${si})">✓</button></div>`;}
+    h+=`</div></div></div>`;
+  });
+  con.innerHTML=h;
+}
+
 function gtab(e,ei,tab){e.stopPropagation();['tecnica','respiracion','errores'].forEach(t=>document.getElementById('gp-'+ei+'-'+t)?.classList.toggle('active',t===tab));e.target.closest('.guide-tabs').querySelectorAll('.gtab').forEach((b,i)=>b.classList.toggle('active',['tecnica','respiracion','errores'][i]===tab));}
 function tEx(i){const b=document.getElementById('eb'+i),c=document.getElementById('cv'+i);const o=b.classList.toggle('op');c.textContent=o?'▾':'▸';}
 function aS(ei,si){const dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};const ck=ei+'-'+si,cd=ST.chk[dky][ck];if(cd){cd.kg=document.getElementById('k'+ei+'-'+si)?.value||'';cd.r=document.getElementById('r'+ei+'-'+si)?.value||'';sv();}}
-function tS(ei,si){const dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};const ck=ei+'-'+si,btn=document.getElementById('ck'+ei+'-'+si);const kg=document.getElementById('k'+ei+'-'+si)?.value||'',r=document.getElementById('r'+ei+'-'+si)?.value||'';if(ST.chk[dky][ck]){delete ST.chk[dky][ck];btn.classList.remove('done');}else{ST.chk[dky][ck]={kg,r};btn.classList.add('done');const ex=SCH[wD].ex[ei];if(kg&&parseFloat(kg)>0){const pr=ST.prs[ex.n];if(!pr||parseFloat(kg)>=pr.kg)ST.prs[ex.n]={kg:parseFloat(kg),r,muscle:ex.m,z:ex.z,date:dkW()};}}sv();}
+function tS(ei,si){
+  const dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
+  const ck=ei+'-'+si,btn=document.getElementById('ck'+ei+'-'+si);
+  const kg=document.getElementById('k'+ei+'-'+si)?.value||'',r=document.getElementById('r'+ei+'-'+si)?.value||'';
+  if(ST.chk[dky][ck]){delete ST.chk[dky][ck];btn.classList.remove('done');}
+  else{ST.chk[dky][ck]={kg,r};btn.classList.add('done');const ex=SCH[wD].ex[ei];if(kg&&parseFloat(kg)>0){const pr=ST.prs[ex.n];if(!pr||parseFloat(kg)>=pr.kg)ST.prs[ex.n]={kg:parseFloat(kg),r,muscle:ex.m,z:ex.z,date:dkW()};}}
+  sv();
+}
 function finishW(){const dky=dkW();if(!ST.done.includes(dky))ST.done.push(dky);sv();const c=SCH[wD].cd;toast('¡Sesión completada! 💪 '+c.tp+' '+c.d+' min en '+c.z);setTimeout(()=>nav('home',document.querySelectorAll('.nb')[0]),1000);rHome();}
+
 function toggleStepInput(){const row=document.getElementById('step-input-row');const showing=row.style.display==='flex';row.style.display=showing?'none':'flex';if(!showing)setTimeout(()=>document.getElementById('step-inp').focus(),50);}
 function saveSteps(){const v=document.getElementById('step-inp').value;if(v&&!isNaN(v)&&parseInt(v)>0){ST.steps[dkForDay(homeDay)]=parseInt(v);sv();document.getElementById('step-inp').value='';document.getElementById('step-input-row').style.display='none';rHome();toast('Pasos guardados ✓');}}
-function rP(){const wks=wk();document.getElementById('ps').textContent=ST.done.filter(d=>wks.includes(d)).length;const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);document.getElementById('pz').textContent=z2;const avgS=Math.round(wks.reduce((a,d)=>a+(ST.steps[d]||0),0)/7);document.getElementById('pp').textContent=avgS.toLocaleString('es-CO');const vc={};wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});document.getElementById('pg').textContent=(vc['gj']||0)+(vc['gm']||0);document.getElementById('vbars').innerHTML=VOLS.map(v=>{const cnt=vc[v.z]||0,pct=Math.min(100,Math.round(cnt/v.max*100));return`<div class="vi"><span class="vn">${v.l}</span><div class="vt"><div class="vf ${v.cl}" style="width:${pct}%"></div></div><span class="vc">${cnt}/${v.max}</span></div>`;}).join('');const prs=Object.entries(ST.prs);document.getElementById('prlist').innerHTML=prs.length===0?'<div class="emp">Completa tu primera sesión para ver tus récords</div>':prs.slice(-6).reverse().map(([n,v])=>`<div class="pri"><div style="flex:1;min-width:0;"><div class="pn">${n}</div><div class="pm">${v.muscle}</div></div><div style="text-align:right;flex-shrink:0;margin-left:8px;"><div class="pkg">${v.kg} kg</div><div class="pd2">${v.r} · ${v.date}</div></div></div>`).join('');const lm=ST.meas?.[ST.meas.length-1];if(lm){[['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>document.getElementById(id).placeholder=lm[k]||'—');document.getElementById('mhist').textContent='Último registro: '+lm.date;}}
-function saveMeas(){const e={date:dk(),cintura:document.getElementById('mcin').value,cadera:document.getElementById('mcad').value,muslo:document.getElementById('mmus').value,peso:document.getElementById('mpes').value};ST.meas.push(e);sv();[['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);el.placeholder=e[k]||'—';el.value='';});document.getElementById('mhist').textContent='Guardado: '+e.date;toast('Medidas guardadas ✓');}
+
+function rP(){
+  const wks=wk();
+  document.getElementById('ps').textContent=ST.done.filter(d=>wks.includes(d)).length;
+  const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
+  document.getElementById('pz').textContent=z2;
+  const avgS=Math.round(wks.reduce((a,d)=>a+(ST.steps[d]||0),0)/7);
+  document.getElementById('pp').textContent=avgS.toLocaleString('es-CO');
+  const vc={};wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
+  document.getElementById('pg').textContent=(vc['gj']||0)+(vc['gm']||0);
+  document.getElementById('vbars').innerHTML=VOLS.map(v=>{const cnt=vc[v.z]||0,pct=Math.min(100,Math.round(cnt/v.max*100));return`<div class="vi"><span class="vn">${v.l}</span><div class="vt"><div class="vf ${v.cl}" style="width:${pct}%"></div></div><span class="vc">${cnt}/${v.max}</span></div>`;}).join('');
+  const prs=Object.entries(ST.prs);
+  document.getElementById('prlist').innerHTML=prs.length===0?'<div class="emp">Completa tu primera sesión para ver tus récords</div>':prs.slice(-6).reverse().map(([n,v])=>`<div class="pri"><div style="flex:1;min-width:0;"><div class="pn">${n}</div><div style="font-size:11px;color:var(--t3);margin-top:1px;">${v.muscle}</div></div><div style="text-align:right;flex-shrink:0;margin-left:8px;"><div class="pkg">${v.kg} kg</div><div class="pd2">${v.r} · ${v.date}</div></div></div>`).join('');
+  const lm=ST.meas?.[ST.meas.length-1];
+  if(lm){[['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>document.getElementById(id).placeholder=lm[k]||'—');document.getElementById('mhist').textContent='Último registro: '+lm.date;}
+}
+
+function saveMeas(){
+  const e={date:dk(),cintura:document.getElementById('mcin').value,cadera:document.getElementById('mcad').value,muslo:document.getElementById('mmus').value,peso:document.getElementById('mpes').value};
+  ST.meas.push(e);sv();
+  [['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);el.placeholder=e[k]||'—';el.value='';});
+  document.getElementById('mhist').textContent='Guardado: '+e.date;toast('Medidas guardadas ✓');
+}
+
 function toggleMultiZone(){const sm=document.getElementById('simple-mode'),mm=document.getElementById('multi-mode');const isMulti=mm.style.display==='block';sm.style.display=isMulti?'block':'none';mm.style.display=isMulti?'none':'block';}
 function updMZTotal(){const vals=['mz1','mz2','mz3','mz4','mz5'].map(id=>parseInt(document.getElementById(id).value)||0);document.getElementById('mztotal').textContent=vals.reduce((a,b)=>a+b,0);}
-function saveCardio(){const tipo=document.getElementById('ctipo').value;const isMulti=document.getElementById('multi-mode').style.display==='block';let e;if(isMulti){const z1=parseInt(document.getElementById('mz1').value)||0,z2=parseInt(document.getElementById('mz2').value)||0,z3=parseInt(document.getElementById('mz3').value)||0,z4=parseInt(document.getElementById('mz4').value)||0,z5=parseInt(document.getElementById('mz5').value)||0;const dur=z1+z2+z3+z4+z5;if(!dur){toast('Ingresa al menos una zona');return;}const md=document.getElementById('mdate').value||dk();e={date:md,tipo,zona:'multi',dur,z1,z2,z3,z4,z5,fc:document.getElementById('mfc').value};['mz1','mz2','mz3','mz4','mz5','mfc'].forEach(id=>document.getElementById(id).value='');document.getElementById('mztotal').textContent='0';document.getElementById('mdate').value=dk();}else{const dur=parseInt(document.getElementById('cdur').value)||0;if(!dur){toast('Ingresa la duración');return;}const cd=document.getElementById('cdate').value||dk();e={date:cd,tipo,zona:document.getElementById('czona').value,dur,fc:document.getElementById('cfc').value};document.getElementById('cdur').value='';document.getElementById('cfc').value='';document.getElementById('cdate').value=dk();}ST.cardio.push(e);sv();rC();toast('Cardio guardado ✓');}
-function rC(){const wks=wk();const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);const z3=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);document.getElementById('wcz2').textContent=z2+' min';document.getElementById('wcz3').textContent=z3+' min';document.getElementById('wcses').textContent=ST.cardio.filter(c=>wks.includes(c.date)).length;const rec=ST.cardio.slice(-5).reverse();function renderCardioEntry(c){if(c.zona==='multi'){const zonas=['Z1','Z2','Z3','Z4','Z5'],vals=[c.z1,c.z2,c.z3,c.z4,c.z5];const splits=zonas.map((z,i)=>vals[i]?`<span style="background:var(--gl);color:var(--gd);padding:1px 6px;border-radius:10px;font-size:11px;font-weight:700;">${z}: ${vals[i]}'</span>`:'').filter(Boolean).join(' ');return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone z3">Multi-zona</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">${splits}</div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min total</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone ${(c.zona.includes('Zona 1')||c.zona.includes('Zona 2'))?'z2':'z3'}">${c.zona}</span></div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}document.getElementById('chist').innerHTML=rec.length===0?'<div class="emp">Sin sesiones registradas</div>':rec.map(renderCardioEntry).join('');}
+
+function saveCardio(){
+  const tipo=document.getElementById('ctipo').value;const isMulti=document.getElementById('multi-mode').style.display==='block';let e;
+  if(isMulti){const z1=parseInt(document.getElementById('mz1').value)||0,z2=parseInt(document.getElementById('mz2').value)||0,z3=parseInt(document.getElementById('mz3').value)||0,z4=parseInt(document.getElementById('mz4').value)||0,z5=parseInt(document.getElementById('mz5').value)||0;const dur=z1+z2+z3+z4+z5;if(!dur){toast('Ingresa al menos una zona');return;}const md=document.getElementById('mdate').value||dk();e={date:md,tipo,zona:'multi',dur,z1,z2,z3,z4,z5,fc:document.getElementById('mfc').value};['mz1','mz2','mz3','mz4','mz5','mfc'].forEach(id=>document.getElementById(id).value='');document.getElementById('mztotal').textContent='0';document.getElementById('mdate').value=dk();}
+  else{const dur=parseInt(document.getElementById('cdur').value)||0;if(!dur){toast('Ingresa la duración');return;}const cd=document.getElementById('cdate').value||dk();e={date:cd,tipo,zona:document.getElementById('czona').value,dur,fc:document.getElementById('cfc').value};document.getElementById('cdur').value='';document.getElementById('cfc').value='';document.getElementById('cdate').value=dk();}
+  ST.cardio.push(e);sv();rC();toast('Cardio guardado ✓');
+}
+
+function rC(){
+  const wks=wk();
+  const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
+  const z3=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);
+  document.getElementById('wcz2').textContent=z2+' min';document.getElementById('wcz3').textContent=z3+' min';
+  document.getElementById('wcses').textContent=ST.cardio.filter(c=>wks.includes(c.date)).length;
+  const rec=ST.cardio.slice(-5).reverse();
+  function renderC(c){if(c.zona==='multi'){const zonas=['Z1','Z2','Z3','Z4','Z5'],vals=[c.z1,c.z2,c.z3,c.z4,c.z5];const splits=zonas.map((z,i)=>vals[i]?`<span style="background:var(--gl);color:var(--gd);padding:1px 6px;border-radius:10px;font-size:11px;font-weight:700;">${z}:${vals[i]}'</span>`:'').filter(Boolean).join(' ');return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone z3">Multi-zona</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">${splits}</div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone ${(c.zona.includes('Zona 1')||c.zona.includes('Zona 2'))?'z2':'z3'}">${c.zona}</span></div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}
+  document.getElementById('chist').innerHTML=rec.length===0?'<div class="emp">Sin sesiones registradas</div>':rec.map(renderC).join('');
+}
+
+// ── CARBOS ──────────────────────────────────────────────────────────
+function setCDay(day,btn){
+  currentCDay=day;
+  document.querySelectorAll('.ctab-row .dc').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['pm','am','rest'].forEach(d=>document.getElementById('cday-'+d).style.display=d===day?'block':'none');
+}
+function setCMeal(day,meal,btn){
+  currentCMeal[day]=meal;
+  btn.closest('.cmeal-tabs').querySelectorAll('.cmtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const prefix=day===currentCDay?day:'';
+  document.querySelectorAll(`[id^="${day}-"]`).forEach(p=>p.style.display='none');
+  const panel=document.getElementById(`${day}-${meal}`);
+  if(panel)panel.style.display='block';
+}
+
+// ── RECOVERY ─────────────────────────────────────────────────────────
+function rRec(){
+  const t=new Date().getDay(),strip=document.getElementById('rds');
+  strip.innerHTML='';
+  for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'');b.textContent=DS[i];b.onclick=(d=>()=>{recDay=d;recDate=dkForDay(d);document.querySelectorAll('#rds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));renderRec();})(i);strip.appendChild(b);}
+  const inp=document.getElementById('rdateinp');if(inp)inp.value=recDate;
+  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const lbl=document.getElementById('r-date-label');if(lbl)lbl.textContent=recDate===today?'hoy':recDate===yesterday?'ayer':'';
+  renderRec();
+}
+
+function renderRec(){
+  const rec=REC_SCH[recDay];
+  document.getElementById('rec-suggest').innerHTML=`<div style="padding:10px 0;"><div style="font-size:12px;color:var(--t2);margin-bottom:8px;">${rec.note}</div>${rec.rec.map(r=>`<div style="font-size:13px;color:var(--teal);font-weight:600;padding:4px 0;">• ${r}</div>`).join('')}</div>`;
+  if(!ST.recovery[recDate])ST.recovery[recDate]={};
+  const done=ST.recovery[recDate];
+  document.getElementById('rec-btns').innerHTML=REC_TYPES.map(rt=>`<div class="rec-btn${done[rt.id]?' done':''}" onclick="toggleRec('${rt.id}')"><div><div class="rec-label">${rt.emoji} ${rt.label}</div><div class="rec-sub">${rt.sub}</div></div><div class="rec-check">${done[rt.id]?'✓':'○'}</div></div>`).join('');
+  const wks=wk();
+  const counts={};
+  REC_TYPES.forEach(rt=>counts[rt.id]=0);
+  wks.forEach(d=>{const dr=ST.recovery[d]||{};REC_TYPES.forEach(rt=>{if(dr[rt.id])counts[rt.id]++;});});
+  document.getElementById('rec-summary').innerHTML=`
+    <div class="wr"><span class="wl">Presoterapia</span><span class="wv">${counts['preso']}x</span></div>
+    <div class="wr"><span class="wl">Sauna</span><span class="wv">${counts['sauna']}x</span></div>
+    <div class="wr"><span class="wl">Turco</span><span class="wv">${counts['turco']}x</span></div>
+    <div class="wr"><span class="wl">Piscina</span><span class="wv">${counts['piscina']}x</span></div>
+    <div class="wr" style="border-bottom:none;"><span class="wl">Masajes este mes</span><span class="wv">${counts['masaje_dep']+counts['masaje_dre']+counts['masaje_rel']+counts['masaje_mol']}x <span style="font-size:11px;color:var(--t3)">/ meta 2</span></span></div>`;
+}
+
+function toggleRec(id){
+  if(!ST.recovery[recDate])ST.recovery[recDate]={};
+  if(ST.recovery[recDate][id])delete ST.recovery[recDate][id];
+  else{ST.recovery[recDate][id]=true;toast(REC_TYPES.find(r=>r.id===id)?.label+' registrado ✓');}
+  sv();renderRec();
+}
+
+// ── REPORT ───────────────────────────────────────────────────────────
 function genReport(){
   const wks=wk();
-  const today=new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit',year:'numeric'});
   const weekStart=new Date();weekStart.setDate(weekStart.getDate()-weekStart.getDay());
   const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
   const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit'});
-
-  // Sessions
   const doneW=ST.done.filter(d=>wks.includes(d));
-  const sesNames={0:'Dom · Glúteos full',1:'Lun · Glúteos+Isquios',2:'Mar · Spinning+Espalda',3:'Mié · Glúteos+Cuád',4:'Jue · Espalda+Core'};
+  const sesNames={0:'Dom·Glúteos full',1:'Lun·Glúteos+Isquios',2:'Mar·Spinning+Espalda',3:'Mié·Glúteos+Cuád',4:'Jue·Espalda+Core'};
   const expectedDays=[0,1,2,3,4];
   const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
   const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
-
-  // Volume and loads per exercise
   let exLines=[];
-  wks.forEach(d=>{
-    const dn=new Date(d+'T12:00:00').getDay();
-    const exs=SCH[dn]?.ex||[];
-    const chkD=ST.chk[d]||{};
-    exs.forEach((ex,ei)=>{
-      const sets=[];
-      for(let si=1;si<=ex.s;si++){
-        const cd=chkD[ei+'-'+si];
-        if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);
-      }
-      if(sets.length>0){
-        const pr=ST.prs[ex.n];
-        const prNote=pr&&pr.date===d?' ⬆️RP':'';
-        exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);
-      }
-    });
-  });
-
-  // Cardio
+  wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay();const exs=SCH[dn]?.ex||[];const chkD=ST.chk[d]||{};exs.forEach((ex,ei)=>{const sets=[];for(let si=1;si<=ex.s;si++){const cd=chkD[ei+'-'+si];if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);}if(sets.length>0){const pr=ST.prs[ex.n];const prNote=pr&&pr.date===d?' ⬆️RP':'';exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);}});});
   const cardioW=ST.cardio.filter(c=>wks.includes(c.date));
   const z2=cardioW.reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
   const z3=cardioW.reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);
   const z1=cardioW.reduce((a,c)=>a+(c.zona==='multi'?(c.z1||0):c.zona.includes('Zona 1')?c.dur:0),0);
   let cardioLines=[];
-  cardioW.forEach(c=>{
-    if(c.zona==='multi'){
-      const splits=['Z1','Z2','Z3','Z4','Z5'].map((z,i)=>c[`z${i+1}`]?`${z}:${c[`z${i+1}`]}'`:'').filter(Boolean).join(' ');
-      cardioLines.push(`  ${c.date} · ${c.tipo} · ${splits} · ${c.dur}min total${c.fc?' · '+c.fc+'bpm':''}`);
-    }else{
-      cardioLines.push(`  ${c.date} · ${c.tipo} · ${c.zona} · ${c.dur}min${c.fc?' · '+c.fc+'bpm':''}`);
-    }
-  });
-
-  // Steps
+  cardioW.forEach(c=>{if(c.zona==='multi'){const splits=['Z1','Z2','Z3','Z4','Z5'].map((z,i)=>c[`z${i+1}`]?`${z}:${c[`z${i+1}`]}'`:'').filter(Boolean).join(' ');cardioLines.push(`  ${c.date}·${c.tipo}·${splits}·${c.dur}min${c.fc?'·'+c.fc+'bpm':''}`);}else{cardioLines.push(`  ${c.date}·${c.tipo}·${c.zona}·${c.dur}min${c.fc?'·'+c.fc+'bpm':''}`);}});
   const stepsW=wks.map(d=>ST.steps[d]||0);
   const avgSteps=Math.round(stepsW.reduce((a,b)=>a+b,0)/7);
-  const maxSteps=Math.max(...stepsW);
-  const minSteps=Math.min(...stepsW.filter(s=>s>0));
-
-  // PRs this week
   const prsW=Object.entries(ST.prs).filter(([n,v])=>wks.includes(v.date));
-
-  // Volume
-  const vc={};
-  wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
-
-  // Note
+  const vc={};wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
+  const recW={};REC_TYPES.forEach(rt=>recW[rt.id]=0);wks.forEach(d=>{const dr=ST.recovery[d]||{};REC_TYPES.forEach(rt=>{if(dr[rt.id])recW[rt.id]++;});});
   const note=document.getElementById('weekly-note').value.trim();
-
-  // Build report
-  let r='';
-  r+='═══════════════════════════════
-';
-  r+='📊 REPORTE SEMANAL KELLY FIT
-';
-  r+=`Semana: ${fmt(weekStart)} – ${fmt(weekEnd)}
-`;
-  r+='═══════════════════════════════
-
-';
-
-  r+='🏋️ ENTRENAMIENTOS
-';
-  r+=`Completadas: ${completedDays.length}/5 sesiones
-`;
-  if(completedDays.length>0)r+=`✅ ${completedDays.map(d=>sesNames[d]).join('
-✅ ')}
-`;
-  if(missedDays.length>0)r+=`❌ ${missedDays.map(d=>sesNames[d]).join('
-❌ ')}
-`;
-  r+='
-';
-
-  if(exLines.length>0){
-    r+='📦 CARGAS REGISTRADAS
-';
-    r+=exLines.join('
-')+'
-
-';
-  }
-
-  if(prsW.length>0){
-    r+='🏆 RÉCORDS ESTA SEMANA
-';
-    prsW.forEach(([n,v])=>r+=`  ${n}: ${v.kg}kg × ${v.r}
-`);
-    r+='
-';
-  }
-
-  r+='📊 VOLUMEN POR GRUPO
-';
+  let r='═══════════════════════════════\n📊 REPORTE SEMANAL KELLY FIT\n';
+  r+=`Semana: ${fmt(weekStart)} – ${fmt(weekEnd)}\n═══════════════════════════════\n\n`;
+  r+=`🏋️ ENTRENAMIENTOS\nCompletadas: ${completedDays.length}/5 sesiones\n`;
+  if(completedDays.length>0)r+=completedDays.map(d=>`✅ ${sesNames[d]}`).join('\n')+'\n';
+  if(missedDays.length>0)r+=missedDays.map(d=>`❌ ${sesNames[d]}`).join('\n')+'\n';
+  if(exLines.length>0)r+='\n📦 CARGAS REGISTRADAS\n'+exLines.join('\n')+'\n';
+  if(prsW.length>0){r+='\n🏆 RÉCORDS ESTA SEMANA\n';prsW.forEach(([n,v])=>r+=`  ${n}: ${v.kg}kg × ${v.r}\n`);}
+  r+='\n📊 VOLUMEN POR GRUPO\n';
   const volNames={gj:'Glúteo mayor',gm:'Glúteo medio',isq:'Isquiotibiales',e:'Espalda',c:'Core',b:'Bíceps',tri:'Tríceps',q:'Cuádriceps'};
-  Object.entries(vc).forEach(([z,cnt])=>{
-    const name=volNames[z]||z;
-    r+=`  ${name}: ${cnt} series
-`;
-  });
-  r+='
-';
-
-  r+='🚴 CARDIO
-';
-  r+=`Zona 1: ${z1} min
-`;
-  r+=`Zona 2: ${z2} min (meta 140)
-`;
-  r+=`Zona 3-5: ${z3} min (máx 90)
-`;
-  if(cardioLines.length>0)r+=cardioLines.join('
-')+'
-';
-  r+='
-';
-
-  r+='👟 PASOS
-';
-  r+=`Promedio: ${avgSteps.toLocaleString('es-CO')} pasos/día
-`;
-  if(maxSteps>0)r+=`Máximo: ${maxSteps.toLocaleString('es-CO')} | Mínimo: ${(minSteps||0).toLocaleString('es-CO')}
-`;
-  r+='
-';
-
-  if(note){
-    r+='💬 CÓMO ME SENTÍ
-';
-    r+=note+'
-
-';
-  }
-
+  Object.entries(vc).forEach(([z,cnt])=>r+=`  ${volNames[z]||z}: ${cnt} series\n`);
+  r+=`\n🚴 CARDIO\nZona 1: ${z1} min\nZona 2: ${z2} min (meta 140)\nZona 3-5: ${z3} min (máx 90)\n`;
+  if(cardioLines.length>0)r+=cardioLines.join('\n')+'\n';
+  r+=`\n👟 PASOS\nPromedio: ${avgSteps.toLocaleString('es-CO')} pasos/día\n`;
+  r+=`\n💆 RECUPERACIÓN\nPresoterapia: ${recW['preso']}x\nSauna: ${recW['sauna']}x\nTurco: ${recW['turco']}x\nPiscina: ${recW['piscina']}x\nMasajes: ${recW['masaje_dep']+recW['masaje_dre']+recW['masaje_rel']+recW['masaje_mol']}x\n`;
+  if(note)r+=`\n💬 CÓMO ME SENTÍ\n${note}\n`;
   const lm=ST.meas?.[ST.meas.length-1];
-  if(lm&&wks.includes(lm.date)){
-    r+='📏 MEDIDAS (última toma)
-';
-    if(lm.cintura)r+=`  Cintura: ${lm.cintura} cm
-`;
-    if(lm.cadera)r+=`  Cadera: ${lm.cadera} cm
-`;
-    if(lm.muslo)r+=`  Muslo: ${lm.muslo} cm
-`;
-    if(lm.peso)r+=`  Peso: ${lm.peso} kg
-`;
-    r+='
-';
-  }
-
-  r+='═══════════════════════════════
-';
-  r+='Generado por Kelly Fit App';
-
-  document.getElementById('report-text').textContent=r;
-  document.getElementById('report-out').style.display='block';
+  if(lm&&wks.includes(lm.date)){r+='\n📏 MEDIDAS\n';if(lm.cintura)r+=`  Cintura: ${lm.cintura} cm\n`;if(lm.cadera)r+=`  Cadera: ${lm.cadera} cm\n`;if(lm.muslo)r+=`  Muslo: ${lm.muslo} cm\n`;if(lm.peso)r+=`  Peso: ${lm.peso} kg\n`;}
+  r+='═══════════════════════════════\nGenerado por Kelly Fit App';
+  document.getElementById('report-text').textContent=r;document.getElementById('report-out').style.display='block';
   document.getElementById('report-out').scrollIntoView({behavior:'smooth'});
 }
 
 function copyReport(){
   const text=document.getElementById('report-text').textContent;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>toast('Reporte copiado ✓'));
-  }else{
-    const ta=document.createElement('textarea');
-    ta.value=text;document.body.appendChild(ta);ta.select();
-    document.execCommand('copy');document.body.removeChild(ta);
-    toast('Reporte copiado ✓');
-  }
+  if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>toast('Reporte copiado ✓'));}
+  else{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('Reporte copiado ✓');}
 }
+
+// init cardio dates
+document.addEventListener('DOMContentLoaded',()=>{
+  const cd=document.getElementById('cdate');if(cd)cd.value=dk();
+  const md=document.getElementById('mdate');if(md)md.value=dk();
+  const rd=document.getElementById('rdateinp');if(rd)rd.value=dk();
+});
 
 load();
 </script>
