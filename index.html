@@ -506,6 +506,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="mc"><div class="mv" id="pg">0</div><div class="mlb">series glúteo</div><div class="ms">acumuladas</div></div>
   </div>
   <div class="slbl">Volumen semanal</div>
+  <div style="padding:0 16px 8px;"><button onclick="debugST()" style="width:100%;padding:8px;background:var(--gry);color:var(--t2);border:1px solid var(--border);border-radius:10px;font-size:11px;cursor:pointer;">🔍 Ver datos guardados</button><pre id="debug-out" style="display:none;font-size:10px;padding:8px;background:var(--gry);border-radius:8px;margin-top:6px;white-space:pre-wrap;word-break:break-all;"></pre></div>
   <div id="vbars" class="vols-wrap" style="margin-bottom:12px;"></div>
   <div class="slbl">Récords personales</div>
   <div id="prlist" style="margin-bottom:12px;"><div class="emp">Completa tu primera sesión</div></div>
@@ -925,6 +926,15 @@ function confirmDeleteW(){
   Object.keys(ST.prs).forEach(k=>{if(ST.prs[k].date===dky)delete ST.prs[k];});
   document.getElementById('delete-confirm').style.display='none';
   sv();rW();rP();rHome();toast('Registro y récords borrados ✓');
+}
+function debugST(){
+  const out=document.getElementById('debug-out');
+  out.style.display=out.style.display==='none'?'block':'none';
+  out.textContent='done:'+JSON.stringify(ST.done)+'
+
+chk keys:'+JSON.stringify(Object.keys(ST.chk))+'
+
+wk():'+JSON.stringify(wk());
 }
 load();
 </script>
