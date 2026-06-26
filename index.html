@@ -188,6 +188,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div id="exblocks" style="padding-bottom:8px;"></div>
   <button class="fb" onclick="finishW()">Finalizar sesión ✓</button>
+  <button onclick="deleteW()" style="margin:8px 16px 0;width:calc(100% - 32px);padding:11px;background:#FFF0F0;color:#8B1A1A;border:1px solid #FFCDD2;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;">🗑 Borrar registro de esta fecha</button>
   <div style="height:16px;"></div>
 </div>
 
@@ -899,6 +900,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   const rd=document.getElementById('rdateinp');if(rd)rd.value=dk();
 });
 
+function deleteW(){
+  const dky=dkW();
+  const hasDone=ST.done.includes(dky);
+  const hasChk=ST.chk[dky]&&Object.keys(ST.chk[dky]).length>0;
+  if(!hasDone&&!hasChk){toast('No hay registro para esta fecha');return;}
+  if(!confirm('¿Borrar el registro del '+dky+'? Se eliminarán las series y el entrenamiento completado.'))return;
+  ST.done=ST.done.filter(d=>d!==dky);
+  delete ST.chk[dky];
+  sv();rW();rHome();toast('Registro borrado ✓');
+}
 load();
 </script>
 </body>
