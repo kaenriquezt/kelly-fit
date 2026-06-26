@@ -674,7 +674,7 @@ let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
-function dk(){const n=new Date();const col=new Date(n.getTime()-5*60*60*1000);return col.toISOString().slice(0,10);}
+function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
 function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
 function dkW(){return wDate;}
 function wk(){const n=new Date(),dy=n.getDay(),k=[];for(let i=0;i<7;i++){const x=new Date(n);x.setDate(x.getDate()-dy+i);k.push(x.toISOString().slice(0,10));}return k;}
