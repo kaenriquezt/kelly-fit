@@ -671,7 +671,7 @@ const SCH={
 };
 
 const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
-let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{}};
+let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{}};
 let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
 let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
@@ -762,7 +762,18 @@ function tS(ei,si){
   else{ST.chk[dky][ck]={kg,r};btn.classList.add('done');const ex=SCH[wD].ex[ei];if(kg&&parseFloat(kg)>0){const pr=ST.prs[ex.n];if(!pr||parseFloat(kg)>=pr.kg)ST.prs[ex.n]={kg:parseFloat(kg),r,muscle:ex.m,z:ex.z,date:dkW()};}}
   sv();
 }
-function finishW(){const dky=dkW();if(!ST.done.includes(dky))ST.done.push(dky);sv();const c=SCH[wD].cd;toast('¡Sesión completada! 💪 '+c.tp+' '+c.d+' min en '+c.z);setTimeout(()=>nav('home',document.querySelectorAll('.nb')[0]),1000);rHome();}
+function finishW(){
+  const dky=dkW();
+  if(!ST.done.includes(dky))ST.done.push(dky);
+  // Store which routine day was done on this date
+  if(!ST.doneDay)ST.doneDay={};
+  ST.doneDay[dky]=wD;
+  sv();
+  const c=SCH[wD].cd;
+  toast('¡Sesión completada! 💪 '+c.tp+' '+c.d+' min en '+c.z);
+  setTimeout(()=>nav('home',document.querySelectorAll('.nb')[0]),1000);
+  rHome();
+}
 
 function toggleStepInput(){const row=document.getElementById('step-input-row');const showing=row.style.display==='flex';row.style.display=showing?'none':'flex';if(!showing)setTimeout(()=>document.getElementById('step-inp').focus(),50);}
 function saveSteps(){const v=document.getElementById('step-inp').value;if(v&&!isNaN(v)&&parseInt(v)>0){ST.steps[dkForDay(homeDay)]=parseInt(v);sv();document.getElementById('step-inp').value='';document.getElementById('step-input-row').style.display='none';rHome();toast('Pasos guardados ✓');}}
@@ -774,7 +785,12 @@ function rP(){
   document.getElementById('pz').textContent=z2;
   const avgS=Math.round(wks.reduce((a,d)=>a+(ST.steps[d]||0),0)/7);
   document.getElementById('pp').textContent=avgS.toLocaleString('es-CO');
-  const vc={};wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
+  const vc={};wks.forEach(d=>{
+    // Use stored routine day if available, otherwise fall back to calendar day
+    const dn=(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay();
+    const exs=SCH[dn]?.ex||[];
+    Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});
+  });
   document.getElementById('pg').textContent=(vc['gj']||0)+(vc['gm']||0);
   document.getElementById('vbars').innerHTML=VOLS.map(v=>{const cnt=vc[v.z]||0,pct=Math.min(100,Math.round(cnt/v.max*100));return`<div class="vi"><span class="vn">${v.l}</span><div class="vt"><div class="vf ${v.cl}" style="width:${pct}%"></div></div><span class="vc">${cnt}/${v.max}</span></div>`;}).join('');
   const prs=Object.entries(ST.prs);
@@ -876,7 +892,7 @@ function genReport(){
   const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
   const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
   let exLines=[];
-  wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay();const exs=SCH[dn]?.ex||[];const chkD=ST.chk[d]||{};exs.forEach((ex,ei)=>{const sets=[];for(let si=1;si<=ex.s;si++){const cd=chkD[ei+'-'+si];if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);}if(sets.length>0){const pr=ST.prs[ex.n];const prNote=pr&&pr.date===d?' ⬆️RP':'';exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);}});});
+  wks.forEach(d=>{const dn=(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay();const exs=SCH[dn]?.ex||[];const chkD=ST.chk[d]||{};exs.forEach((ex,ei)=>{const sets=[];for(let si=1;si<=ex.s;si++){const cd=chkD[ei+'-'+si];if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);}if(sets.length>0){const pr=ST.prs[ex.n];const prNote=pr&&pr.date===d?' ⬆️RP':'';exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);}});});
   const cardioW=ST.cardio.filter(c=>wks.includes(c.date));
   const z2=cardioW.reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
   const z3=cardioW.reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);
@@ -886,7 +902,12 @@ function genReport(){
   const stepsW=wks.map(d=>ST.steps[d]||0);
   const avgSteps=Math.round(stepsW.reduce((a,b)=>a+b,0)/7);
   const prsW=Object.entries(ST.prs).filter(([n,v])=>wks.includes(v.date));
-  const vc={};wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay(),exs=SCH[dn]?.ex||[];Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});});
+  const vc={};wks.forEach(d=>{
+    // Use stored routine day if available, otherwise fall back to calendar day
+    const dn=(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay();
+    const exs=SCH[dn]?.ex||[];
+    Object.keys(ST.chk[d]||{}).forEach(ck=>{const ei=parseInt(ck.split('-')[0]),ex=exs[ei];if(ex)vc[ex.z]=(vc[ex.z]||0)+1;});
+  });
   const recW={};REC_TYPES.forEach(rt=>recW[rt.id]=0);wks.forEach(d=>{const dr=ST.recovery[d]||{};REC_TYPES.forEach(rt=>{if(dr[rt.id])recW[rt.id]++;});});
   const note=document.getElementById('weekly-note').value.trim();
   let r='═══════════════════════════════\n📊 REPORTE SEMANAL KELLY FIT\n';
