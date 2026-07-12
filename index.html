@@ -680,15 +680,16 @@ const SCH={
 
 const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
 let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{}};
-let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
-let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
+let wD=new Date().getDay(),wDate=dk();
+let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
-function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
+function ldFromDate(x){const y=x.getFullYear();const m=String(x.getMonth()+1).padStart(2,'0');const d=String(x.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
+function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return ldFromDate(x);}
 function dkW(){return wDate;}
 function wk(){
   const n=new Date(),dy=n.getDay(),k=[];
@@ -736,14 +737,14 @@ function rHD(d){
   document.getElementById('hc').innerHTML=h;
 }
 
-function owD(d){wD=d;wDate=new Date().toISOString().slice(0,10);nav('workout',document.querySelectorAll('.nb')[1]);}
+function owD(d){wD=d;wDate=dk();nav('workout',document.querySelectorAll('.nb')[1]);}
 
 function rW(){
   const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;
   const wds=document.getElementById('wds');wds.innerHTML='';
-  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=new Date().toISOString().slice(0,10);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
+  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=dk();document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
   const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;
-  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const today=dk(),yesterday=ldFromDate(new Date(Date.now()-86400000));
   const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
   const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
   let h='';
@@ -858,7 +859,7 @@ function rRec(){
   strip.innerHTML='';
   for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'');b.textContent=DS[i];b.onclick=(d=>()=>{recDay=d;recDate=dkForDay(d);document.querySelectorAll('#rds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));renderRec();})(i);strip.appendChild(b);}
   const inp=document.getElementById('rdateinp');if(inp)inp.value=recDate;
-  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const today=dk(),yesterday=ldFromDate(new Date(Date.now()-86400000));
   const lbl=document.getElementById('r-date-label');if(lbl)lbl.textContent=recDate===today?'hoy':recDate===yesterday?'ayer':'';
   renderRec();
 }
@@ -897,8 +898,9 @@ function genReport(){
   const doneW=ST.done.filter(d=>wks.includes(d));
   const sesNames={0:'Dom·Glúteos full',1:'Lun·Glúteos+Isquios',2:'Mar·Spinning+Espalda',3:'Mié·Glúteos+Cuád',4:'Jue·Espalda+Core'};
   const expectedDays=[0,1,2,3,4];
-  const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
-  const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
+  const completedRoutineDays=new Set(doneW.map(d=>(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay()));
+  const completedDays=expectedDays.filter(d=>completedRoutineDays.has(d));
+  const missedDays=expectedDays.filter(d=>!completedRoutineDays.has(d));
   let exLines=[];
   wks.forEach(d=>{const dn=(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay();const exs=SCH[dn]?.ex||[];const chkD=ST.chk[d]||{};exs.forEach((ex,ei)=>{const sets=[];for(let si=1;si<=ex.s;si++){const cd=chkD[ei+'-'+si];if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);}if(sets.length>0){const pr=ST.prs[ex.n];const prNote=pr&&pr.date===d?' ⬆️RP':'';exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);}});});
   const cardioW=ST.cardio.filter(c=>wks.includes(c.date));
