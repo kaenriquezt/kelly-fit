@@ -358,16 +358,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- DOM AM -->
   <div id="cday-am" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno 10am · <strong>135g C totales</strong></div>
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>135g C totales · 5 comidas</strong></div>
     <div class="cmeal-tabs">
-      <button class="cmtab active" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
+      <button class="cmtab active" onclick="setCMeal('am','des',this)">Desayuno</button>
+      <button class="cmtab" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
       <button class="cmtab" onclick="setCMeal('am','alm',this)">Almuerzo post</button>
       <button class="cmtab" onclick="setCMeal('am','snk',this)">Snack PM</button>
       <button class="cmtab" onclick="setCMeal('am','cen',this)">Cena</button>
     </div>
-    <div id="am-pre" class="cmeal-panel">
+    <div id="am-des" class="cmeal-panel">
+      <div class="carbo-card carbo-card-normal">
+        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 6:30–7am</div><div class="cc-macro">30P · 25C · 10G</div></div>
+        <div class="cc-rule cc-rule-green">✅ Carbos complejos · antes de la Levotiroxina no · después 30–45 min sí</div>
+        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
+        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>35–45g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
+        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>90–110g</td><td><span class="badge bx">Ideal</span></td></tr>
+        <tr><td>Arepa maíz blanco<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Tostada integral / multicereal<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">OK</span></td></tr>
+        <tr><td>Waffle de yuca (casero)<br><span class="badge bx">Complejo</span></td><td>66g (1 und)</td><td><span class="badge bw">⚠️ 32g C · ajustar resto</span></td></tr>
+        </table>
+        <div class="carbo-note">Secuencia: jugo verde → proteína/grasa → carbo. Desayuno ligero — el pre-entreno viene pronto.</div>
+      </div>
+    </div>
+    <div id="am-pre" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-pre">
-        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · ~8:30am</div><div class="cc-macro">20P · 40C · 5G</div></div>
+        <div class="cc-head"><div class="cc-title">⚡ Snack AM / Pre-entreno · 8:30am</div><div class="cc-macro">20P · 35C · 5G</div></div>
         <div class="cc-rule cc-rule-red">❌ Sin fibra pesada · sin grasas altas · digestión rápida</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>55–70g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
@@ -382,7 +397,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-alm" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-post">
-        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">35P · 60C · 15G</div></div>
+        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">35P · 55C · 12G</div></div>
         <div class="cc-rule cc-rule-green">✅ La comida más importante de la semana · máxima carga permitida</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Legumbres (lenteja / garbanzo)<br><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra sol.★★</span></td></tr>
@@ -397,7 +412,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-snk" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack PM · ~4pm</div><div class="cc-macro">20P · 20C · 8G</div></div>
+        <div class="cc-head"><div class="cc-title">🍎 Snack PM · ~3–4pm</div><div class="cc-macro">20P · 10C · 8G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carga moderada · sostenida hasta la cena</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
@@ -410,7 +425,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-cen" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🌙 Cena · ~7–8pm</div><div class="cc-macro">25P · 15C · 10G</div></div>
+        <div class="cc-head"><div class="cc-title">🌙 Cena · ~7–8pm</div><div class="cc-macro">20P · 10C · 10G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga reducida · cierre del día de entreno</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
@@ -435,7 +450,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="rest-des" class="cmeal-panel">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">☀️ Desayuno</div><div class="cc-macro">25P · 30C · 10G</div></div>
+        <div class="cc-head"><div class="cc-title">☀️ Desayuno</div><div class="cc-macro">30P · 25C · 10G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carbos complejos · distribuir energía lineal todo el día</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>45–55g</td><td><span class="badge bf2">⭐ Fibra sol. ★</span></td></tr>
@@ -450,7 +465,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="rest-snk" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack AM</div><div class="cc-macro">20P · 20C · 8G</div></div>
+        <div class="cc-head"><div class="cc-title">🍎 Snack AM</div><div class="cc-macro">20P · 22C · 8G</div></div>
         <div class="cc-rule cc-rule-green">✅ Sin demanda muscular activa · priorizar fibra y proteína</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
@@ -477,7 +492,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="rest-snk2" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack PM</div><div class="cc-macro">15P · 15C · 8G</div></div>
+        <div class="cc-head"><div class="cc-title">🍎 Snack PM</div><div class="cc-macro">15P · 15C · 6G</div></div>
         <div class="cc-rule cc-rule-amber">⚡ Carga mínima · no hay entreno · solo mantenimiento tiroideo</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und pequeña</td><td><span class="badge bx">OK</span></td></tr>
@@ -492,7 +507,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="rest-cen" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🌙 Cena</div><div class="cc-macro">25P · 15C · 10G</div></div>
+        <div class="cc-head"><div class="cc-title">🌙 Cena</div><div class="cc-macro">20P · 8C · 6G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga mínima nocturna · sin entreno previo</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
@@ -680,16 +695,15 @@ const SCH={
 
 const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
 let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{}};
-let wD=new Date().getDay(),wDate=dk();
-let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=dk();
+let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
+let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
-function ldFromDate(x){const y=x.getFullYear();const m=String(x.getMonth()+1).padStart(2,'0');const d=String(x.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
-function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return ldFromDate(x);}
+function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
 function dkW(){return wDate;}
 function wk(){
   const n=new Date(),dy=n.getDay(),k=[];
@@ -737,14 +751,14 @@ function rHD(d){
   document.getElementById('hc').innerHTML=h;
 }
 
-function owD(d){wD=d;wDate=dk();nav('workout',document.querySelectorAll('.nb')[1]);}
+function owD(d){wD=d;wDate=new Date().toISOString().slice(0,10);nav('workout',document.querySelectorAll('.nb')[1]);}
 
 function rW(){
   const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;
   const wds=document.getElementById('wds');wds.innerHTML='';
-  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=dk();document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
+  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=new Date().toISOString().slice(0,10);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
   const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;
-  const today=dk(),yesterday=ldFromDate(new Date(Date.now()-86400000));
+  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
   const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
   const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
   let h='';
@@ -859,7 +873,7 @@ function rRec(){
   strip.innerHTML='';
   for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'');b.textContent=DS[i];b.onclick=(d=>()=>{recDay=d;recDate=dkForDay(d);document.querySelectorAll('#rds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));renderRec();})(i);strip.appendChild(b);}
   const inp=document.getElementById('rdateinp');if(inp)inp.value=recDate;
-  const today=dk(),yesterday=ldFromDate(new Date(Date.now()-86400000));
+  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
   const lbl=document.getElementById('r-date-label');if(lbl)lbl.textContent=recDate===today?'hoy':recDate===yesterday?'ayer':'';
   renderRec();
 }
@@ -898,9 +912,8 @@ function genReport(){
   const doneW=ST.done.filter(d=>wks.includes(d));
   const sesNames={0:'Dom·Glúteos full',1:'Lun·Glúteos+Isquios',2:'Mar·Spinning+Espalda',3:'Mié·Glúteos+Cuád',4:'Jue·Espalda+Core'};
   const expectedDays=[0,1,2,3,4];
-  const completedRoutineDays=new Set(doneW.map(d=>(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay()));
-  const completedDays=expectedDays.filter(d=>completedRoutineDays.has(d));
-  const missedDays=expectedDays.filter(d=>!completedRoutineDays.has(d));
+  const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
+  const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
   let exLines=[];
   wks.forEach(d=>{const dn=(ST.doneDay&&ST.doneDay[d]!==undefined)?ST.doneDay[d]:new Date(d+'T12:00:00').getDay();const exs=SCH[dn]?.ex||[];const chkD=ST.chk[d]||{};exs.forEach((ex,ei)=>{const sets=[];for(let si=1;si<=ex.s;si++){const cd=chkD[ei+'-'+si];if(cd&&cd.kg)sets.push(cd.kg+'kg×'+cd.r);}if(sets.length>0){const pr=ST.prs[ex.n];const prNote=pr&&pr.date===d?' ⬆️RP':'';exLines.push(`  ${ex.n}: ${sets.join(', ')}${prNote}`);}});});
   const cardioW=ST.cardio.filter(c=>wks.includes(c.date));
