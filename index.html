@@ -367,7 +367,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- DOM AM -->
   <div id="cday-am" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>135g C totales · 5 comidas</strong></div>
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>125P · 135C · 45G · 5 comidas</strong></div>
     <div class="cmeal-tabs">
       <button class="cmtab active" onclick="setCMeal('am','des',this)">Desayuno</button>
       <button class="cmtab" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
@@ -377,7 +377,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-des" class="cmeal-panel">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 6:30–7am</div><div class="cc-macro">30P · 25C · 10G</div></div>
+        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 7am</div><div class="cc-macro">25P · 20C · 5G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carbos complejos · antes de la Levotiroxina no · después 30–45 min sí</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>35–45g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
@@ -393,7 +393,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-pre" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-pre">
-        <div class="cc-head"><div class="cc-title">⚡ Snack AM / Pre-entreno · 8:30am</div><div class="cc-macro">20P · 35C · 5G</div></div>
+        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · 9am</div><div class="cc-macro">15P · 30C · 3G</div></div>
         <div class="cc-rule cc-rule-red">❌ Sin fibra pesada · sin grasas altas · digestión rápida</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>130–160g</td><td><span class="badge bx">⭐ Dig. fácil</span></td></tr>
@@ -408,7 +408,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-alm" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-post">
-        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">35P · 55C · 12G</div></div>
+        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">40P · 55C · 15G</div></div>
         <div class="cc-rule cc-rule-green">✅ La comida más importante de la semana · máxima carga permitida</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Legumbres (lenteja / garbanzo)<br><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra sol.★★</span></td></tr>
@@ -423,7 +423,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-snk" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack PM · ~3–4pm</div><div class="cc-macro">20P · 10C · 8G</div></div>
+        <div class="cc-head"><div class="cc-title">🍎 Snack PM · 3–4pm</div><div class="cc-macro">20P · 20C · 12G</div></div>
         <div class="cc-rule cc-rule-green">✅ Carga moderada · sostenida hasta la cena</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
@@ -439,7 +439,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div id="am-cen" class="cmeal-panel" style="display:none;">
       <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🌙 Cena · ~7–8pm</div><div class="cc-macro">20P · 10C · 10G</div></div>
+        <div class="cc-head"><div class="cc-title">🌙 Cena · 7–8pm</div><div class="cc-macro">25P · 10C · 10G</div></div>
         <div class="cc-rule cc-rule-blue">💡 Carga reducida · cierre del día de entreno</div>
         <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
         <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
@@ -685,7 +685,7 @@ const GUIDE={
 const SCH={
 0:{t:'Glúteos full · sesión pesada',sb:'Domingo · 60 min · AM',ty:'force',st:7000,
   cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · recuperación activa'},
-  nt:'Estiramientos 15 min · caminata suave tarde',rnt:'Presoterapia + sauna post-entreno',
+  nt:'Caminata suave tarde · estiramientos',rnt:'Presoterapia + sauna post-entreno',
   ex:[{n:'Monster walks + fire hydrant con banda',m:'Activación glúteo medio',s:2,r:'15',hi:false,z:'gm'},{n:'Hip thrust con barra',m:'Glúteo mayor · PR semanal',s:5,r:'6–8',hi:true,z:'gj'},{n:'Back squat con barra',m:'Glúteos + cuádriceps',s:4,r:'8–10',hi:true,z:'gj'},{n:'Peso muerto rumano',m:'Isquios + glúteo',s:3,r:'10–12',hi:false,z:'isq'},{n:'Abducción en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},{n:'Extensión cuádriceps en máquina',m:'Definición pierna completa',s:3,r:'15',hi:false,z:'q'},{n:'Pallof press en polea',m:'Core anti-rotacional · sin oblicuos',s:3,r:'10 c/lado',hi:false,z:'c'}]},
 1:{t:'Glúteos + Isquios',sb:'Lunes · 60 min · 5pm',ty:'force',st:8000,
   cd:{tp:'Caminata inclinada',z:'Zona 2',d:25,nt:'Post-entreno · Zona 2'},
