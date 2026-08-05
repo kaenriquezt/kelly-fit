@@ -305,7 +305,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- L-J PM -->
   <div id="cday-pm">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Lunes a Jueves · entreno 5pm · <strong>135g C totales</strong></div>
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Lunes a Jueves · entreno 5pm · <strong>144P · 140C · 47G · 1.560 kcal</strong></div>
     <div class="cmeal-tabs">
       <button class="cmtab active" onclick="setCMeal('pm','des',this)">Desayuno</button>
       <button class="cmtab" onclick="setCMeal('pm','snk',this)">Snack AM</button>
@@ -411,7 +411,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- DOM AM -->
   <div id="cday-am" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>125P · 135C · 45G · 5 comidas</strong></div>
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>144P · 140C · 47G · 1.560 kcal</strong></div>
     <div class="cmeal-tabs">
       <button class="cmtab active" onclick="setCMeal('am','des',this)">Desayuno</button>
       <button class="cmtab" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
@@ -497,7 +497,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- VIE-SAB -->
   <div id="cday-rest" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Viernes y Sábado · descanso · <strong>110g C totales</strong></div>
+    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Viernes y Sábado · descanso · <strong>128P · 99C · 57G · 1.418 kcal</strong></div>
     <div class="cmeal-tabs">
       <button class="cmtab active" onclick="setCMeal('rest','des',this)">Desayuno</button>
       <button class="cmtab" onclick="setCMeal('rest','snk',this)">Snack AM</button>
@@ -691,8 +691,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="nb" onclick="nav('workout',this)"><svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M8 6.5V4M16 6.5V4M8 20v-2.5M16 20v-2.5"/></svg>Rutina</button>
   <button class="nb" onclick="nav('cardio',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Cardio</button>
   <button class="nb" onclick="nav('carbos',this)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12h8M12 8v8"/></svg>Macros</button>
-  <button class="nb" onclick="nav('progress',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
   <button class="nb" onclick="nav('recovery',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Recup.</button>
+  <button class="nb" onclick="nav('progress',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
 </nav>
 </div>
 <div id="toast"></div>
@@ -794,21 +794,21 @@ const SCH={
 
 const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
 const MEALS={
- 0:[{id:'des',n:'Desayuno',h:'7:00 am',p:25,c:20,g:5},
-    {id:'pre',n:'Pre-entreno',h:'9:00 am',p:15,c:30,g:3},
-    {id:'alm',n:'Almuerzo post-entreno',h:'12:00 m',p:40,c:55,g:15},
-    {id:'snk',n:'Snack PM',h:'3–4 pm',p:20,c:20,g:12},
-    {id:'cen',n:'Cena',h:'7–8 pm',p:25,c:10,g:10}],
- 1:[{id:'des',n:'Desayuno',h:'7:00 am',p:30,c:25,g:10},
-    {id:'snk',n:'Snack AM',h:'10:00 am',p:20,c:20,g:8},
-    {id:'alm',n:'Almuerzo',h:'12:00 m',p:35,c:50,g:12},
-    {id:'pre',n:'Pre-entreno',h:'4:00 pm',p:15,c:25,g:5},
-    {id:'cen',n:'Cena post-entreno',h:'7–8 pm',p:25,c:15,g:10}],
- 5:[{id:'des',n:'Desayuno',h:'7:00 am',p:30,c:25,g:10},
-    {id:'snk',n:'Snack AM',h:'10:00 am',p:20,c:22,g:8},
-    {id:'alm',n:'Almuerzo',h:'12:00 m',p:35,c:40,g:12},
-    {id:'snk2',n:'Snack PM',h:'4:00 pm',p:15,c:15,g:6},
-    {id:'cen',n:'Cena',h:'7–8 pm',p:20,c:8,g:6}]
+ 0:[{id:'des',n:'Desayuno',h:'7:00 am',p:30,c:22,g:6},
+    {id:'pre',n:'Pre-entreno',h:'9:00 am',p:17,c:32,g:3},
+    {id:'alm',n:'Almuerzo post-entreno',h:'12:00 m',p:42,c:56,g:15},
+    {id:'snk',n:'Snack PM',h:'3–4 pm',p:25,c:20,g:12},
+    {id:'cen',n:'Cena',h:'7–8 pm',p:30,c:10,g:11}],
+ 1:[{id:'des',n:'Desayuno',h:'7:00 am',p:32,c:26,g:10},
+    {id:'snk',n:'Snack AM',h:'10:00 am',p:25,c:20,g:8},
+    {id:'alm',n:'Almuerzo',h:'12:00 m',p:40,c:52,g:13},
+    {id:'pre',n:'Pre-entreno',h:'4:00 pm',p:17,c:27,g:5},
+    {id:'cen',n:'Cena post-entreno',h:'7–8 pm',p:30,c:15,g:11}],
+ 5:[{id:'des',n:'Desayuno',h:'7:00 am',p:30,c:24,g:12},
+    {id:'snk',n:'Snack AM',h:'10:00 am',p:25,c:20,g:10},
+    {id:'alm',n:'Almuerzo',h:'12:00 m',p:38,c:36,g:15},
+    {id:'snk2',n:'Snack PM',h:'4:00 pm',p:15,c:12,g:9},
+    {id:'cen',n:'Cena',h:'7–8 pm',p:20,c:7,g:11}]
 };
 MEALS[2]=MEALS[1];MEALS[3]=MEALS[1];MEALS[4]=MEALS[1];MEALS[6]=MEALS[5];
 function mealsFor(d){return MEALS[d]||MEALS[1];}
@@ -841,7 +841,7 @@ let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().to
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}rHome();}
+function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
 function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
