@@ -163,7 +163,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pc-sub{font-size:10px;color:var(--t3);margin-top:1px;}
 .pc-bar{height:4px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:7px;}
 .pc-fill{height:100%;border-radius:3px;transition:width .35s;}
-.f-ok{background:var(--green);}.f-mid{background:var(--amb);}.f-low{background:#C97A7A;}.f-pur{background:var(--pur);}
+.f-ok{background:var(--green);}.f-mid{background:var(--amb);}.f-low{background:#C97A7A;}.f-pur{background:var(--pur);}.f-teal{background:var(--teal);}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .d-ok{background:var(--green);}.d-mid{background:var(--amb);}.d-bad{background:#C0564E;}
 /* meal rows */
@@ -812,6 +812,7 @@ const MEALS={
 };
 MEALS[2]=MEALS[1];MEALS[3]=MEALS[1];MEALS[4]=MEALS[1];MEALS[6]=MEALS[5];
 function mealsFor(d){return MEALS[d]||MEALS[1];}
+const FIBER_TGT=20;
 function dayTarget(d){const m=mealsFor(d);return{p:m.reduce((a,x)=>a+x.p,0),c:m.reduce((a,x)=>a+x.c,0),g:m.reduce((a,x)=>a+x.g,0)};}
 
 // marcadores de laboratorio · meta = objetivo clínico, ref = rango del laboratorio
@@ -835,13 +836,13 @@ function labStat(m,v){
   if(m.dir==='low')  return v<=m.hi?'ok':(v<=m.hi*1.25?'mid':'bad');
   return v>=m.lo?'ok':(v>=m.lo*0.85?'mid':'bad');
 }
-let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[]};
+let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[],fiber:{}};
 let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
 let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
+function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
 function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
@@ -917,6 +918,13 @@ function dayTotals(d){
   Object.values(md).forEach(v=>{p+=parseFloat(v.p)||0;c+=parseFloat(v.c)||0;g+=parseFloat(v.g)||0;});
   return{p,c,g};
 }
+function setFiber(v){
+  const d=dkForDay(homeDay);
+  if(v===''||v===null){delete ST.fiber[d];}else{ST.fiber[d]=parseFloat(v)||0;}
+  sv();
+  const fn=parseFloat(v)||0, pct=Math.min(100,Math.round(fn/FIBER_TGT*100));
+  const bar=document.querySelector('#macro-summary .f-teal'); if(bar)bar.style.width=pct+'%';
+}
 function rMacroSummary(d){
   const dk_=dkForDay(d),t=dayTarget(d),a=dayTotals(dk_);
   const kcal=Math.round(a.p*4+a.c*4+a.g*9),kcalT=Math.round(t.p*4+t.c*4+t.g*9);
@@ -924,9 +932,20 @@ function rMacroSummary(d){
     const pct=tv?Math.min(100,Math.round(av/tv*100)):0;
     return `<div class="mbar"><span class="k">${k}</span><div class="t"><div class="tf ${cl}" style="width:${pct}%;height:100%;"></div></div><span class="v">${Math.round(av)} / ${tv} g</span></div>`;
   };
+  const fv=ST.fiber[dk_]!==undefined?ST.fiber[dk_]:'';
+  const fn=parseFloat(fv)||0, fpct=Math.min(100,Math.round(fn/FIBER_TGT*100));
+  const fibRow=`<div class="mbar" style="border-top:1px solid var(--border);margin-top:6px;padding-top:9px;">
+    <span class="k">F</span>
+    <div class="t"><div class="tf f-teal" style="width:${fpct}%;height:100%;"></div></div>
+    <span class="v" style="width:auto;display:flex;align-items:center;gap:4px;">
+      <input id="fib-inp" type="number" inputmode="decimal" placeholder="0" value="${fv}"
+        oninput="setFiber(this.value)"
+        style="width:46px;padding:4px 6px;border:1px solid var(--border);border-radius:8px;font-size:13px;text-align:center;background:var(--bg);color:var(--t1);-webkit-appearance:none;outline:none;">
+      <span style="font-size:11px;color:var(--t3);">/ ${FIBER_TGT} g</span></span></div>
+  <div style="font-size:10px;color:var(--t3);margin-top:4px;">Fibra del día · meta de tu nutricionista</div>`;
   document.getElementById('macro-summary').innerHTML=
     `<div class="srow" style="margin-bottom:6px;"><span class="sv">${kcal.toLocaleString('es-CO')}</span><span class="sl">de ${kcalT.toLocaleString('es-CO')} kcal</span></div>`+
-    row('P','Proteína',a.p,t.p,'f-ok')+row('C','Carbos',a.c,t.c,'f-pur')+row('G','Grasas',a.g,t.g,'f-mid');
+    row('P','Proteína',a.p,t.p,'f-ok')+row('C','Carbos',a.c,t.c,'f-pur')+row('G','Grasas',a.g,t.g,'f-mid')+fibRow;
 }
 function rMacros(d){
   const dk_=dkForDay(d),ms=mealsFor(d);
@@ -1039,6 +1058,8 @@ function rP(){
   const avgSteps=Math.round(stSum/7);
   const adhs=wks.map(macAdh).filter(x=>x!==null);
   const macPct=adhs.length?Math.round(adhs.reduce((a,b)=>a+b,0)/adhs.length):0;
+  const fibs=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
+  const fibAvg=fibs.length?Math.round(fibs.reduce((a,b)=>a+parseFloat(b),0)/fibs.length):0;
   const L=lastLab();
   const mTsh=LABS.find(m=>m.k==='tsh'),mLdl=LABS.find(m=>m.k==='ldl');
   const tshV=L&&L.tsh!=null&&L.tsh!==''?L.tsh:null;
@@ -1051,7 +1072,7 @@ function rP(){
     card(sesPct,sesPct+'%','Sesiones fuerza',ses+' de 5 programadas')+
     card(z2Pct,z2Pct+'%','Zona 2',z2+' de 140 min')+
     card(stPct,stPct+'%','Pasos',avgSteps.toLocaleString('es-CO')+' prom · meta '+Math.round(stTgt/7).toLocaleString('es-CO'))+
-    card(macPct,macPct+'%','Macros',adhs.length+' de 7 días registrados')+
+    card(macPct,macPct+'%','Macros',adhs.length+' de 7 días · fibra '+fibAvg+'g prom')+
     card(tshV!==null?100:null,tshV!==null?tshV:'—','Tiroides · TSH',tshV!==null?(stTxt[tshS]+' · meta 0.5–2.5'):'sin datos',tshS==='ok'?'f-ok':tshS==='mid'?'f-mid':'f-low')+
     card(ldlV!==null?100:null,ldlV!==null?ldlV:'—','Colesterol · LDL',ldlV!==null?(stTxt[ldlS]+' · meta <100'):'sin datos',ldlS==='ok'?'f-ok':ldlS==='mid'?'f-mid':'f-low');
 
@@ -1170,6 +1191,11 @@ function rRange(){
   const mac=days.map(d=>({x:d,y:macAdh(d)})).filter(p=>p.y!==null);
   const macAvg=mac.length?Math.round(mac.reduce((a,b)=>a+b.y,0)/mac.length):0;
   h+=chartBox('Adherencia a macros',mac.length?`promedio ${macAvg}% · ${mac.length} días`:'sin datos',spark(mac,{color:'var(--teal)',goal:100,min:0,max:100}));
+
+  // 4b. Fibra diaria
+  const fib=days.filter(d=>ST.fiber[d]!==undefined&&ST.fiber[d]!==''&&ST.fiber[d]!==null).map(d=>({x:d,y:parseFloat(ST.fiber[d])}));
+  const fibAvgR=fib.length?Math.round(fib.reduce((a,b)=>a+b.y,0)/fib.length):0;
+  h+=chartBox('Fibra diaria',fib.length?`promedio ${fibAvgR} g · meta ${FIBER_TGT} g`:'sin datos',spark(fib,{color:'var(--teal)',goal:FIBER_TGT,min:0}));
 
   // 5. Zona 2 por semana
   const wkMap={};
@@ -1364,7 +1390,11 @@ function genReport(){
   r+=`\n👟 PASOS\nPromedio: ${avgSteps.toLocaleString('es-CO')} pasos/día\n`;
   const adhs=wks.map(macAdh).filter(x=>x!==null);
   const macPct=adhs.length?Math.round(adhs.reduce((a,b)=>a+b,0)/adhs.length):0;
-  r+=`\n🍽️ MACROS\nAdherencia promedio: ${macPct}%\nDías registrados: ${adhs.length}/7\n`;
+  const fibs=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
+  const fibAvg=fibs.length?Math.round(fibs.reduce((a,b)=>a+parseFloat(b),0)/fibs.length):0;
+  const fibsR=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
+  const fibAvgRep=fibsR.length?Math.round(fibsR.reduce((a,b)=>a+parseFloat(b),0)/fibsR.length):0;
+  r+=`\n🍽️ MACROS\nAdherencia promedio: ${macPct}%\nDías registrados: ${adhs.length}/7\nFibra promedio: ${fibAvgRep} g (meta ${FIBER_TGT} g) · ${fibsR.length}/7 días\n`;
   wks.forEach(d=>{const t=dayTotals(d),dn=new Date(d+'T12:00:00').getDay(),tg=dayTarget(dn);
     if(t.p||t.c||t.g)r+=`  ${d} · ${Math.round(t.p)}/${tg.p}P ${Math.round(t.c)}/${tg.c}C ${Math.round(t.g)}/${tg.g}G\n`;});
   r+=`\n💆 RECUPERACIÓN\nPresoterapia: ${recW['preso']}x\nSauna: ${recW['sauna']}x\nTurco: ${recW['turco']}x\nPiscina: ${recW['piscina']}x\nMasajes: ${recW['masaje_dep']+recW['masaje_dre']+recW['masaje_rel']+recW['masaje_mol']}x\n`;
