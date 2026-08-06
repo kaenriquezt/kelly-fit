@@ -702,15 +702,14 @@ const DS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 
 // ── RECOVERY SCHEDULE ──────────────────────────────────────────────
 const REC_SCH={
-  0:{rec:['Presoterapia piernas','Sauna 15–20 min','Piscina · natación suave o flotación'],note:'Post glúteos AM · reduce inflamación de piernas'},
-  1:{rec:['Presoterapia piernas','Sauna 15–20 min'],note:'Post glúteos+isquios · prioridad presoterapia'},
-  2:{rec:['Turco o sauna 10–15 min'],note:'Post spinning+espalda · relajación muscular'},
-  3:{rec:['Presoterapia piernas','Piscina · hidroterapia'],note:'Post glúteos+cuád · piernas muy activas'},
-  4:{rec:['Sauna 15–20 min','Turco'],note:'Cierre semana de fuerza · relajar SNS'},
-  5:{rec:['Presoterapia piernas · opcional','Piscina · descanso activo'],note:'Descanso · vaciado linfático semana'},
-  6:{rec:['Sauna o turco · opcional','Piscina · natación suave'],note:'Descanso · recuperación completa'}
+  0:{rec:['Presoterapia piernas','Sauna 15–20 min','Piscina'],note:'Sesión más pesada de la semana · prioridad presoterapia'},
+  1:{rec:['Sauna o turco 10–15 min'],note:'Tren superior · relajación muscular'},
+  2:{rec:['Presoterapia piernas','Piscina'],note:'Post cuádriceps + spinning · piernas muy cargadas'},
+  3:{rec:['Turco o sauna 10–15 min'],note:'Tren superior · relajar sistema nervioso'},
+  4:{rec:['Presoterapia piernas','Sauna 15–20 min'],note:'Cierre de semana de fuerza'},
+  5:{rec:['Presoterapia · opcional','Piscina'],note:'Descanso · vaciado linfático de la semana'},
+  6:{rec:['Sauna o turco · opcional','Piscina'],note:'Descanso · recuperación completa'}
 };
-
 const REC_TYPES=[
   {id:'preso',label:'Presoterapia',sub:'Piernas · drenaje linfático',emoji:'🦵'},
   {id:'sauna',label:'Sauna',sub:'15–20 min',emoji:'🔥'},
@@ -723,6 +722,7 @@ const REC_TYPES=[
 ];
 
 const GUIDE={
+"Elevaciones laterales con mancuernas":{t:"De pie, mancuernas a los lados, codos con una flexión mínima y fija. Sube los brazos hacia los lados hasta la altura del hombro, no más. Imagina que llevas los codos hacia afuera, no las manos hacia arriba. Baja en 2–3 segundos.",r:"Exhala al subir. Inhala al bajar controlado.",e:"Usar demasiado peso y balancear el torso. Encoger los trapecios al subir. Pasar de la altura del hombro. Bajar de golpe — la fase excéntrica es la que más construye."},
 "Monster walks + fire hydrant con banda":{t:"Monster walks: banda en pies o tobillos, rodillas y caderas ligeramente flexionadas. Camina lateral manteniendo tensión constante. Fire hydrant: cuadrupedia, levanta la rodilla hacia el lado sin rotar la cadera.",r:"Monster walks: ritmo libre. Fire hydrant: exhala al subir la rodilla, inhala al bajar.",e:"Rotar la pelvis al elevar la pierna. Pasos demasiado largos. Subir la rodilla más allá de 45°."},
 "Hip thrust con barra":{t:"Espalda media en banco (omóplatos sobre el borde), pies planos, rodillas a 90° arriba. Barra en el pliegue de la cadera con almohadilla. Empuja con los talones hasta que muslos y torso queden paralelos al suelo.",r:"Inhala abajo. Exhala fuerte al subir. Core activado todo el tiempo.",e:"Hiperextender la lumbar. Mirar al frente en vez de barbilla al pecho. No apretar glúteos arriba. Rodillas que colapsan."},
 "Back squat con barra":{t:"Barra en el trapecio, pies al ancho de hombros, puntas afuera 15–30°. Baja controlado con torso erguido, rodillas siguiendo los pies, talones en el suelo, hasta muslos paralelos o más abajo.",r:"Inhala y Valsalva antes de bajar. Exhala al pasar el punto más difícil al subir.",e:"Rodillas que colapsan al subir. Talones que se levantan. Torso que cae demasiado adelante."},
@@ -762,37 +762,64 @@ const GUIDE={
 };
 
 const SCH={
-0:{t:'Glúteos full · sesión pesada',sb:'Domingo · 60 min · AM',ty:'force',st:7000,
+0:{t:'Glúteos · sesión pesada',sb:'Domingo · 60 min · AM',ty:'force',st:7000,
   cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · recuperación activa'},
-  nt:'Caminata suave tarde · estiramientos',rnt:'Presoterapia + sauna post-entreno',
-  ex:[{n:'Monster walks + fire hydrant con banda',m:'Activación glúteo medio',s:2,r:'15',hi:false,z:'gm'},{n:'Hip thrust con barra',m:'Glúteo mayor · PR semanal',s:5,r:'6–8',hi:true,z:'gj'},{n:'Back squat con barra',m:'Glúteos + cuádriceps',s:4,r:'8–10',hi:true,z:'gj'},{n:'Peso muerto rumano',m:'Isquios + glúteo',s:3,r:'10–12',hi:false,z:'isq'},{n:'Abducción en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},{n:'Extensión cuádriceps en máquina',m:'Definición pierna completa',s:3,r:'15',hi:false,z:'q'},{n:'Pallof press en polea',m:'Core anti-rotacional · sin oblicuos',s:3,r:'10 c/lado',hi:false,z:'c'}]},
-1:{t:'Glúteos + Isquios',sb:'Lunes · 60 min · 5pm',ty:'force',st:8000,
-  cd:{tp:'Caminata inclinada',z:'Zona 2',d:25,nt:'Post-entreno · Zona 2'},
-  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia post-entreno',
-  ex:[{n:'Glute bridge con banda + clamshell',m:'Activación glúteo',s:2,r:'15',hi:false,z:'gm'},{n:'Hip thrust con barra',m:'Glúteo mayor · compuesto principal',s:4,r:'8–10',hi:true,z:'gj'},{n:'Peso muerto rumano con barra',m:'Isquios + glúteo mayor',s:4,r:'8–10',hi:true,z:'isq'},{n:'Curl femoral tumbada en máquina',m:'Isquiotibiales · aislamiento',s:3,r:'12–15',hi:false,z:'isq'},{n:'Abducción de cadera en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},{n:'Patada de glúteo en polea baja',m:'Glúteo mayor · aislamiento',s:3,r:'15 c/lado',hi:false,z:'gj'},{n:'Dead bug',m:'Core profundo · sin carga lateral',s:3,r:'8 c/lado',hi:false,z:'c'}]},
-2:{t:'Spinning + Espalda + Bíceps',sb:'Martes · Spinning + 45 min fuerza · 5pm',ty:'force',st:9000,
-  cd:{tp:'Spinning',z:'multi',d:45,nt:'Spinning primero · luego fuerza'},
-  nt:'Caminata post-almuerzo 20 min · subir escaleras',rnt:'Turco o sauna post-entreno',
-  ex:[{n:'Face pulls con cable o banda',m:'Activación hombro posterior',s:2,r:'15',hi:false,z:'e'},{n:'Remo con barra agarre prono',m:'Espalda media principal',s:3,r:'8–10',hi:true,z:'e'},{n:'Jalón agarre estrecho neutro',m:'Dorsal · anchura espalda',s:3,r:'10–12',hi:true,z:'e'},{n:'Pájaros inclinado con mancuernas',m:'Deltoides posterior · definición',s:3,r:'15',hi:false,z:'e'},{n:'Curl de bíceps con barra EZ',m:'Bíceps · compuesto',s:3,r:'10–12',hi:false,z:'b'},{n:'Curl martillo con mancuernas',m:'Braquial + bíceps · brazos tonificados',s:2,r:'12',hi:false,z:'b'}]},
-3:{t:'Glúteos + Cuádriceps',sb:'Miércoles · 60 min · 5pm',ty:'force',st:8000,
-  cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · piernas activas'},
-  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia post-entreno · piscina si puedes',
-  ex:[{n:'Clamshell + donkey kicks con banda',m:'Activación glúteo completo',s:2,r:'15',hi:false,z:'gm'},{n:'Sentadilla búlgara con mancuernas',m:'Glúteo + cuádriceps · unilateral',s:4,r:'10 c/lado',hi:true,z:'gj'},{n:'Hip thrust unilateral en banco',m:'Glúteo mayor · conexión mente-músculo',s:3,r:'12 c/lado',hi:true,z:'gj'},{n:'Prensa pies altos y separados',m:'Glúteos + isquios',s:3,r:'12–15',hi:false,z:'gj'},{n:'Sentadilla sumo goblet',m:'Glúteo medio + aductores',s:3,r:'15',hi:false,z:'gm'},{n:'Abducción en máquina',m:'Glúteo medio · cierre de sesión',s:3,r:'15–20',hi:false,z:'gm'},{n:'Plancha isométrica',m:'Core estabilizador',s:3,r:'35s',hi:false,z:'c'}]},
-4:{t:'Espalda completa + Core',sb:'Jueves · 60 min · 5pm',ty:'force',st:9000,
-  cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Post-entreno · Zona 2'},
-  nt:'Caminata post-almuerzo 20 min',rnt:'Sauna post-entreno · cierre semana de fuerza',
-  ex:[{n:'Band pull-apart',m:'Activación escapular · postura',s:2,r:'20',hi:false,z:'e'},{n:'Remo unilateral con mancuerna',m:'Espalda media principal',s:4,r:'10 c/lado',hi:true,z:'e'},{n:'Remo en polea baja agarre neutro',m:'Retracción escapular · talle',s:3,r:'10–12',hi:true,z:'e'},{n:'Press inclinado con mancuernas',m:'Pecho · mantenimiento',s:3,r:'12–15',hi:false,z:'p'},{n:'Tríceps en polea agarre cuerda',m:'Brazos tonificados',s:3,r:'12–15',hi:false,z:'tri'},{n:'Elevación de piernas colgada',m:'Recto abdominal inferior',s:3,r:'10–12',hi:false,z:'c'},{n:'Dead bug',m:'Core profundo · sin oblicuos',s:3,r:'8 c/lado',hi:false,z:'c'}]},
+  nt:'Caminata suave tarde · estiramientos 15 min',rnt:'Presoterapia + sauna + piscina',
+  ex:[{n:'Monster walks + fire hydrant con banda',m:'Activación glúteo medio',s:2,r:'15',hi:false,z:'gm'},
+      {n:'Hip thrust con barra',m:'Glúteo mayor · PR semanal · RIR 1–2',s:4,r:'5–8',hi:true,z:'gj'},
+      {n:'Back squat con barra',m:'Glúteos + cuádriceps · RIR 2',s:4,r:'6–8',hi:true,z:'gj'},
+      {n:'Peso muerto rumano',m:'Isquios + glúteo · RIR 2',s:3,r:'8–10',hi:false,z:'isq'},
+      {n:'Abducción en máquina',m:'Glúteo medio · anchura cadera',s:3,r:'15–20',hi:false,z:'gm'},
+      {n:'Pallof press en polea',m:'Core anti-rotacional · sin oblicuos',s:3,r:'10 c/lado',hi:false,z:'c'}]},
+1:{t:'Espalda + Hombros + Bíceps',sb:'Lunes · 60 min · 5pm',ty:'force',st:9000,
+  cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Post-entreno · piernas descansadas'},
+  nt:'Caminata post-almuerzo 20 min · subir escaleras',rnt:'Sauna o turco · día de tren superior',
+  ex:[{n:'Band pull-apart',m:'Activación escapular · postura',s:2,r:'20',hi:false,z:'e'},
+      {n:'Remo con barra agarre prono',m:'Espalda media · principal · RIR 1–2',s:4,r:'5–8',hi:true,z:'e'},
+      {n:'Jalón agarre estrecho neutro',m:'Dorsal · anchura de espalda · RIR 2',s:3,r:'8–10',hi:true,z:'e'},
+      {n:'Elevaciones laterales con mancuernas',m:'Deltoides lateral · proporción hombro-cintura',s:4,r:'12–15',hi:true,z:'h'},
+      {n:'Face pulls con cable o banda',m:'Deltoides posterior · manguito rotador',s:3,r:'15',hi:false,z:'h'},
+      {n:'Curl de bíceps con barra EZ',m:'Bíceps · compuesto',s:3,r:'8–10',hi:false,z:'b'},
+      {n:'Curl martillo con mancuernas',m:'Braquial · brazo tonificado',s:2,r:'12',hi:false,z:'b'}]},
+2:{t:'Glúteos + Cuádriceps · Spinning',sb:'Martes · 50 min fuerza + spinning · 5pm',ty:'force',st:8000,
+  cd:{tp:'Spinning',z:'multi',d:45,nt:'DESPUÉS de la fuerza · Zona 2–3'},
+  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia + piscina · post piernas y spinning',
+  ex:[{n:'Clamshell + donkey kicks con banda',m:'Activación glúteo completo',s:2,r:'15',hi:false,z:'gm'},
+      {n:'Sentadilla búlgara con mancuernas',m:'Cuádriceps + glúteo · unilateral · RIR 2',s:4,r:'6–8 c/lado',hi:true,z:'q'},
+      {n:'Prensa pies altos y separados',m:'Glúteos + isquios · RIR 2',s:3,r:'8–10',hi:true,z:'gj'},
+      {n:'Extensión cuádriceps en máquina',m:'Cuádriceps · aislamiento',s:3,r:'12–15',hi:false,z:'q'},
+      {n:'Sentadilla sumo goblet',m:'Glúteo medio + aductores',s:3,r:'12–15',hi:false,z:'gm'},
+      {n:'Abducción en máquina',m:'Glúteo medio · cierre de sesión',s:3,r:'15–20',hi:false,z:'gm'}]},
+3:{t:'Espalda + Pecho + Core',sb:'Miércoles · 60 min · 5pm',ty:'force',st:9000,
+  cd:{tp:'Caminata inclinada',z:'Zona 2',d:35,nt:'Post-entreno · piernas frescas'},
+  nt:'Caminata post-almuerzo 20 min',rnt:'Turco o sauna · día de tren superior',
+  ex:[{n:'Face pulls con cable o banda',m:'Activación hombro posterior',s:2,r:'15',hi:false,z:'h'},
+      {n:'Remo unilateral con mancuerna',m:'Espalda media · principal · RIR 1–2',s:4,r:'6–8 c/lado',hi:true,z:'e'},
+      {n:'Remo en polea baja agarre neutro',m:'Retracción escapular · efecto talle',s:3,r:'10–12',hi:true,z:'e'},
+      {n:'Pájaros inclinado con mancuernas',m:'Deltoides posterior + romboides',s:3,r:'12–15',hi:false,z:'e'},
+      {n:'Press inclinado con mancuernas',m:'Pecho · RIR 2',s:3,r:'8–10',hi:false,z:'p'},
+      {n:'Tríceps en polea agarre cuerda',m:'Tríceps · brazo tonificado',s:3,r:'12–15',hi:false,z:'tri'},
+      {n:'Elevación de piernas colgada',m:'Recto abdominal inferior',s:3,r:'10–12',hi:false,z:'c'},
+      {n:'Dead bug',m:'Core profundo · sin oblicuos',s:2,r:'8 c/lado',hi:false,z:'c'}]},
+4:{t:'Glúteos + Isquios',sb:'Jueves · 55 min · 5pm',ty:'force',st:8000,
+  cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · recuperación activa'},
+  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia + sauna · cierre de semana',
+  ex:[{n:'Glute bridge con banda + clamshell',m:'Activación glúteo',s:2,r:'15',hi:false,z:'gm'},
+      {n:'Peso muerto rumano con barra',m:'Isquios · principal · RIR 1–2',s:4,r:'5–8',hi:true,z:'isq'},
+      {n:'Hip thrust con barra',m:'Glúteo mayor · RIR 2',s:4,r:'6–8',hi:true,z:'gj'},
+      {n:'Curl femoral tumbada en máquina',m:'Isquios · aislamiento',s:3,r:'10–12',hi:false,z:'isq'},
+      {n:'Patada de glúteo en polea baja',m:'Glúteo mayor · aislamiento',s:3,r:'12–15 c/lado',hi:false,z:'gj'},
+      {n:'Plancha isométrica',m:'Core estabilizador',s:3,r:'40s',hi:false,z:'c'}]},
 5:{t:'Descanso activo',sb:'Viernes · estudio · cardio opcional',ty:'opt',st:9000,
   cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Opcional · cualquier hora'},
-  nt:'Caminata 15 min · meta pasos',rnt:'Presoterapia · vaciado linfático semana',
+  nt:'Caminata 15 min · meta de pasos',rnt:'Presoterapia · vaciado linfático de la semana',
   ex:[]},
 6:{t:'Descanso activo',sb:'Sábado · spinning opcional',ty:'opt',st:10000,
-  cd:{tp:'Spinning',z:'Zona 3',d:50,nt:'Opcional'},
+  cd:{tp:'Spinning',z:'Zona 3',d:45,nt:'Opcional'},
   nt:'Meta 10.000 pasos',rnt:'Sauna o turco · piscina',
   ex:[]}
 };
-
-const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'e',l:'Espalda media',max:20,cl:'fm'},{z:'c',l:'Core',max:9,cl:'fm'}];
+const VOLS=[{z:'gj',l:'Glúteo mayor',max:22,cl:'fh'},{z:'gm',l:'Glúteo medio',max:18,cl:'fh'},{z:'isq',l:'Isquiotibiales',max:14,cl:'fh'},{z:'q',l:'Cuádriceps',max:10,cl:'fh'},{z:'e',l:'Espalda',max:20,cl:'fm'},{z:'h',l:'Hombros',max:12,cl:'fm'},{z:'c',l:'Core',max:12,cl:'fm'}];
 const MEALS={
  0:[{id:'des',n:'Desayuno',h:'7:00 am',p:30,c:22,g:6},
     {id:'pre',n:'Pre-entreno',h:'9:00 am',p:17,c:32,g:3},
@@ -1352,7 +1379,7 @@ function genReport(){
   const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
   const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit'});
   const doneW=ST.done.filter(d=>wks.includes(d));
-  const sesNames={0:'Dom·Glúteos full',1:'Lun·Glúteos+Isquios',2:'Mar·Spinning+Espalda',3:'Mié·Glúteos+Cuád',4:'Jue·Espalda+Core'};
+  const sesNames={0:'Dom·Glúteos pesado',1:'Lun·Espalda+Hombros+Bíceps',2:'Mar·Glúteos+Cuád+Spinning',3:'Mié·Espalda+Pecho+Core',4:'Jue·Glúteos+Isquios'};
   const expectedDays=[0,1,2,3,4];
   const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
   const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
