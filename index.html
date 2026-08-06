@@ -700,6 +700,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 const DE=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const DS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 
+// ═══ Fechas ancladas a Colombia (UTC-5) · definidas antes de cualquier estado ═══
+// Devuelve un Date cuyos campos locales representan la hora de pared en Colombia.
+function nowCO(){
+  try{
+    const p=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Bogota',year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(new Date());
+    const g=t=>{const f=p.find(x=>x.type===t);return f?parseInt(f.value,10):0;};
+    return new Date(g('year'),g('month')-1,g('day'),g('hour')%24,g('minute'),g('second'));
+  }catch(e){return new Date();}
+}
+function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function dk(){return fmtD(nowCO());}
+function todayDow(){return nowCO().getDay();}
+function shiftD(base,n){const x=new Date(base.getTime());x.setDate(x.getDate()+n);return x;}
+function dkForDay(d){const n=nowCO();return fmtD(shiftD(n,d-n.getDay()));}
+function dkW(){return wDate;}
+function wk(){const n=nowCO(),dy=n.getDay(),k=[];for(let i=0;i<7;i++)k.push(fmtD(shiftD(n,i-dy)));return k;}
+
+
 // ── RECOVERY SCHEDULE ──────────────────────────────────────────────
 const REC_SCH={
   0:{rec:['Presoterapia piernas','Sauna 15–20 min','Piscina'],note:'Sesión más pesada de la semana · prioridad presoterapia'},
@@ -864,29 +883,13 @@ function labStat(m,v){
   return v>=m.lo?'ok':(v>=m.lo*0.85?'mid':'bad');
 }
 let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[],fiber:{}};
-let wD=new Date().getDay(),wDate=new Date().toISOString().slice(0,10);
-let homeDay=new Date().getDay(),recDay=new Date().getDay(),recDate=new Date().toISOString().slice(0,10);
+let wD=todayDow(),wDate=dk();
+let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
-function dk(){const n=new Date();const y=n.getFullYear();const m=String(n.getMonth()+1).padStart(2,'0');const d=String(n.getDate()).padStart(2,'0');return y+'-'+m+'-'+d;}
-function dkForDay(d){const n=new Date(),x=new Date(n);x.setDate(x.getDate()+(d-n.getDay()));return x.toISOString().slice(0,10);}
-function dkW(){return wDate;}
-function wk(){
-  const n=new Date(),dy=n.getDay(),k=[];
-  for(let i=0;i<7;i++){
-    const x=new Date(n);
-    x.setDate(x.getDate()-dy+i);
-    const y=x.getFullYear();
-    const m=String(x.getMonth()+1).padStart(2,'0');
-    const d=String(x.getDate()).padStart(2,'0');
-    k.push(y+'-'+m+'-'+d);
-  }
-  return k;
-}
-
 function nav(s,btn){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
@@ -895,14 +898,14 @@ function nav(s,btn){
 }
 
 function rHome(){
-  const t=new Date().getDay(),strip=document.getElementById('ds');
+  const t=todayDow(),strip=document.getElementById('ds');
   strip.innerHTML='';
   for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{document.querySelectorAll('#ds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));rHD(d);})(i);strip.appendChild(b);}
   rHD(t);
 }
 
 function rHD(d){
-  homeDay=d;const s=SCH[d],t=new Date().getDay(),it=d===t;
+  homeDay=d;const s=SCH[d],t=todayDow(),it=d===t;
   document.getElementById('hg').textContent=(it?'Hoy, ':'')+DE[d][0].toUpperCase()+DE[d].slice(1);
   document.getElementById('hs').textContent=s.t;
   document.getElementById('stl').textContent='pasos del día · meta: '+s.st.toLocaleString('es-CO');
@@ -1005,14 +1008,14 @@ function macAdh(dk_){
   return Math.round((f(a.p,t.p)+f(a.c,t.c)+f(a.g,t.g))/3*100);
 }
 
-function owD(d){wD=d;wDate=new Date().toISOString().slice(0,10);nav('workout',document.querySelectorAll('.nb')[1]);}
+function owD(d){wD=d;wDate=dk();nav('workout',document.querySelectorAll('.nb')[1]);}
 
 function rW(){
   const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;
   const wds=document.getElementById('wds');wds.innerHTML='';
-  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=new Date().toISOString().slice(0,10);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
+  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=dk();document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
   const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;
-  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const today=dk(),yesterday=fmtD(shiftD(nowCO(),-1));
   const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
   const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
   let h='';
@@ -1164,10 +1167,9 @@ function saveLab(){
 function setRangePreset(days,btn){
   document.querySelectorAll('#pv-range .dc').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
-  const to=new Date(),from=new Date();from.setDate(from.getDate()-days);
-  const f=d=>{const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');return y+'-'+m+'-'+dd;};
-  document.getElementById('rg-from').value=f(from);
-  document.getElementById('rg-to').value=f(to);
+  const to=nowCO(),from=shiftD(nowCO(),-days);
+  document.getElementById('rg-from').value=fmtD(from);
+  document.getElementById('rg-to').value=fmtD(to);
   rRange();
 }
 function spark(pts,opt){
@@ -1347,11 +1349,11 @@ function setCMeal(day,meal,btn){
 
 // ── RECOVERY ─────────────────────────────────────────────────────────
 function rRec(){
-  const t=new Date().getDay(),strip=document.getElementById('rds');
+  const t=todayDow(),strip=document.getElementById('rds');
   strip.innerHTML='';
   for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'');b.textContent=DS[i];b.onclick=(d=>()=>{recDay=d;recDate=dkForDay(d);document.querySelectorAll('#rds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));renderRec();})(i);strip.appendChild(b);}
   const inp=document.getElementById('rdateinp');if(inp)inp.value=recDate;
-  const today=dk(),yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+  const today=dk(),yesterday=fmtD(shiftD(nowCO(),-1));
   const lbl=document.getElementById('r-date-label');if(lbl)lbl.textContent=recDate===today?'hoy':recDate===yesterday?'ayer':'';
   renderRec();
 }
@@ -1375,7 +1377,7 @@ function toggleRec(id){
 // ── REPORT ───────────────────────────────────────────────────────────
 function genReport(){
   const wks=wk();
-  const weekStart=new Date();weekStart.setDate(weekStart.getDate()-weekStart.getDay());
+  const weekStart=shiftD(nowCO(),-nowCO().getDay());
   const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
   const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit'});
   const doneW=ST.done.filter(d=>wks.includes(d));
