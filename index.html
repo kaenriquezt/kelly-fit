@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Vital</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{--green:#1D9E75;--gl:#E1F5EE;--gd:#085041;--gb:#5DCAA5;--pur:#7F77DD;--pl:#EEEDFE;--pd:#3C3489;--amb:#BA7517;--al:#FAEEDA;--gry:#F1EFE8;--gryd:#444441;--bg:#F7F7F5;--card:#FFFFFF;--border:#E8E6E0;--t1:#1A1A18;--t2:#6B6B66;--t3:#9E9E99;--teal:#0891B2;--tl:#E0F7FA;--rose:#BE185D;--rl:#FFF0F6;}
@@ -213,6 +216,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </head>
 <body>
 <div class="app">
+<div id="upd-bar" style="display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--gl);border-bottom:1px solid var(--gb);">
+  <span style="flex:1;font-size:12px;color:var(--gd);font-weight:600;">Hay una versión nueva de Vital</span>
+  <button onclick="forceUpdate()" style="padding:6px 12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Actualizar</button>
+</div>
 
 <!-- HOME -->
 <div id="s-home" class="screen active">
@@ -655,7 +662,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <pre id="report-text" style="font-size:11px;color:var(--t1);white-space:pre-wrap;word-break:break-word;line-height:1.6;font-family:inherit;margin:0;"></pre>
       </div>
     </div>
-    <div style="height:16px;"></div>
+    <div id="ver-line" style="padding:4px 16px 16px;font-size:10px;color:var(--t3);text-align:center;"></div>
   </div>
 
   <!-- ===== VISTA RANGO ===== -->
@@ -895,6 +902,40 @@ let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},
 let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
+
+const APP_VER='2026-08-06.2';
+let curDay=null;
+
+// Si la app quedó abierta y cambió el día, vuelve a hoy y re-renderiza todo.
+function checkRollover(){
+  const hoy=dk();
+  if(curDay===null){curDay=hoy;return false;}
+  if(hoy===curDay)return false;
+  curDay=hoy;
+  homeDay=todayDow(); wD=todayDow(); wDate=hoy; recDay=todayDow(); recDate=hoy;
+  rHome();
+  const act=document.querySelector('.screen.active');
+  if(act){const id=act.id.replace('s-','');
+    if(id==='workout')rW(); else if(id==='progress')rP(); else if(id==='cardio')rC(); else if(id==='recovery')rRec();}
+  toast('Nuevo día: '+DE[todayDow()]);
+  return true;
+}
+
+// Aviso si hay una versión nueva publicada (Safari cachea el HTML con fuerza).
+async function checkVersion(){
+  try{
+    const r=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'});
+    const t=await r.text();
+    const m=t.match(/const APP_VER='([^']+)'/);
+    if(m&&m[1]!==APP_VER)document.getElementById('upd-bar').style.display='flex';
+  }catch(e){}
+}
+function forceUpdate(){location.replace(location.pathname+'?v='+Date.now());}
+
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkRollover();checkVersion();}});
+window.addEventListener('pageshow',()=>{checkRollover();checkVersion();});
+window.addEventListener('focus',()=>checkRollover());
+setInterval(checkRollover,30000);
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
@@ -1341,33 +1382,6 @@ function renderCardioItem(c){
   return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone ${(c.zona.includes('Zona 1')||c.zona.includes('Zona 2'))?'z2':'z3'}">${c.zona}</span></div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;
 }
 
-function saveMeas(){
-  const e={date:dk(),cintura:document.getElementById('mcin').value,cadera:document.getElementById('mcad').value,muslo:document.getElementById('mmus').value,peso:document.getElementById('mpes').value};
-  ST.meas.push(e);sv();
-  [['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);el.placeholder=e[k]||'—';el.value='';});
-  toast('Medidas guardadas ✓');rP();
-}
-
-function toggleMultiZone(){const sm=document.getElementById('simple-mode'),mm=document.getElementById('multi-mode');const isMulti=mm.style.display==='block';sm.style.display=isMulti?'block':'none';mm.style.display=isMulti?'none':'block';}
-function updMZTotal(){const vals=['mz1','mz2','mz3','mz4','mz5'].map(id=>parseInt(document.getElementById(id).value)||0);document.getElementById('mztotal').textContent=vals.reduce((a,b)=>a+b,0);}
-
-function saveCardio(){
-  const tipo=document.getElementById('ctipo').value;const isMulti=document.getElementById('multi-mode').style.display==='block';let e;
-  if(isMulti){const z1=parseInt(document.getElementById('mz1').value)||0,z2=parseInt(document.getElementById('mz2').value)||0,z3=parseInt(document.getElementById('mz3').value)||0,z4=parseInt(document.getElementById('mz4').value)||0,z5=parseInt(document.getElementById('mz5').value)||0;const dur=z1+z2+z3+z4+z5;if(!dur){toast('Ingresa al menos una zona');return;}const md=document.getElementById('mdate').value||dk();e={date:md,tipo,zona:'multi',dur,z1,z2,z3,z4,z5,fc:document.getElementById('mfc').value};['mz1','mz2','mz3','mz4','mz5','mfc'].forEach(id=>document.getElementById(id).value='');document.getElementById('mztotal').textContent='0';document.getElementById('mdate').value=dk();}
-  else{const dur=parseInt(document.getElementById('cdur').value)||0;if(!dur){toast('Ingresa la duración');return;}const cd=document.getElementById('cdate').value||dk();e={date:cd,tipo,zona:document.getElementById('czona').value,dur,fc:document.getElementById('cfc').value};document.getElementById('cdur').value='';document.getElementById('cfc').value='';document.getElementById('cdate').value=dk();}
-  ST.cardio.push(e);sv();rC();toast('Cardio guardado ✓');
-}
-
-function rC(){
-  const wks=wk();
-  const z2=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?(c.z2||0):c.zona.includes('Zona 2')?c.dur:0),0);
-  const z3=ST.cardio.filter(c=>wks.includes(c.date)).reduce((a,c)=>a+(c.zona==='multi'?((c.z3||0)+(c.z4||0)+(c.z5||0)):(c.zona.includes('Zona 3')||c.zona.includes('Zona 4')||c.zona.includes('Zona 5'))?c.dur:0),0);
-  document.getElementById('wcz2').textContent=z2+' min';document.getElementById('wcz3').textContent=z3+' min';
-  document.getElementById('wcses').textContent=ST.cardio.filter(c=>wks.includes(c.date)).length;
-  const rec=ST.cardio.slice(-5).reverse();
-  function renderC(c){if(c.zona==='multi'){const zonas=['Z1','Z2','Z3','Z4','Z5'],vals=[c.z1,c.z2,c.z3,c.z4,c.z5];const splits=zonas.map((z,i)=>vals[i]?`<span style="background:var(--gl);color:var(--gd);padding:1px 6px;border-radius:10px;font-size:11px;font-weight:700;">${z}:${vals[i]}'</span>`:'').filter(Boolean).join(' ');return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone z3">Multi-zona</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">${splits}</div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}return`<div class="chi"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span class="ctype">${c.tipo}</span><span class="czone ${(c.zona.includes('Zona 1')||c.zona.includes('Zona 2'))?'z2':'z3'}">${c.zona}</span></div><div style="font-size:12px;color:var(--t2);display:flex;gap:14px;"><span>${c.dur} min</span>${c.fc?`<span>${c.fc} bpm</span>`:''}<span style="margin-left:auto;font-size:11px;color:var(--t3)">${c.date}</span></div></div>`;}
-  document.getElementById('chist').innerHTML=rec.length===0?'<div class="emp">Sin sesiones registradas</div>':rec.map(renderC).join('');
-}
 
 // ── CARBOS ──────────────────────────────────────────────────────────
 function setCDay(day,btn){
@@ -1509,7 +1523,10 @@ function confirmDeleteW(){
   document.getElementById('delete-confirm').style.display='none';
   sv();rW();rP();rHome();toast('Registro y récords borrados ✓');
 }
+curDay=dk();
+const vl=document.getElementById('ver-line');if(vl)vl.textContent='Vital · versión '+APP_VER;
 load();
+checkVersion();
 </script>
 </body>
 </html>
