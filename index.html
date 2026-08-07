@@ -188,6 +188,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mbar .k{font-size:11px;font-weight:700;width:16px;color:var(--t2);}
 .mbar .t{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
 .mbar .v{font-size:11px;color:var(--t2);width:74px;text-align:right;font-weight:600;}
+.sh-row{display:grid;grid-template-columns:74px 1fr 46px;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);}
+.sh-row:last-child{border-bottom:none;}
+.sh-row.hoy .sh-d{color:var(--gd);font-weight:700;}
+.sh-d{font-size:12px;color:var(--t2);font-weight:600;}
+.sh-row input{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:8px;font-size:14px;text-align:center;background:var(--bg);color:var(--t1);-webkit-appearance:none;outline:none;}
+.sh-row input:focus{border-color:var(--gb);}
+.sh-t{font-size:11px;color:var(--t3);text-align:right;}
 /* labs */
 .lab-r{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;background:var(--card);border:1px solid var(--border);border-radius:11px;margin-bottom:6px;}
 .lab-n{font-size:12px;font-weight:600;color:var(--t1);}
@@ -220,6 +227,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <input id="step-inp" type="number" inputmode="numeric" placeholder="ej. 7500" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:var(--bg);color:var(--t1);outline:none;">
       <button onclick="saveSteps()" style="padding:8px 14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Guardar</button>
     </div>
+    <button onclick="toggleStepHist()" id="sh-btn" style="width:100%;margin-top:10px;padding:7px;background:var(--bg);color:var(--t2);border:1px solid var(--border);border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;">Ver y corregir últimos 14 días</button>
+    <div id="step-hist" style="display:none;margin-top:8px;"></div>
   </div>
   <div class="slbl">Macros del día</div>
   <div class="sbox" id="macro-summary"></div>
@@ -1056,7 +1065,37 @@ function finishW(){
 }
 
 function toggleStepInput(){const row=document.getElementById('step-input-row');const showing=row.style.display==='flex';row.style.display=showing?'none':'flex';if(!showing)setTimeout(()=>document.getElementById('step-inp').focus(),50);}
-function saveSteps(){const v=document.getElementById('step-inp').value;if(v&&!isNaN(v)&&parseInt(v)>0){ST.steps[dkForDay(homeDay)]=parseInt(v);sv();document.getElementById('step-inp').value='';document.getElementById('step-input-row').style.display='none';rHome();toast('Pasos guardados ✓');}}
+function toggleStepHist(){
+  const b=document.getElementById('step-hist'),btn=document.getElementById('sh-btn');
+  const open=b.style.display==='block';
+  b.style.display=open?'none':'block';
+  btn.textContent=open?'Ver y corregir últimos 14 días':'Ocultar historial';
+  if(!open)rStepHist();
+}
+function rStepHist(){
+  const n=nowCO(),hoy=fmtD(n);let h='';
+  for(let i=0;i<14;i++){
+    const d=shiftD(n,-i),k=fmtD(d),dow=d.getDay();
+    const v=(ST.steps[k]!==undefined&&ST.steps[k]!==null)?ST.steps[k]:'';
+    h+=`<div class="sh-row${k===hoy?' hoy':''}">
+      <span class="sh-d">${DS[dow]} ${d.getDate()}/${d.getMonth()+1}${k===hoy?' ·':''}</span>
+      <input type="number" inputmode="numeric" placeholder="—" value="${v}" oninput="setStepFor('${k}',this.value)">
+      <span class="sh-t">/ ${(SCH[dow].st/1000).toLocaleString('es-CO')}k</span></div>`;
+  }
+  h+=`<div style="font-size:10px;color:var(--t3);margin-top:8px;line-height:1.5;">Edita cualquier día directamente. Se guarda solo. Deja vacío para borrar el registro.</div>`;
+  document.getElementById('step-hist').innerHTML=h;
+}
+function setStepFor(k,v){
+  if(v===''||v===null){delete ST.steps[k];}else{const n=parseInt(v);if(isNaN(n)||n<0)return;ST.steps[k]=n;}
+  sv();
+  // refresca sólo el contador de arriba si toqué el día que está en pantalla
+  if(k===dkForDay(homeDay)){
+    const st=ST.steps[k]||0,meta=SCH[homeDay].st;
+    document.getElementById('stv').textContent=st.toLocaleString('es-CO');
+    document.getElementById('stf').style.width=Math.min(100,Math.round(st/meta*100))+'%';
+  }
+}
+function saveSteps(){const v=document.getElementById('step-inp').value;if(v&&!isNaN(v)&&parseInt(v)>0){ST.steps[dkForDay(homeDay)]=parseInt(v);sv();document.getElementById('step-inp').value='';document.getElementById('step-input-row').style.display='none';rHD(homeDay);if(document.getElementById('step-hist').style.display==='block')rStepHist();toast('Pasos guardados ✓');}}
 
 function pctCls(p){return p>=90?'f-ok':p>=65?'f-mid':'f-low';}
 function card(pct,val,lbl,sub,cls){
