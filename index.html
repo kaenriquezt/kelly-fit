@@ -617,7 +617,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="mr2"><span class="mla">Peso</span><input class="mi" type="number" inputmode="decimal" id="mpes" placeholder="kg"><span class="mu">kg</span></div>
       <div class="mr2"><span class="mla">Cintura</span><input class="mi" type="number" inputmode="decimal" id="mcin" placeholder="cm"><span class="mu">cm</span></div>
       <div class="mr2"><span class="mla">Cadera</span><input class="mi" type="number" inputmode="decimal" id="mcad" placeholder="cm"><span class="mu">cm</span></div>
+      <div class="mr2"><span class="mla">Glúteo</span><input class="mi" type="number" inputmode="decimal" id="mglu" placeholder="cm"><span class="mu">cm</span></div>
       <div class="mr2"><span class="mla">Muslo</span><input class="mi" type="number" inputmode="decimal" id="mmus" placeholder="cm"><span class="mu">cm</span></div>
+      <div class="mr2"><span class="mla">Brazo der.</span><input class="mi" type="number" inputmode="decimal" id="mbra" placeholder="cm"><span class="mu">cm</span></div>
     </div>
     <button class="sbtn" onclick="saveMeas()">Guardar medidas de hoy</button>
     <div id="mhist" style="padding:8px 16px 4px;font-size:12px;color:var(--t3);"></div>
@@ -906,7 +908,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-08-08.3';
+const APP_VER='2026-08-08.4';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -947,7 +949,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 function load(){
   // Borrado único: arranque limpio acordado. No se repite.
   try{ if(localStorage.getItem('kf5_reset')!==RESET_TOKEN){localStorage.removeItem('kf5');localStorage.setItem('kf5_reset',RESET_TOKEN);} }catch(e){}
-  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
+  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cintura:'86',cadera:'',gluteo:'',muslo:'',brazo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function nav(s,btn){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
@@ -1179,7 +1181,7 @@ function rP(){
 
   // ── medidas ──
   const lm=ST.meas?.[ST.meas.length-1];
-  if(lm){[['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.placeholder=lm[k]||'—';});
+  if(lm){[['mcin','cintura'],['mcad','cadera'],['mglu','gluteo'],['mmus','muslo'],['mbra','brazo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.placeholder=lm[k]||'—';});
     document.getElementById('mhist').textContent='Último registro: '+lm.date;}
 
   rLabs();
@@ -1269,6 +1271,10 @@ function rRange(){
   // 2. Cintura
   const cin=(ST.meas||[]).filter(m=>inR(m.date)&&m.cintura).map(m=>({x:m.date,y:parseFloat(m.cintura)}));
   h+=chartBox('Cintura',cin.length?`${cin[cin.length-1].y} cm · ${cin.length} registros`:'sin datos',spark(cin,{color:'var(--pur)'}));
+  const glu=(ST.meas||[]).filter(m=>inR(m.date)&&m.gluteo).map(m=>({x:m.date,y:parseFloat(m.gluteo)}));
+  h+=chartBox('Glúteo',glu.length?`${glu[glu.length-1].y} cm · ${glu.length} registros`:'sin datos',spark(glu,{color:'var(--pur)'}));
+  const bra=(ST.meas||[]).filter(m=>inR(m.date)&&m.brazo).map(m=>({x:m.date,y:parseFloat(m.brazo)}));
+  h+=chartBox('Brazo derecho',bra.length?`${bra[bra.length-1].y} cm · ${bra.length} registros`:'sin datos',spark(bra,{color:'var(--pur)'}));
 
   // 3. Pasos (% cumplimiento diario)
   const stp=days.filter(d=>ST.steps[d]).map(d=>{const dn=new Date(d+'T12:00:00').getDay();return{x:d,y:Math.round((ST.steps[d]/SCH[dn].st)*100)};});
@@ -1327,9 +1333,9 @@ function renderCardioItem(c){
 }
 
 function saveMeas(){
-  const e={date:dk(),cintura:document.getElementById('mcin').value,cadera:document.getElementById('mcad').value,muslo:document.getElementById('mmus').value,peso:document.getElementById('mpes').value};
+  const e={date:dk(),cintura:document.getElementById('mcin').value,cadera:document.getElementById('mcad').value,gluteo:document.getElementById('mglu').value,muslo:document.getElementById('mmus').value,brazo:document.getElementById('mbra').value,peso:document.getElementById('mpes').value};
   ST.meas.push(e);sv();
-  [['mcin','cintura'],['mcad','cadera'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);el.placeholder=e[k]||'—';el.value='';});
+  [['mcin','cintura'],['mcad','cadera'],['mglu','gluteo'],['mmus','muslo'],['mbra','brazo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);el.placeholder=e[k]||'—';el.value='';});
   toast('Medidas guardadas ✓');rP();
 }
 
@@ -1461,7 +1467,7 @@ function genReport(){
   r+=`\n💆 RECUPERACIÓN\nPresoterapia: ${recW['preso']}x\nSauna: ${recW['sauna']}x\nTurco: ${recW['turco']}x\nPiscina: ${recW['piscina']}x\nMasajes: ${recW['masaje_dep']+recW['masaje_dre']+recW['masaje_rel']+recW['masaje_mol']}x\n`;
   if(note)r+=`\n💬 CÓMO ME SENTÍ\n${note}\n`;
   const lm=ST.meas?.[ST.meas.length-1];
-  if(lm&&wks.includes(lm.date)){r+='\n📏 MEDIDAS\n';if(lm.cintura)r+=`  Cintura: ${lm.cintura} cm\n`;if(lm.cadera)r+=`  Cadera: ${lm.cadera} cm\n`;if(lm.muslo)r+=`  Muslo: ${lm.muslo} cm\n`;if(lm.peso)r+=`  Peso: ${lm.peso} kg\n`;}
+  if(lm&&wks.includes(lm.date)){r+='\n📏 MEDIDAS\n';if(lm.cintura)r+=`  Cintura: ${lm.cintura} cm\n`;if(lm.cadera)r+=`  Cadera: ${lm.cadera} cm\n`;if(lm.gluteo)r+=`  Glúteo: ${lm.gluteo} cm\n`;if(lm.muslo)r+=`  Muslo: ${lm.muslo} cm\n`;if(lm.brazo)r+=`  Brazo der.: ${lm.brazo} cm\n`;if(lm.peso)r+=`  Peso: ${lm.peso} kg\n`;}
   const L=lastLab();
   if(L){r+=`\n🧪 ÚLTIMO LABORATORIO (${L.date})\n`;
     LABS.forEach(m=>{const v=L[m.k];if(v===undefined||v===null||v==='')return;
