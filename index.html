@@ -1455,7 +1455,7 @@ function genReport(){
   if(exLines.length>0)r+='\n📦 CARGAS REGISTRADAS\n'+exLines.join('\n')+'\n';
   if(prsW.length>0){r+='\n🏆 RÉCORDS ESTA SEMANA\n';prsW.forEach(([n,v])=>r+=`  ${n}: ${v.kg}kg × ${v.r}\n`);}
   r+='\n📊 VOLUMEN POR GRUPO\n';
-  const volNames={gj:'Glúteo mayor',gm:'Glúteo medio',isq:'Isquiotibiales',e:'Espalda',c:'Core',b:'Bíceps',tri:'Tríceps',q:'Cuádriceps'};
+  const volNames={gj:'Glúteo mayor',gm:'Glúteo medio',isq:'Isquiotibiales',e:'Espalda',c:'Core',b:'Bíceps',tri:'Tríceps',q:'Cuádriceps',h:'Hombros',p:'Pecho'};
   Object.entries(vc).forEach(([z,cnt])=>r+=`  ${volNames[z]||z}: ${cnt} series\n`);
   r+=`\n🚴 CARDIO\nZona 1: ${z1} min\nZona 2: ${z2} min (meta 140)\nZona 3-5: ${z3} min (máx 90)\n`;
   if(cardioLines.length>0)r+=cardioLines.join('\n')+'\n';
