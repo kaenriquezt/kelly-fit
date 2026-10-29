@@ -748,7 +748,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-10-28.2';
+const APP_VER='2026-10-28.3';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -911,12 +911,12 @@ function macAdh(dk_){
   return Math.round((f(a.p,t.p)+f(a.c,t.c)+f(a.g,t.g))/3*100);
 }
 
-function owD(d){wD=d;wDate=dk();nav('workout',document.querySelectorAll('.nb')[1]);}
+function owD(d){wD=d;wDate=dkForDay(d);nav('workout',document.querySelectorAll('.nb')[1]);}
 
 function rW(){
   const s=SCH[wD];document.getElementById('wt').textContent=s.t;document.getElementById('ws').textContent=s.sb;
   const wds=document.getElementById('wds');wds.innerHTML='';
-  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=dk();document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
+  [0,1,2,3,4,5].filter(i=>SCH[i].ex.length>0).forEach(i=>{const b=document.createElement('button');b.className='dc'+(i===wD?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{wD=d;wDate=dkForDay(d);document.querySelectorAll('#wds .dc').forEach(c=>c.classList.remove('active'));b.classList.add('active');rW();})(i);wds.appendChild(b);});
   const inp=document.getElementById('wdateinp');if(inp)inp.value=wDate;
   const today=dk(),yesterday=fmtD(shiftD(nowCO(),-1));
   const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
