@@ -203,6 +203,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .chart-s{font-size:11px;color:var(--t3);}
 .chart svg{width:100%;height:70px;display:block;overflow:visible;}
 
+/* ===== FASES ===== */
+.fz{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;}
+.fz1{background:var(--al);color:#633806;}.fz2{background:var(--pl);color:var(--pd);}.fz3{background:var(--gl);color:var(--gd);}
+.fz-t{font-size:14px;font-weight:700;margin-top:6px;color:var(--t1);}
+.fz-m{font-size:12px;color:var(--t2);margin-top:2px;line-height:1.45;}
+.pchk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;flex-shrink:0;cursor:pointer;}
+.meal.full .pchk{background:var(--green);border-color:var(--green);color:#fff;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.chip{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--gry);color:var(--gryd);}
+.popt{font-size:12px;color:var(--t1);line-height:1.5;padding:7px 9px;background:var(--bg);border-radius:9px;margin-top:6px;}
+.popt b{color:var(--gd);}
+.pnote{font-size:11px;color:#633806;background:var(--al);padding:6px 9px;border-radius:8px;margin-top:6px;line-height:1.45;}
+.ftabs{display:flex;gap:6px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--border);}
+.ftab{flex:1;padding:7px 4px;border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--t2);text-align:center;line-height:1.3;}
+.ftab.active{background:var(--gl);color:var(--gd);border-color:var(--gb);}
+.ftab span{font-weight:600;font-size:10px;}
+ul.fr{padding-left:16px;}
+ul.fr li{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:3px;}
+.fpt{width:100%;border-collapse:collapse;}
+.fpt td{font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);vertical-align:top;}
+.fpt td:first-child{font-weight:700;width:36%;color:var(--t1);}
+.fpt td:last-child{color:var(--t2);}
+.fpt tr:last-child td{border-bottom:none;}
+.ffood{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:6px;}
+.ffood b{color:var(--t1);}
+.dc small{display:block;font-size:9px;font-weight:700;line-height:1;}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--gd);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;}
 #toast.show{opacity:1;}
 </style>
@@ -228,8 +254,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button onclick="saveSteps()" style="padding:8px 14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Guardar</button>
     </div>
   </div>
-  <div class="slbl">Macros del día</div>
-  <div class="sbox" id="macro-summary"></div>
+  <div class="slbl">Plan del día</div>
+  <div class="sbox" id="phase-summary"></div>
   <div id="meal-list" style="padding:0 0 8px;"></div>
   <div style="height:8px;"></div>
 </div>
@@ -301,296 +327,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="height:16px;"></div>
 </div>
 
-<!-- MACROS -->
+<!-- FASES -->
 <div id="s-carbos" class="screen">
-  <div class="ph"><h2>Guía de Macros</h2><p>Qué comer · cuándo · cuánto</p></div>
-  <div class="ctab-row">
-    <button class="dc active" onclick="setCDay('pm',this)">L–J · 5pm</button>
-    <button class="dc" onclick="setCDay('am',this)">Dom · AM</button>
-    <button class="dc" onclick="setCDay('rest',this)">Vie–Sáb</button>
-  </div>
-
-  <!-- L-J PM -->
-  <div id="cday-pm">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Lunes a Jueves · entreno 5pm · <strong>144P · 137C · 46G · 1.538 kcal</strong></div>
-    <div class="cmeal-tabs">
-      <button class="cmtab active" onclick="setCMeal('pm','des',this)">Desayuno</button>
-      <button class="cmtab" onclick="setCMeal('pm','snk',this)">Snack AM</button>
-      <button class="cmtab" onclick="setCMeal('pm','alm',this)">Almuerzo</button>
-      <button class="cmtab" onclick="setCMeal('pm','pre',this)">Pre-entreno</button>
-      <button class="cmtab" onclick="setCMeal('pm','cen',this)">Cena post</button>
-    </div>
-
-    <div id="pm-des" class="cmeal-panel">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 7am</div><div class="cc-macro">25P · 38C · 10G · 342 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Carbos complejos únicamente · fibra soluble prioritaria</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>40–55g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arepa Multigranos Masmaï<br><span class="badge bx">Complejo</span></td><td>80g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Pan Tajado Artesanal (Horneaditos)<br><span class="badge bx">Complejo</span></td><td>32g (1 tajada)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Premezcla Pancakes Arándanos (Karavansay)<br><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">OK+proteína</span></td></tr>
-        <tr><td>Cereal Integral Fitness<br><span class="badge bm">Mixto</span></td><td>40g (1 taza)</td><td><span class="badge bw">⚠️ Solo desayuno</span></td></tr>
-        <tr><td>Waffles de Yuca (caseros)<br><span class="badge bx">Complejo</span></td><td>66g (1 und)</td><td><span class="badge bw">⚠️ 32g C</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Complemento</span></td></tr>
-        </table>
-        <div class="carbo-note">Secuencia: jugo verde → proteína/grasa → carbo. Vegetales no cuentan.</div>
-      </div>
-    </div>
-
-    <div id="pm-snk" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack AM · 10am</div><div class="cc-macro">17P · 12C · 11G · 215 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Carbos complejos · pequeña carga de energía sostenida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bm">OK fibra</span></td></tr>
-        <tr><td>Rosquitas Horneadas Yuca (Sanissimo)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        <tr><td>Besitos Horneados Yuca (Natri)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        <tr><td>Maíz Dulce<br><span class="badge bm">Mixto</span></td><td>85g (1 taza)</td><td><span class="badge bm">OK+proteína</span></td></tr>
-        <tr><td>Yogurt Tres Zeros (Alpina)<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Tote Mix Premium (Tote)<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Topping</span></td></tr>
-        <tr><td>Mixtura Trail Mix (DisproNat)<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Topping</span></td></tr>
-        </table>
-        <div class="carbo-note">Comer con proteína. Sin suplementos de fibra en pre-entreno PM.</div>
-      </div>
-    </div>
-
-    <div id="pm-alm" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍽️ Almuerzo · 12m</div><div class="cc-macro">36P · 40C · 14G · 430 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Mayor carga del día · combinar complejo + almidón resistente</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres · lenteja, garbanzo, fríjol<br><span class="badge bx">Complejo</span></td><td>60g crudo</td><td><span class="badge bf2">⭐ Fibra sol. ★ colesterol</span></td></tr>
-        <tr><td>Quinua (Natri)<br><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Prot. completa</span></td></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>100–140g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>140–180g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arroz Parborizado (Doña Pepa)<br><span class="badge bx">Complejo</span></td><td>160g cocido</td><td><span class="badge bx">OK · IG bajo</span></td></tr>
-        <tr><td>Pasta de Arroz Doria<br><span class="badge bx">Complejo</span></td><td>80g crudo</td><td><span class="badge bx">OK sin gluten</span></td></tr>
-        <tr><td>Spaghetti Monticello<br><span class="badge bx">Complejo</span></td><td>80g crudo</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Maíz Dulce<br><span class="badge bm">Mixto</span></td><td>85g (1 taza)</td><td><span class="badge bm">OK</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 80g</td><td><span class="badge bm">Complemento</span></td></tr>
-        </table>
-        <div class="carbo-note">Secuencia: crema/sopa → proteína → carbo. Vegetales ilimitados sin contar.</div>
-      </div>
-    </div>
-
-    <div id="pm-pre" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-pre">
-        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · 4:30pm</div><div class="cc-macro">29P · 22C · 1G · 213 kcal</div></div>
-        <div class="cc-rule cc-rule-red">❌ Prohibido: suplementos de fibra · grasas altas · comidas pesadas</div>
-        <div class="cc-rule cc-rule-amber">⚡ Digestión rápida · energía disponible en 30–60 min</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>100–130g</td><td><span class="badge bx">⭐ Dig. fácil</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bx">✅ OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK · rápido</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK energía</span></td></tr>
-        <tr><td>Pan Baguette (El Horno de Ara)<br><span class="badge bm">Mixto</span></td><td>25g (1 porción)</td><td><span class="badge bm">OK</span></td></tr>
-        </table>
-        <div class="carbo-note">Grasa máx 5g total. Sin fibra suplementaria. Comer 60–90 min antes del entreno.</div>
-      </div>
-    </div>
-
-    <div id="pm-cen" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-post">
-        <div class="cc-head"><div class="cc-title">🌙 Cena post-entreno · 7–8pm</div><div class="cc-macro">37P · 25C · 10G · 338 kcal</div></div>
-        <div class="cc-rule cc-rule-blue">💡 Carga reducida · recuperación sin pico insulínico nocturno</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>45g (½ und)</td><td><span class="badge bx">~15g C</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>18g (2–3 und)</td><td><span class="badge bx">~15g C</span></td></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>22g</td><td><span class="badge bx">~15g C</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 60g</td><td><span class="badge bw">⚠️ Si faltan C</span></td></tr>
-        </table>
-        <div class="carbo-note">Jugo verde antes de cenar. La proteína y grasa ya recuperan el músculo — los 15C son suficientes.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DOM AM -->
-  <div id="cday-am" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Domingo · entreno ~10am · <strong>144P · 137C · 46G · 1.538 kcal</strong></div>
-    <div class="cmeal-tabs">
-      <button class="cmtab active" onclick="setCMeal('am','des',this)">Desayuno</button>
-      <button class="cmtab" onclick="setCMeal('am','pre',this)">Pre-entreno</button>
-      <button class="cmtab" onclick="setCMeal('am','alm',this)">Almuerzo post</button>
-      <button class="cmtab" onclick="setCMeal('am','snk',this)">Snack PM</button>
-      <button class="cmtab" onclick="setCMeal('am','cen',this)">Cena</button>
-    </div>
-    <div id="am-des" class="cmeal-panel">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">☀️ Desayuno · 7am</div><div class="cc-macro">25P · 38C · 10G · 342 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Carbos complejos · antes de la Levotiroxina no · después 30–45 min sí</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>35–45g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal · liviano</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>90–110g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Pan Tajado Artesanal (Horneaditos)<br><span class="badge bx">Complejo</span></td><td>32g (1 tajada)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Waffles de Yuca (caseros)<br><span class="badge bx">Complejo</span></td><td>66g (1 und)</td><td><span class="badge bw">⚠️ 32g C</span></td></tr>
-        </table>
-        <div class="carbo-note">Secuencia: jugo verde → proteína/grasa → carbo. Desayuno ligero — el pre-entreno viene pronto.</div>
-      </div>
-    </div>
-    <div id="am-pre" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-pre">
-        <div class="cc-head"><div class="cc-title">⚡ Pre-entreno · 9am</div><div class="cc-macro">29P · 22C · 1G · 213 kcal</div></div>
-        <div class="cc-rule cc-rule-red">❌ Sin fibra pesada · sin grasas altas · digestión rápida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>130–160g</td><td><span class="badge bx">⭐ Dig. fácil</span></td></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>55–70g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK · rápido</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>80–100g</td><td><span class="badge bm">OK energía</span></td></tr>
-        <tr><td>Pan Baguette (El Horno de Ara)<br><span class="badge bm">Mixto</span></td><td>25–50g</td><td><span class="badge bm">OK</span></td></tr>
-        </table>
-        <div class="carbo-note">Comer 60–90 min antes. Grasa máx 5g. Sin legumbres ni plátano verde aquí.</div>
-      </div>
-    </div>
-    <div id="am-alm" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-post">
-        <div class="cc-head"><div class="cc-title">🏆 Almuerzo post-entreno · ~12m</div><div class="cc-macro">36P · 40C · 14G · 430 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ La comida más importante de la semana · máxima carga permitida</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres · lenteja, garbanzo, fríjol<br><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bf2">⭐ Fibra sol.★★</span></td></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>120–160g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
-        <tr><td>Arroz Parborizado (Doña Pepa)<br><span class="badge bx">Complejo</span></td><td>175g cocido</td><td><span class="badge bx">OK · IG bajo</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>160–200g</td><td><span class="badge bx">Ideal</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 100g</td><td><span class="badge bx">✅ Post-ent.</span></td></tr>
-        <tr><td>Pasta de Arroz Doria<br><span class="badge bx">Complejo</span></td><td>70g crudo</td><td><span class="badge bx">OK sin gluten</span></td></tr>
-        </table>
-        <div class="carbo-note">Ventana anabólica activa. Prioriza fibra soluble para potenciar perfil lipídico.</div>
-      </div>
-    </div>
-    <div id="am-snk" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack PM · 3–4pm</div><div class="cc-macro">17P · 12C · 11G · 215 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Carga moderada · sostenida hasta la cena</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bm">OK fibra</span></td></tr>
-        <tr><td>Yogurt Tres Zeros (Alpina)<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Waffles de Yuca (caseros)<br><span class="badge bx">Complejo</span></td><td>66g (1 und)</td><td><span class="badge bw">⚠️ 32g C · ajustar</span></td></tr>
-        <tr><td>Rosquitas Horneadas Yuca (Sanissimo)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        <tr><td>Besitos Horneados Yuca (Natri)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        </table>
-      </div>
-    </div>
-    <div id="am-cen" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🌙 Cena · 7–8pm</div><div class="cc-macro">37P · 25C · 10G · 338 kcal</div></div>
-        <div class="cc-rule cc-rule-blue">💡 Carga reducida · cierre del día de entreno</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bf2">⭐ Ideal</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>60–80g</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>25–35g</td><td><span class="badge bx">OK cena</span></td></tr>
-        </table>
-        <div class="carbo-note">Jugo verde antes de cenar siempre.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VIE-SAB -->
-  <div id="cday-rest" style="display:none;">
-    <div style="padding:8px 16px;font-size:12px;color:var(--t2);background:var(--gry);border-bottom:1px solid var(--border);">Viernes y Sábado · descanso · <strong>126P · 95C · 57G · 1.397 kcal</strong></div>
-    <div class="cmeal-tabs">
-      <button class="cmtab active" onclick="setCMeal('rest','des',this)">Desayuno</button>
-      <button class="cmtab" onclick="setCMeal('rest','snk',this)">Snack AM</button>
-      <button class="cmtab" onclick="setCMeal('rest','alm',this)">Almuerzo</button>
-      <button class="cmtab" onclick="setCMeal('rest','snk2',this)">Snack PM</button>
-      <button class="cmtab" onclick="setCMeal('rest','cen',this)">Cena</button>
-    </div>
-    <div id="rest-des" class="cmeal-panel">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">☀️ Desayuno</div><div class="cc-macro">35P · 30C · 11G · 359 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Carbos complejos · distribuir energía lineal todo el día</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>45–55g</td><td><span class="badge bf2">⭐ Fibra sol. ★ colesterol</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arepa Multigranos Masmaï<br><span class="badge bx">Complejo</span></td><td>80g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>110–140g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Pan Tajado Artesanal (Horneaditos)<br><span class="badge bx">Complejo</span></td><td>32g (1 tajada)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Premezcla Pancakes Arándanos (Karavansay)<br><span class="badge bm">Mixto</span></td><td>30–45g</td><td><span class="badge bm">Ocasional</span></td></tr>
-        <tr><td>Waffles de Yuca (caseros)<br><span class="badge bx">Complejo</span></td><td>66g (1 und)</td><td><span class="badge bw">⚠️ 32g C</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g</span></td></tr>
-        </table>
-      </div>
-    </div>
-    <div id="rest-snk" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack AM</div><div class="cc-macro">16P · 16C · 11G · 227 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Sin demanda muscular activa · priorizar fibra y proteína</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Avena en hojuelas<br><span class="badge bx">Complejo</span></td><td>30–40g</td><td><span class="badge bf2">⭐ Fibra soluble</span></td></tr>
-        <tr><td>Arepa Maíz Blanco Minitela<br><span class="badge bx">Complejo</span></td><td>65g (1 und)</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>28g (4 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Tortillas Camote M<br><span class="badge bx">Complejo</span></td><td>30g (1 und)</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und mediana</td><td><span class="badge bm">OK</span></td></tr>
-        <tr><td>Yogurt Tres Zeros (Alpina)<br><span class="badge bs">Simple</span></td><td>150g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Mezcla Divertida (Nuthos)<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Topping</span></td></tr>
-        </table>
-      </div>
-    </div>
-    <div id="rest-alm" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍽️ Almuerzo</div><div class="cc-macro">30P · 3C · 12G · 240 kcal</div></div>
-        <div class="cc-rule cc-rule-green">✅ Menor carga que días de entreno · priorizar fibra soluble</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Legumbres · lenteja, garbanzo, fríjol<br><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Ideal · fibra sol. ★ colesterol</span></td></tr>
-        <tr><td>Quinua (Natri)<br><span class="badge bx">Complejo</span></td><td>50g crudo</td><td><span class="badge bf2">⭐ Prot. completa</span></td></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>80–120g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>120–150g</td><td><span class="badge bx">✅ Ideal</span></td></tr>
-        <tr><td>Arroz Parborizado (Doña Pepa)<br><span class="badge bx">Complejo</span></td><td>130g cocido</td><td><span class="badge bx">OK · IG bajo</span></td></tr>
-        <tr><td>Pasta de Arroz Doria<br><span class="badge bx">Complejo</span></td><td>80g crudo</td><td><span class="badge bx">OK sin gluten</span></td></tr>
-        <tr><td>Spaghetti Monticello<br><span class="badge bx">Complejo</span></td><td>80g crudo</td><td><span class="badge bx">OK</span></td></tr>
-        <tr><td>Maíz Dulce<br><span class="badge bm">Mixto</span></td><td>85g (1 taza)</td><td><span class="badge bm">OK</span></td></tr>
-        <tr><td>Plátano maduro<br><span class="badge bm">Mixto</span></td><td>máx 70g</td><td><span class="badge bw">⚠️ Máx 70g</span></td></tr>
-        </table>
-        <div class="carbo-note">Día de comida libre sábado: una sola comida libre, cena ligera ese día.</div>
-      </div>
-    </div>
-    <div id="rest-snk2" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🍎 Snack PM</div><div class="cc-macro">11P · 24C · 10G · 230 kcal</div></div>
-        <div class="cc-rule cc-rule-amber">⚡ Carga mínima · no hay entreno · solo mantenimiento tiroideo</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Fruta entera<br><span class="badge bm">Mixto</span></td><td>1 und pequeña</td><td><span class="badge bm">OK fibra</span></td></tr>
-        <tr><td>Rosquitas Horneadas Yuca (Sanissimo)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        <tr><td>Besitos Horneados Yuca (Natri)<br><span class="badge bm">Mixto</span></td><td>20g (1 paq)</td><td><span class="badge bm">OK liviano</span></td></tr>
-        <tr><td>Yogurt Tres Zeros (Alpina)<br><span class="badge bs">Simple</span></td><td>100g</td><td><span class="badge bm">Con proteína</span></td></tr>
-        <tr><td>Tote Mix Premium (Tote)<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Topping</span></td></tr>
-        <tr><td>Mixtura Trail Mix (DisproNat)<br><span class="badge bm">Mixto</span></td><td>máx 15g</td><td><span class="badge bw">⚠️ Topping</span></td></tr>
-        </table>
-      </div>
-    </div>
-    <div id="rest-cen" class="cmeal-panel" style="display:none;">
-      <div class="carbo-card carbo-card-normal">
-        <div class="cc-head"><div class="cc-title">🌙 Cena</div><div class="cc-macro">34P · 22C · 13G · 341 kcal</div></div>
-        <div class="cc-rule cc-rule-blue">💡 Solo 8g C · cerrar mínimo tiroideo sin pico insulínico nocturno</div>
-        <div class="cc-rule cc-rule-red">❌ Sin arroz — IG alto en noche sin entreno favorece almacenamiento de grasa</div>
-        <table class="ct"><tr><th>Alimento</th><th>Porción</th><th>Estado</th></tr>
-        <tr><td>Plátano verde cocido<br><span class="badge bx">Complejo</span></td><td>55g</td><td><span class="badge bf2">⭐ Almidón R.</span></td></tr>
-        <tr><td>Papa cocida<br><span class="badge bx">Complejo</span></td><td>55g</td><td><span class="badge bx">✅ Dig. lenta</span></td></tr>
-        <tr><td>Tostadas Multicereal sin Azúcar (Natri)<br><span class="badge bx">Complejo</span></td><td>10g (1 und)</td><td><span class="badge bx">~8g C</span></td></tr>
-        </table>
-        <div class="carbo-note">Jugo verde antes siempre. Sábado con tragos: esta cena es obligatoria y ligera.</div>
-      </div>
-    </div>
-  </div>
+  <div class="ph"><h2>Dieta del metabolismo acelerado</h2><p>Qué comer en cada fase · porciones del libro</p></div>
+  <div class="ftabs" id="f-tabs"></div>
+  <div id="f-body"></div>
+  <div class="slbl">Porciones · nivel estándar</div>
+  <div class="sbox"><table class="fpt">
+    <tr><td>Proteína</td><td>1 palma en comidas principales · ½ palma en meriendas</td></tr>
+    <tr><td>Cereal</td><td>Fase 1: 1 taza cocida · Fase 3: ½ taza · equivale a 1 tajada de pan o 1 tortilla sin gluten</td></tr>
+    <tr><td>Fruta</td><td>1 taza o 1 unidad · frutas pequeñas (kiwi) de a 2</td></tr>
+    <tr><td>Verdura</td><td>2 tazas en comidas · 1 taza en meriendas · es un mínimo</td></tr>
+    <tr><td>Grasa (solo fase 3)</td><td>¼ a ½ aguacate Hass · ⅛ taza de almendras · ⅛ taza de aceitunas · 2 cucharadas de aceite de oliva (sin otra grasa en esa comida)</td></tr>
+    <tr><td>Nueces de Brasil</td><td>Máximo 2 al día por su selenio. Para completar la porción, usa almendras.</td></tr>
+  </table></div>
+  <div class="slbl">Fuera en las tres fases</div>
+  <div class="sbox"><div class="ffood">Trigo y gluten, maíz (arepa), lácteos (yogur, queso, whey), soya, azúcar, edulcorantes artificiales, café, alcohol, frutas deshidratadas, jugos y productos "diet".</div></div>
+  <div class="slbl">Batch cooking</div>
+  <div class="sbox"><ul class="fr">
+    <li><b>Domingo:</b> comidas de fase 3 (domingo a martes).</li>
+    <li><b>Martes en la noche:</b> comidas de fase 1 (miércoles y jueves) y fase 2 (viernes y sábado). Lo del viernes y sábado, al congelador.</li>
+  </ul></div>
   <div style="height:16px;"></div>
 </div>
 
@@ -713,7 +470,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="nb active" onclick="nav('home',this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Hoy</button>
   <button class="nb" onclick="nav('workout',this)"><svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M3 12h18M8 6.5V4M16 6.5V4M8 20v-2.5M16 20v-2.5"/></svg>Rutina</button>
   <button class="nb" onclick="nav('cardio',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Cardio</button>
-  <button class="nb" onclick="nav('carbos',this)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12h8M12 8v8"/></svg>Macros</button>
+  <button class="nb" onclick="nav('carbos',this)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M8 12h8M12 8v8"/></svg>Fases</button>
   <button class="nb" onclick="nav('recovery',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Recup.</button>
   <button class="nb" onclick="nav('progress',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Progreso</button>
 </nav>
@@ -746,8 +503,8 @@ function wk(){const n=nowCO(),dy=n.getDay(),k=[];for(let i=0;i<7;i++)k.push(fmtD
 const REC_SCH={
   0:{rec:['Presoterapia piernas','Sauna 15–20 min','Piscina'],note:'Sesión más pesada de la semana · prioridad presoterapia'},
   1:{rec:['Sauna o turco 10–15 min'],note:'Tren superior · relajación muscular'},
-  2:{rec:['Presoterapia piernas','Piscina'],note:'Post cuádriceps + spinning · piernas muy cargadas'},
-  3:{rec:['Turco o sauna 10–15 min'],note:'Tren superior · relajar sistema nervioso'},
+  2:{rec:['Presoterapia piernas','Piscina'],note:'Post cuádriceps · piernas cargadas'},
+  3:{rec:['Presoterapia piernas','Turco o sauna 10–15 min'],note:'Tren superior + spinning'},
   4:{rec:['Presoterapia piernas','Sauna 15–20 min'],note:'Cierre de semana de fuerza'},
   5:{rec:['Presoterapia · opcional','Piscina'],note:'Descanso · vaciado linfático de la semana'},
   6:{rec:['Sauna o turco · opcional','Piscina'],note:'Descanso · recuperación completa'}
@@ -823,22 +580,22 @@ const SCH={
       {n:'Face pulls con cable o banda',m:'Deltoides posterior · manguito rotador',s:3,r:'15',hi:false,z:'h'},
       {n:'Curl de bíceps con barra EZ',m:'Bíceps · compuesto',s:3,r:'8–10',hi:false,z:'b'},
       {n:'Curl martillo con mancuernas',m:'Braquial · brazo tonificado',s:2,r:'12',hi:false,z:'b'}]},
-2:{t:'Glúteos + Cuádriceps · Spinning',sb:'Martes · 50 min fuerza + spinning · 5pm',ty:'force',st:8000,
-  cd:{tp:'Spinning',z:'multi',d:45,nt:'DESPUÉS de la fuerza · Zona 2–3'},
-  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia + piscina · post piernas y spinning',
+2:{t:'Glúteos + Cuádriceps',sb:'Martes · 50 min · 5pm',ty:'force',st:8000,
+  cd:{tp:'Caminata suave',z:'Zona 2',d:20,nt:'Post-entreno · recuperación activa'},
+  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia + piscina · post piernas',
   ex:[{n:'Clamshell + donkey kicks con banda',m:'Activación glúteo completo',s:2,r:'15',hi:false,z:'gm'},
       {n:'Sentadilla búlgara con mancuernas',m:'Cuádriceps + glúteo · unilateral · RIR 2',s:4,r:'6–8 c/lado',hi:true,z:'q'},
       {n:'Prensa pies altos y separados',m:'Glúteos + isquios · RIR 2',s:3,r:'8–10',hi:true,z:'gj'},
       {n:'Extensión cuádriceps en máquina',m:'Cuádriceps · aislamiento',s:3,r:'12–15',hi:false,z:'q'},
       {n:'Sentadilla sumo goblet',m:'Glúteo medio + aductores',s:3,r:'12–15',hi:false,z:'gm'},
       {n:'Abducción en máquina',m:'Glúteo medio · cierre de sesión',s:3,r:'15–20',hi:false,z:'gm'}]},
-3:{t:'Espalda + Pecho + Core',sb:'Miércoles · 60 min · 5pm',ty:'force',st:9000,
-  cd:{tp:'Caminata inclinada',z:'Zona 2',d:35,nt:'Post-entreno · piernas frescas'},
-  nt:'Caminata post-almuerzo 20 min',rnt:'Turco o sauna · día de tren superior',
+3:{t:'Espalda + Pecho + Core · Spinning',sb:'Miércoles · 60 min fuerza + spinning · 5pm',ty:'force',st:9000,
+  cd:{tp:'Spinning',z:'multi',d:45,nt:'DESPUÉS de la fuerza · Zona 2–3 · fase 1, día de cardio'},
+  nt:'Caminata post-almuerzo 10 min',rnt:'Presoterapia + turco · post spinning',
   ex:[{n:'Face pulls con cable o banda',m:'Activación hombro posterior',s:2,r:'15',hi:false,z:'h'},
       {n:'Remo unilateral con mancuerna',m:'Espalda media · principal · RIR 1–2',s:4,r:'6–8 c/lado',hi:true,z:'e'},
       {n:'Remo en polea baja agarre neutro',m:'Retracción escapular · efecto talle',s:3,r:'10–12',hi:true,z:'e'},
-      {n:'Pájaros inclinado con mancuernas',m:'Deltoides posterior + romboides',s:3,r:'12–15',hi:false,z:'e'},
+      {n:'Elevaciones laterales con mancuernas',m:'Deltoides lateral · 2.º estímulo semanal',s:3,r:'12–15',hi:true,z:'h'},
       {n:'Press inclinado con mancuernas',m:'Pecho · RIR 2',s:3,r:'8–10',hi:false,z:'p'},
       {n:'Tríceps en polea agarre cuerda',m:'Tríceps · brazo tonificado',s:3,r:'12–15',hi:false,z:'tri'},
       {n:'Elevación de piernas colgada',m:'Recto abdominal inferior',s:3,r:'10–12',hi:false,z:'c'},
@@ -852,12 +609,12 @@ const SCH={
       {n:'Curl femoral tumbada en máquina',m:'Isquios · aislamiento',s:3,r:'10–12',hi:false,z:'isq'},
       {n:'Patada de glúteo en polea baja',m:'Glúteo mayor · aislamiento',s:3,r:'12–15 c/lado',hi:false,z:'gj'},
       {n:'Plancha isométrica',m:'Core estabilizador',s:3,r:'40s',hi:false,z:'c'}]},
-5:{t:'Descanso activo',sb:'Viernes · estudio · cardio opcional',ty:'opt',st:9000,
-  cd:{tp:'Caminata inclinada',z:'Zona 2',d:30,nt:'Opcional · cualquier hora'},
+5:{t:'Descanso activo',sb:'Viernes · estudio · caminata opcional',ty:'opt',st:9000,
+  cd:{tp:'Caminata suave',z:'Zona 2',d:30,nt:'Opcional · fase 2 sin carbohidrato: nada intenso'},
   nt:'Caminata 15 min · meta de pasos',rnt:'Presoterapia · vaciado linfático de la semana',
   ex:[]},
-6:{t:'Descanso activo',sb:'Sábado · spinning opcional',ty:'opt',st:10000,
-  cd:{tp:'Spinning',z:'Zona 3',d:45,nt:'Opcional'},
+6:{t:'Descanso activo',sb:'Sábado · estudio · caminata opcional',ty:'opt',st:10000,
+  cd:{tp:'Caminata suave',z:'Zona 2',d:30,nt:'Opcional · fase 2 sin carbohidrato: nada intenso'},
   nt:'Meta 10.000 pasos',rnt:'Sauna o turco · piscina',
   ex:[]}
 };
@@ -882,6 +639,78 @@ const MEALS={
 MEALS[2]=MEALS[1];MEALS[3]=MEALS[1];MEALS[4]=MEALS[1];MEALS[6]=MEALS[5];
 function mealsFor(d){return MEALS[d]||MEALS[1];}
 const FIBER_TGT=20;
+// ═══════ DIETA POR FASES (desde 2026-11-04) ═══════
+const PLAN_START='2026-11-04';
+const PDOW=[3,3,3,1,1,2,2]; // dom..sáb → fase
+const PH={
+1:{n:'Fase 1',cls:'fz1',dias:'Miércoles y jueves',corto:'Mié · Jue',lema:'Carbohidrato alto · proteína moderada · sin grasa',
+ reglas:['Cocina sin aceite: horno, air fryer u olla a presión con caldo, limón y especias. Ni aguacate ni nueces.','Proteína magra. Del huevo, solo la clara.','Fruta en todas las comidas, menos en la cena.'],
+ alimentos:{'Proteína':'pollo, pavo, res magra, atún en agua, claras, lentejas','Cereal':'arroz integral, avena sin gluten, quinua, pasta integral sin gluten, tapioca','Fruta':'mango, piña, papaya, melón, pera, manzana, naranja, mandarina, guayaba, kiwi, fresas','Verdura':'lechuga, rúgula, tomate, cebolla, brócoli, zanahoria, ahuyama'},
+ meals:[
+  {n:'Desayuno',h:'7:00 am',ll:['Cereal 1 taza','Fruta 1 taza'],op:['<b>A.</b> Pancakes de avena: ½ taza de hojuelas de avena sin gluten licuadas con 2 claras y canela (equivale a 1 taza de cereal), con 1 taza de mango o papaya.','<b>B.</b> Batido de avena: ½ taza de hojuelas de avena sin gluten, 1 taza de piña o fresas congeladas, canela, hielo y agua.']},
+  {n:'Media mañana',h:'9:30 am',ll:['Fruta 1 unidad'],op:['<b>A.</b> 1 pera o 1 manzana.','<b>B.</b> 1 taza de melón o piña.']},
+  {n:'Almuerzo',h:'12:00 m',ll:['Proteína 1 palma','Cereal 1 taza','Verdura 2 tazas','Fruta 1 taza'],op:['<b>A.</b> Pollo en air fryer con limón y ajo, 1 taza de arroz integral, brócoli y zanahoria al vapor. Postre: 1 naranja o 2 mandarinas.','<b>B.</b> Res magra desmechada en salsa de tomate y cebolla, 1 taza de quinua, ensalada de lechuga y tomate con limón. Postre: 1 taza de papaya.']},
+  {n:'Preentreno',h:'4:00 pm',ll:['Fruta 1 unidad'],op:['<b>A.</b> 1 taza de piña o mango.','<b>B.</b> 1 manzana o 2 kiwis.']},
+  {n:'Cena',h:'7:00–8:00 pm',ll:['Proteína 1 palma','Cereal 1 taza','Verdura 2 tazas'],op:['<b>A.</b> Lentejas guisadas con pollo desmechado, 1 taza de arroz integral, zanahoria y ahuyama al horno.','<b>B.</b> Atún en agua salteado con tomate y cebolla, 1 taza de pasta integral sin gluten y brócoli.']}
+ ]},
+2:{n:'Fase 2',cls:'fz2',dias:'Viernes y sábado',corto:'Vie · Sáb',lema:'Proteína alta · mucha verdura · sin carbohidrato ni grasa',
+ reglas:['Cocina sin aceite. Sin cereal y sin fruta.','Proteína en las cinco comidas.','Verdura sin almidón: es un mínimo, puedes comer más.'],
+ alimentos:{'Proteína':'pollo, pavo, res magra, huevo y claras, atún en agua','Verdura':'brócoli, repollo, espinaca, pepino, tomate, lechuga, rúgula, cebolla, pimentón','No':'arroz, pan, pasta, papa, fríjol, garbanzo, fruta'},
+ meals:[
+  {n:'Desayuno',h:'7:00 am',ll:['Proteína 1 palma','Verdura 2 tazas'],op:['<b>A.</b> Carne molida magra salteada con espinaca, tomate y cebolla.','<b>B.</b> Pollo desmechado con pimentón y pepino en rodajas.']},
+  {n:'Media mañana',h:'9:30 am',ll:['Proteína ½ palma'],op:['<b>A.</b> Atún en agua con limón y pepino.','<b>B.</b> Rollitos de pechuga de pavo natural (sin azúcar ni soya) con tiras de pimentón.']},
+  {n:'Almuerzo',h:'12:00 m',ll:['Proteína 1 palma','Verdura 2 tazas'],op:['<b>A.</b> Ensalada de res a la plancha, sin aceite, con espinaca, pepino, cebolla morada, pimentón y vinagreta de limón y cilantro.','<b>B.</b> Pimentones rellenos de atún o carne molida magra, al horno, con ensalada de lechuga y pepino.']},
+  {n:'Tarde',h:'4:00 pm',ll:['Proteína ½ palma'],op:['<b>A.</b> Pollo desmechado con limón y pepino.','<b>B.</b> Carne molida magra en hojas de lechuga.']},
+  {n:'Cena',h:'7:00–8:00 pm',ll:['Proteína 1 palma','Verdura 2 tazas'],op:['<b>A.</b> Pollo al horno con brócoli y repollo.','<b>B.</b> Sopa de pollo con brócoli, repollo y espinaca.']}
+ ]},
+3:{n:'Fase 3',cls:'fz3',dias:'Domingo, lunes y martes',corto:'Dom · Lun · Mar',lema:'Grasas buenas · carbohidrato y proteína moderados',
+ reglas:['Una porción de grasa buena en cada comida. Por tu LDL, prioriza aguacate, almendras o aceitunas.','Si cocinas con aceite de oliva (2 cucharadas), esa es la grasa de la comida: no le sumes aguacate ni nueces.','Nueces de Brasil: máximo 2 al día.','Cereal ½ taza; en la cena es opcional. Sin fruta en la cena. El huevo entero vuelve.'],
+ alimentos:{'Proteína':'pollo, pavo, res y cerdo magros, carne molida magra, huevo entero','Cereal':'avena sin gluten, quinua, arroz integral, pan y tortilla sin gluten','Fruta':'pera, manzana','Grasa':'aguacate Hass, almendras, nueces de Brasil (máx. 2 al día), aceitunas, aceite de oliva'},
+ meals:[
+  {n:'Desayuno',h:'7:00 am',ll:['Fruta 1 unidad','Grasa 1 porción','Proteína','Cereal ½ taza'],op:['<b>A.</b> Pancakes de avena (¼ taza de hojuelas sin gluten, equivale a ½ taza de cereal) con 1 huevo y 2 claras, ⅛ taza de almendras fileteadas encima y 1 pera.','<b>B.</b> 1 tajada de pan sin gluten con ¼ de aguacate y huevo revuelto, más 1 manzana. Mejor en casa.'],nota:'Domingo entrenas en la mañana: desayuna al menos 1 hora antes de ir al gimnasio.'},
+  {n:'Media mañana',h:'9:30 am',ll:['Grasa 1 porción','Verdura 1 taza'],op:['<b>A.</b> Palitos de zanahoria y pepino con guacamole (¼ a ½ aguacate).','<b>B.</b> 2 nueces de Brasil y unas almendras, con tomates cherry.']},
+  {n:'Almuerzo',h:'12:00 m',ll:['Proteína 1 palma','Grasa 1 porción','Verdura 2 tazas','Fruta 1 unidad'],op:['<b>A.</b> Pollo en air fryer sobre ensalada grande de espinaca, tomate y pepino con ¼ a ½ aguacate. Postre: 1 pera.','<b>B.</b> Res a la plancha con ensalada de lechuga y tomate y ⅛ taza de aceitunas. Postre: 1 manzana.']},
+  {n:'Preentreno',h:'4:00 pm',ll:['Grasa 1 porción','Verdura 1 taza'],op:['<b>A.</b> ⅛ taza de almendras con pepino en rodajas.','<b>B.</b> Palitos de zanahoria con guacamole (¼ de aguacate).'],nota:'Cómela al menos 1 hora antes de entrenar: la grasa se digiere despacio.'},
+  {n:'Cena',h:'7:00–8:00 pm',ll:['Proteína 1 palma','Grasa 1 porción','Verdura 2 tazas','Cereal ½ taza (opcional)'],op:['<b>A.</b> Fajitas de pollo con pimentón y cebolla en sartén antiadherente, 1 tortilla sin gluten y guacamole con ¼ a ½ aguacate.','<b>B.</b> ½ taza de quinua con pollo desmechado, verduras al horno y ⅛ taza de almendras picadas.']}
+ ]}
+};
+function planDay(dk_){const n=Math.round((new Date(dk_+'T12:00:00')-new Date(PLAN_START+'T12:00:00'))/864e5)+1;return n;}
+function planAdh(dk_){const d=ST.plan&&ST.plan[dk_];if(!d)return null;const n=Object.values(d).filter(Boolean).length;return n?Math.round(n/5*100):null;}
+let fTab=1;
+function planMealsHTML(p,prefix,dk_){
+  return p.meals.map((m,i)=>{
+    const id=prefix+i, ok=dk_&&ST.plan[dk_]&&ST.plan[dk_][i];
+    return `<div class="meal${ok?' full':''}">
+      <div class="meal-h" onclick="document.getElementById('pb${id}').classList.toggle('op')">
+        ${dk_?`<div class="pchk" onclick="event.stopPropagation();togglePlan('${dk_}',${i})">✓</div>`:''}
+        <div style="flex:1;min-width:0;"><div class="meal-n">${m.n}</div><div class="meal-t">${m.h}</div>
+        <div class="chips">${m.ll.map(x=>`<span class="chip">${x}</span>`).join('')}</div></div>
+        <span style="font-size:16px;color:var(--t3);">▾</span>
+      </div>
+      <div class="meal-b" id="pb${id}">${m.op.map(o=>`<div class="popt">${o}</div>`).join('')}${m.nota?`<div class="pnote">${m.nota}</div>`:''}</div>
+    </div>`;}).join('');
+}
+function togglePlan(dk_,i){if(!ST.plan[dk_])ST.plan[dk_]={};ST.plan[dk_][i]=!ST.plan[dk_][i];if(!ST.plan[dk_][i])delete ST.plan[dk_][i];if(!Object.keys(ST.plan[dk_]).length)delete ST.plan[dk_];sv();rPlan(homeDay);}
+function rPlan(d){
+  const dk_=dkForDay(d),p=PH[PDOW[d]],n=planDay(dk_);
+  const done=ST.plan[dk_]?Object.values(ST.plan[dk_]).filter(Boolean).length:0;
+  const cnt=n<1?`Arrancas el miércoles 4 de noviembre`:n<=28?`Día ${n} de 28`:`Ciclo de 28 días completado`;
+  document.getElementById('phase-summary').innerHTML=`<span class="fz ${p.cls}">${p.n} · ${p.dias}</span>
+    <div class="fz-t">${p.lema}</div>
+    <div class="fz-m">${p.reglas[0]}</div>
+    <div class="mbar" style="margin-top:8px;"><div class="t"><div class="tf f-ok" style="width:${done/5*100}%;height:100%;"></div></div><span class="v" style="width:auto;">${done} de 5 comidas</span></div>
+    <div style="font-size:10px;color:var(--t3);margin-top:4px;">${cnt} · toca una comida para ver las opciones</div>`;
+  document.getElementById('meal-list').innerHTML=planMealsHTML(p,'h',dk_);
+}
+function rFases(){
+  document.getElementById('f-tabs').innerHTML=[1,2,3].map(k=>`<div class="ftab${k===fTab?' active':''}" onclick="fTab=${k};rFases()">${PH[k].n}<br><span>${PH[k].corto}</span></div>`).join('');
+  const p=PH[fTab];
+  document.getElementById('f-body').innerHTML=`<div class="slbl">${p.lema}</div>
+    <div class="sbox"><ul class="fr">${p.reglas.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+    <div class="slbl">Menú · dos opciones por comida</div>${planMealsHTML(p,'f'+fTab,null)}
+    <div class="slbl">Alimentos de la fase</div>
+    <div class="sbox">${Object.entries(p.alimentos).map(([k,v])=>`<div class="ffood"><b>${k==='No'?'No se permiten':k}:</b> ${v}</div>`).join('')}</div>`;
+}
 function dayTarget(d){const m=mealsFor(d);return{p:m.reduce((a,x)=>a+x.p,0),c:m.reduce((a,x)=>a+x.c,0),g:m.reduce((a,x)=>a+x.g,0)};}
 
 // marcadores de laboratorio · meta = objetivo clínico, ref = rango del laboratorio
@@ -905,12 +734,12 @@ function labStat(m,v){
   if(m.dir==='low')  return v<=m.hi?'ok':(v<=m.hi*1.25?'mid':'bad');
   return v>=m.lo?'ok':(v>=m.lo*0.85?'mid':'bad');
 }
-let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[],fiber:{}};
+let ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[],fiber:{},plan:{}};
 let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-08-08.5';
+const APP_VER='2026-10-28.1';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -951,19 +780,19 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 function load(){
   // Borrado único: arranque limpio acordado. No se repite.
   try{ if(localStorage.getItem('kf5_reset')!==RESET_TOKEN){localStorage.removeItem('kf5');localStorage.setItem('kf5_reset',RESET_TOKEN);} }catch(e){}
-  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();}
+  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();rFases();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function nav(s,btn){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
   document.getElementById('s-'+s).classList.add('active');btn.classList.add('active');
-  if(s==='workout')rW();if(s==='progress')rP();if(s==='cardio')rC();if(s==='recovery')rRec();
+  if(s==='workout')rW();if(s==='progress')rP();if(s==='carbos')rFases();if(s==='cardio')rC();if(s==='recovery')rRec();
 }
 
 function rHome(){
   const t=todayDow(),strip=document.getElementById('ds');
   strip.innerHTML='';
-  for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.textContent=DS[i];b.onclick=(d=>()=>{document.querySelectorAll('#ds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));rHD(d);})(i);strip.appendChild(b);}
+  for(let i=0;i<7;i++){const b=document.createElement('button');b.className='dc'+(i===t?' active':'')+(SCH[i].ty==='opt'?' opt':'');b.innerHTML=DS[i]+'<small>F'+PDOW[i]+'</small>';b.onclick=(d=>()=>{document.querySelectorAll('#ds .dc').forEach((c,j)=>c.classList.toggle('active',j===d));rHD(d);})(i);strip.appendChild(b);}
   rHD(t);
 }
 
@@ -984,7 +813,7 @@ function rHD(d){
   h+=`<div class="sc sr2"><span class="sbadge bt">Recuperación</span><div class="stitle">${rec.rec.join(' · ')}</div><div class="smeta">${s.rnt||rec.note}</div></div>`;
   h+=`<div class="sc sn"><span class="sbadge bn">NEAT</span><div class="stitle">${s.nt}</div><div class="smeta">Meta del día: ${s.st.toLocaleString('es-CO')} pasos</div></div>`;
   document.getElementById('hc').innerHTML=h;
-  rMacros(d);
+  rPlan(d);
 }
 
 // ═══════ MACROS DEL DÍA ═══════
@@ -1082,6 +911,7 @@ function rW(){
   const lbl=document.getElementById('w-date-label');if(lbl)lbl.textContent=wDate===today?'hoy':wDate===yesterday?'ayer':'';
   const con=document.getElementById('exblocks'),dky=dkW();if(!ST.chk[dky])ST.chk[dky]={};
   let h='';
+  if(wDate>='2026-11-04'&&wDate<='2026-11-10')h+=`<div class="pnote" style="margin:8px 16px 0;">Semana 1 de la dieta: mismas cargas pero con RIR 3 en todo. El cuerpo se adapta a las fases; desde el 11 de noviembre vuelves a RIR 1–2 y a progresar.</div>`;
   s.ex.forEach((ex,ei)=>{const pr=ST.prs[ex.n],g=GUIDE[ex.n];
     h+=`<div class="exb${ex.hi?' hi':''}"><div class="exh" onclick="tEx(${ei})"><div class="exhi"><div class="exn">${ex.n}</div><div class="exm">${ex.m}</div></div><span class="exch" id="cv${ei}">▸</span></div><div class="exbd" id="eb${ei}">`;
     if(g){h+=`<div class="guide-tabs"><button class="gtab active" onclick="gtab(event,${ei},'tecnica')">Técnica</button><button class="gtab" onclick="gtab(event,${ei},'respiracion')">Respiración</button><button class="gtab" onclick="gtab(event,${ei},'errores')">Errores</button></div><div class="guide-panel active" id="gp-${ei}-tecnica"><div class="guide-text">${g.t}</div></div><div class="guide-panel" id="gp-${ei}-respiracion"><div class="guide-text">${g.r}</div></div><div class="guide-panel" id="gp-${ei}-errores"><div class="error-text">${g.e}</div></div>`;}
@@ -1149,10 +979,8 @@ function rP(){
   wks.forEach(d=>{const dn=new Date(d+'T12:00:00').getDay();stSum+=(ST.steps[d]||0);stTgt+=SCH[dn].st;});
   const stPct=stTgt?Math.round(stSum/stTgt*100):0;
   const avgSteps=Math.round(stSum/7);
-  const adhs=wks.map(macAdh).filter(x=>x!==null);
-  const macPct=adhs.length?Math.round(adhs.reduce((a,b)=>a+b,0)/adhs.length):0;
-  const fibs=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
-  const fibAvg=fibs.length?Math.round(fibs.reduce((a,b)=>a+parseFloat(b),0)/fibs.length):0;
+  const padh=wks.map(planAdh).filter(x=>x!==null);
+  const planPct=padh.length?Math.round(padh.reduce((a,b)=>a+b,0)/padh.length):0;
   const L=lastLab();
   const mTsh=LABS.find(m=>m.k==='tsh'),mLdl=LABS.find(m=>m.k==='ldl');
   const tshV=L&&L.tsh!=null&&L.tsh!==''?L.tsh:null;
@@ -1165,7 +993,7 @@ function rP(){
     card(sesPct,sesPct+'%','Sesiones fuerza',ses+' de 5 programadas')+
     card(z2Pct,z2Pct+'%','Zona 2',z2+' de 140 min')+
     card(stPct,stPct+'%','Pasos',avgSteps.toLocaleString('es-CO')+' prom · meta '+Math.round(stTgt/7).toLocaleString('es-CO'))+
-    card(macPct,macPct+'%','Macros',adhs.length+' de 7 días · fibra '+fibAvg+'g prom')+
+    card(planPct,planPct+'%','Plan de comidas',padh.length+' de 7 días registrados')+
     card(tshV!==null?100:null,tshV!==null?tshV:'—','Tiroides · TSH',tshV!==null?(stTxt[tshS]+' · meta 0.5–2.5'):'sin datos',tshS==='ok'?'f-ok':tshS==='mid'?'f-mid':'f-low')+
     card(ldlV!==null?100:null,ldlV!==null?ldlV:'—','Colesterol · LDL',ldlV!==null?(stTxt[ldlS]+' · meta <100'):'sin datos',ldlS==='ok'?'f-ok':ldlS==='mid'?'f-mid':'f-low');
 
@@ -1285,15 +1113,18 @@ function rRange(){
   const stAvg=stp.length?Math.round(stp.reduce((a,b)=>a+b.y,0)/stp.length):0;
   h+=chartBox('Pasos · % de la meta diaria',stp.length?`promedio ${stAvg}%`:'sin datos',spark(stp,{color:'var(--amb)',goal:100,min:0}));
 
-  // 4. Adherencia macros
-  const mac=days.map(d=>({x:d,y:macAdh(d)})).filter(p=>p.y!==null);
-  const macAvg=mac.length?Math.round(mac.reduce((a,b)=>a+b.y,0)/mac.length):0;
-  h+=chartBox('Adherencia a macros',mac.length?`promedio ${macAvg}% · ${mac.length} días`:'sin datos',spark(mac,{color:'var(--teal)',goal:100,min:0,max:100}));
+  // 4. Plan de comidas por fases
+  const pl=days.map(d=>({x:d,y:planAdh(d)})).filter(p=>p.y!==null);
+  const plAvg=pl.length?Math.round(pl.reduce((a,b)=>a+b.y,0)/pl.length):0;
+  h+=chartBox('Plan de comidas · % del día',pl.length?`promedio ${plAvg}% · ${pl.length} días`:'sin datos',spark(pl,{color:'var(--teal)',goal:100,min:0,max:100}));
 
-  // 4b. Fibra diaria
+  // 4b. Histórico de macros y fibra (antes de la dieta por fases): solo si hay datos en el rango
+  const mac=days.map(d=>({x:d,y:macAdh(d)})).filter(p=>p.y!==null);
+  if(mac.length){const macAvg=Math.round(mac.reduce((a,b)=>a+b.y,0)/mac.length);
+    h+=chartBox('Adherencia a macros · histórico',`promedio ${macAvg}% · ${mac.length} días`,spark(mac,{color:'var(--teal)',goal:100,min:0,max:100}));}
   const fib=days.filter(d=>ST.fiber[d]!==undefined&&ST.fiber[d]!==''&&ST.fiber[d]!==null).map(d=>({x:d,y:parseFloat(ST.fiber[d])}));
-  const fibAvgR=fib.length?Math.round(fib.reduce((a,b)=>a+b.y,0)/fib.length):0;
-  h+=chartBox('Fibra diaria',fib.length?`promedio ${fibAvgR} g · meta ${FIBER_TGT} g`:'sin datos',spark(fib,{color:'var(--teal)',goal:FIBER_TGT,min:0}));
+  if(fib.length){const fibAvgR=Math.round(fib.reduce((a,b)=>a+b.y,0)/fib.length);
+    h+=chartBox('Fibra diaria · histórico',`promedio ${fibAvgR} g`,spark(fib,{color:'var(--teal)',min:0}));}
 
   // 5. Zona 2 por semana
   const wkMap={};
@@ -1424,7 +1255,7 @@ function genReport(){
   const weekEnd=new Date(weekStart);weekEnd.setDate(weekEnd.getDate()+6);
   const fmt=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit'});
   const doneW=ST.done.filter(d=>wks.includes(d));
-  const sesNames={0:'Dom·Glúteos pesado',1:'Lun·Espalda+Hombros+Bíceps',2:'Mar·Glúteos+Cuád+Spinning',3:'Mié·Espalda+Pecho+Core',4:'Jue·Glúteos+Isquios'};
+  const sesNames={0:'Dom·Glúteos pesado',1:'Lun·Espalda+Hombros+Bíceps',2:'Mar·Glúteos+Cuádriceps',3:'Mié·Espalda+Pecho+Core+Spinning',4:'Jue·Glúteos+Isquios'};
   const expectedDays=[0,1,2,3,4];
   const completedDays=expectedDays.filter(d=>doneW.includes(dkForDay(d)));
   const missedDays=expectedDays.filter(d=>!doneW.includes(dkForDay(d)));
@@ -1460,15 +1291,11 @@ function genReport(){
   r+=`\n🚴 CARDIO\nZona 1: ${z1} min\nZona 2: ${z2} min (meta 140)\nZona 3-5: ${z3} min (máx 90)\n`;
   if(cardioLines.length>0)r+=cardioLines.join('\n')+'\n';
   r+=`\n👟 PASOS\nPromedio: ${avgSteps.toLocaleString('es-CO')} pasos/día\n`;
-  const adhs=wks.map(macAdh).filter(x=>x!==null);
-  const macPct=adhs.length?Math.round(adhs.reduce((a,b)=>a+b,0)/adhs.length):0;
-  const fibs=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
-  const fibAvg=fibs.length?Math.round(fibs.reduce((a,b)=>a+parseFloat(b),0)/fibs.length):0;
-  const fibsR=wks.map(d=>ST.fiber[d]).filter(v=>v!==undefined&&v!==null&&v!=='');
-  const fibAvgRep=fibsR.length?Math.round(fibsR.reduce((a,b)=>a+parseFloat(b),0)/fibsR.length):0;
-  r+=`\n🍽️ MACROS\nAdherencia promedio: ${macPct}%\nDías registrados: ${adhs.length}/7\nFibra promedio: ${fibAvgRep} g (meta ${FIBER_TGT} g) · ${fibsR.length}/7 días\n`;
-  wks.forEach(d=>{const t=dayTotals(d),dn=new Date(d+'T12:00:00').getDay(),tg=dayTarget(dn);
-    if(t.p||t.c||t.g)r+=`  ${d} · ${Math.round(t.p)}/${tg.p}P ${Math.round(t.c)}/${tg.c}C ${Math.round(t.g)}/${tg.g}G\n`;});
+  const padhR=wks.map(planAdh).filter(x=>x!==null);
+  const planPctR=padhR.length?Math.round(padhR.reduce((a,b)=>a+b,0)/padhR.length):0;
+  r+=`\n🍽️ PLAN DE COMIDAS (DIETA POR FASES)\nCumplimiento promedio: ${planPctR}%\nDías registrados: ${padhR.length}/7\n`;
+  wks.forEach(d=>{const a=ST.plan[d];if(!a)return;const dn=new Date(d+'T12:00:00').getDay(),ph=PH[PDOW[dn]];
+    const hechas=ph.meals.filter((m,i)=>a[i]).map(m=>m.n);r+=`  ${d} · ${ph.n} · ${hechas.length}/5 · ${hechas.join(', ')}\n`;});
   r+=`\n💆 RECUPERACIÓN\nPresoterapia: ${recW['preso']}x\nSauna: ${recW['sauna']}x\nTurco: ${recW['turco']}x\nPiscina: ${recW['piscina']}x\nMasajes: ${recW['masaje_dep']+recW['masaje_dre']+recW['masaje_rel']+recW['masaje_mol']}x\n`;
   if(note)r+=`\n💬 CÓMO ME SENTÍ\n${note}\n`;
   const lm=ST.meas?.[ST.meas.length-1];
