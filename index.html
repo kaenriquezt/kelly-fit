@@ -716,6 +716,7 @@ function dayTarget(d){const m=mealsFor(d);return{p:m.reduce((a,x)=>a+x.p,0),c:m.
 // marcadores de laboratorio · meta = objetivo clínico, ref = rango del laboratorio
 const LABS=[
  {k:'tsh', n:'TSH',              u:'mUI/L', lo:0.5,  hi:2.5,  dir:'band', grp:'tiroides',   m:'Óptimo 0.5–2.5 · ref 0.35–4.94'},
+ {k:'t3',  n:'T3 libre',         u:'pg/mL', lo:1.58, hi:3.91, dir:'band', grp:'tiroides',   m:'Ref 1.58–3.91'},
  {k:'t4',  n:'T4 libre',         u:'ng/dL', lo:0.8,  hi:1.8,  dir:'band', grp:'tiroides',   m:'Ref 0.8–1.8 (opcional)'},
  {k:'ct',  n:'Colesterol total', u:'mg/dL', hi:200,  dir:'low', grp:'lipidos',  m:'Meta <200'},
  {k:'ldl', n:'LDL',              u:'mg/dL', hi:100,  dir:'low', grp:'lipidos',  m:'Meta <100 con estatina'},
@@ -724,9 +725,17 @@ const LABS=[
  {k:'apob',n:'ApoB',             u:'mg/dL', hi:90,   dir:'low', grp:'lipidos',  m:'Óptimo <90'},
  {k:'lpa', n:'Lp(a)',            u:'nmol/L',hi:75,   dir:'low', grp:'lipidos',  m:'Meta <75 · genético'},
  {k:'alt', n:'ALT (GPT)',        u:'U/L',   hi:33,   dir:'low', grp:'higado',   m:'Ref 0–33 · control estatina'},
- {k:'hba1c',n:'HbA1c',           u:'%',     hi:5.7,  dir:'low', grp:'glucosa',  m:'Normal <5.7'}
+ {k:'ast', n:'AST (GOT)',        u:'U/L',   hi:32,   dir:'low', grp:'higado',   m:'Ref 0–32'},
+ {k:'ggt', n:'GGT',              u:'U/L',   hi:40,   dir:'low', grp:'higado',   m:'Ref 0–40'},
+ {k:'hba1c',n:'HbA1c',           u:'%',     hi:5.7,  dir:'low', grp:'glucosa',  m:'Normal <5.7'},
+ {k:'ins', n:'Insulina',         u:'µUI/mL',lo:2.6,  hi:24.9, dir:'band', grp:'glucosa',  m:'Ref 2.6–24.9'},
+ {k:'creat',n:'Creatinina',      u:'mg/dL', hi:0.95, dir:'low', grp:'renal',    m:'Ref 0.51–0.95 · la creatina y la proteína alta la suben'},
+ {k:'hb',  n:'Hemoglobina',      u:'g/dL',  lo:12,   dir:'high',grp:'sangre',   m:'Ref 12–16'},
+ {k:'eri', n:'Eritrocitos',      u:'M/µL',  lo:4.2,  dir:'high',grp:'sangre',   m:'Ref 4.2–5.4'},
+ {k:'ferr',n:'Ferritina',        u:'ng/mL', lo:13,   hi:150,  dir:'band', grp:'sangre',   m:'Ref 13–150 · reservas de hierro'}
 ];
-const LAB_BASE={date:'2026-05-29',tsh:1.373,ct:201,ldl:120,hdl:69,tg:79,apob:94,lpa:5,alt:35,hba1c:5.27};
+const LAB_BASE={date:'2026-05-29',tsh:1.373,ct:201,ldl:120,hdl:69,tg:79,apob:94,lpa:5,alt:35,hba1c:5.27,creat:0.96,hb:12.2,eri:3.91};
+const LAB_SEP={date:'2026-09-25',tsh:1.602,t3:2.04,ct:163,ldl:81,hdl:57,tg:127,alt:28,ast:21,ggt:14,hba1c:5.18,ins:5.52,creat:1.00,hb:12.8,eri:4.03,ferr:72.9};
 function labStat(m,v){
   if(v===''||v===null||v===undefined||isNaN(v))return'';
   v=parseFloat(v);
@@ -739,7 +748,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-10-28.1';
+const APP_VER='2026-10-28.2';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -780,7 +789,9 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 function load(){
   // Borrado único: arranque limpio acordado. No se repite.
   try{ if(localStorage.getItem('kf5_reset')!==RESET_TOKEN){localStorage.removeItem('kf5');localStorage.setItem('kf5_reset',RESET_TOKEN);} }catch(e){}
-  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();rFases();}
+  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}
+  {const b=ST.labs.find(l=>l.date===LAB_BASE.date);if(b){let ch=false;['creat','hb','eri'].forEach(k=>{if(b[k]===undefined){b[k]=LAB_BASE[k];ch=true;}});if(ch)sv();}}
+  if(!ST.labs.some(l=>l.date===LAB_SEP.date)){ST.labs.push({...LAB_SEP});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();rFases();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
 function nav(s,btn){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
