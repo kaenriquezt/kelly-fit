@@ -416,10 +416,26 @@ ul.fr li{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:3px;}
     </div>
     <div class="slbl">Datos</div>
     <div style="padding:0 16px 10px;">
+      <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:8px;">
+        <div style="font-size:13px;font-weight:700;color:var(--t1);">Copia de seguridad</div>
+        <div id="bk-last" style="font-size:11px;color:var(--t2);margin:3px 0 10px;line-height:1.5;"></div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="exportBackup()" style="flex:1;padding:10px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">⬇ Descargar copia</button>
+          <button onclick="document.getElementById('bk-file').click()" style="flex:1;padding:10px;background:var(--gl);color:var(--gd);border:1px solid var(--gb);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">⬆ Restaurar</button>
+        </div>
+        <input type="file" id="bk-file" accept=".json,application/json" style="display:none;" onchange="readBackup(this)">
+        <div id="bk-confirm" style="display:none;margin-top:10px;padding:10px 12px;background:var(--al);border-radius:10px;">
+          <div id="bk-confirm-txt" style="font-size:12px;color:#633806;line-height:1.5;margin-bottom:8px;"></div>
+          <div style="display:flex;gap:8px;">
+            <button onclick="applyBackup()" style="flex:1;padding:8px;background:var(--amb);color:#fff;border:none;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;">Sí, restaurar</button>
+            <button onclick="cancelBackup()" style="flex:1;padding:8px;background:var(--bg);color:var(--t2);border:1px solid var(--border);border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;">Cancelar</button>
+          </div>
+        </div>
+      </div>
       <button onclick="askReset()" style="width:100%;padding:10px;background:#FFF0F0;color:#8B1A1A;border:1px solid #FFCDD2;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;">🗑 Borrar todos mis registros</button>
       <div id="reset-box" style="display:none;margin-top:8px;padding:12px 14px;background:#FFF0F0;border:1px solid #FFCDD2;border-radius:12px;">
         <div style="font-size:13px;color:#8B1A1A;font-weight:600;margin-bottom:6px;">¿Borrar todo y empezar de cero?</div>
-        <div style="font-size:12px;color:#8B1A1A;margin-bottom:10px;line-height:1.5;">Se eliminan entrenamientos, cargas, récords, pasos, macros, fibra, cardio, recuperación y medidas. Se conservan tu laboratorio base y la medición del 01/08. No se puede deshacer.</div>
+        <div style="font-size:12px;color:#8B1A1A;margin-bottom:10px;line-height:1.5;">Se eliminan entrenamientos, cargas, récords, pasos, macros, fibra, cardio, recuperación y medidas. No se puede deshacer: descarga una copia antes.</div>
         <div style="display:flex;gap:8px;">
           <button onclick="doReset()" style="flex:1;padding:9px;background:#8B1A1A;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Sí, borrar todo</button>
           <button onclick="document.getElementById('reset-box').style.display='none'" style="flex:1;padding:9px;background:var(--bg);color:var(--t2);border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Cancelar</button>
@@ -748,7 +764,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-10-28.3';
+const APP_VER='2026-10-28.4';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -776,6 +792,41 @@ async function checkVersion(){
     if(m&&m[1]!==APP_VER)document.getElementById('upd-bar').style.display='flex';
   }catch(e){}
 }
+// ═══════ COPIA DE SEGURIDAD ═══════
+let pendingBackup=null;
+function rBackupInfo(){const el=document.getElementById('bk-last');if(!el)return;
+  el.textContent=ST.lastBackup?('Última copia: '+ST.lastBackup+'. Guárdala en Archivos o en Drive.'):'Aún no has descargado ninguna copia. Te recomiendo hacerlo cada semana.';}
+async function exportBackup(){
+  const fecha=dk();ST.lastBackup=fecha;sv();
+  const data=JSON.stringify({app:'Vital',version:APP_VER,fecha,datos:ST});
+  const name='vital-copia-'+fecha+'.json';
+  try{
+    const file=new File([data],name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Copia de Vital'});rBackupInfo();toast('Copia lista ✓');return;}
+  }catch(e){if(e&&e.name==='AbortError'){return;}}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download=name;
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+  rBackupInfo();toast('Copia descargada ✓');
+}
+function readBackup(inp){
+  const f=inp.files&&inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{const o=JSON.parse(r.result);const d=o&&o.datos?o.datos:o;
+      if(!d||typeof d!=='object'||!('chk' in d||'meas' in d||'done' in d))throw new Error('formato');
+      pendingBackup=d;
+      const ses=(d.done||[]).length,med=(d.meas||[]).length;
+      document.getElementById('bk-confirm-txt').textContent=`Copia del ${o.fecha||'—'}: ${ses} ${ses===1?'sesión':'sesiones'} y ${med} ${med===1?'medida':'medidas'}. Reemplaza todo lo que hay ahora en la app.`;
+      document.getElementById('bk-confirm').style.display='block';
+    }catch(e){toast('Ese archivo no es una copia de Vital');}
+    inp.value='';
+  };
+  r.readAsText(f);
+}
+function applyBackup(){if(!pendingBackup)return;
+  ST={steps:{},cardio:[],chk:{},prs:{},done:[],meas:[],recovery:{},doneDay:{},macros:{},labs:[],fiber:{},plan:{},...pendingBackup};
+  pendingBackup=null;sv();location.replace(location.pathname+'?v='+Date.now());}
+function cancelBackup(){pendingBackup=null;document.getElementById('bk-confirm').style.display='none';}
 function askReset(){const b=document.getElementById('reset-box');b.style.display=b.style.display==='block'?'none':'block';}
 function doReset(){try{localStorage.removeItem('kf5');}catch(e){}location.replace(location.pathname+'?v='+Date.now());}
 function forceUpdate(){location.replace(location.pathname+'?v='+Date.now());}
@@ -787,8 +838,6 @@ setInterval(checkRollover,30000);
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){
-  // Borrado único: arranque limpio acordado. No se repite.
-  try{ if(localStorage.getItem('kf5_reset')!==RESET_TOKEN){localStorage.removeItem('kf5');localStorage.setItem('kf5_reset',RESET_TOKEN);} }catch(e){}
   try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}
   {const b=ST.labs.find(l=>l.date===LAB_BASE.date);if(b){let ch=false;['creat','hb','eri'].forEach(k=>{if(b[k]===undefined){b[k]=LAB_BASE[k];ch=true;}});if(ch)sv();}}
   if(!ST.labs.some(l=>l.date===LAB_SEP.date)){ST.labs.push({...LAB_SEP});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();rFases();}
@@ -1025,7 +1074,7 @@ function rP(){
   if(lm){[['mcue','cuello'],['mbra','brazo'],['mcin','cintura'],['mabd','abdomen'],['mcad','cadera'],['mglu','gluteo'],['mmus','muslo'],['mpes','peso']].forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.placeholder=lm[k]||'—';});
     document.getElementById('mhist').textContent='Último registro: '+lm.date;}
 
-  rLabs();
+  rLabs();rBackupInfo();
 }
 
 // ═══════ LABORATORIOS ═══════
