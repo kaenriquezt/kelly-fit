@@ -766,7 +766,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-11-08.1';
+const APP_VER='2026-11-08.2';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
@@ -838,7 +838,7 @@ setInterval(checkRollover,30000);
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function load(){
-  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}
+  try{const r=localStorage.getItem('kf5');if(r)ST={...ST,...JSON.parse(r)};}catch(e){}if(!ST.macros)ST.macros={};if(!ST.fiber)ST.fiber={};if(!ST.plan)ST.plan={};if(!ST.rutinaReset){ST.archivoRutina={hasta:dk(),chk:ST.chk||{},prs:ST.prs||{},done:ST.done||[],doneDay:ST.doneDay||{}};ST.chk={};ST.prs={};ST.done=[];ST.doneDay={};ST.rutinaReset='2026-11-08';sv();}if(!ST.labs)ST.labs=[];if(ST.labs.length===0){ST.labs.push({...LAB_BASE});sv();}
   {const b=ST.labs.find(l=>l.date===LAB_BASE.date);if(b){let ch=false;['creat','hb','eri'].forEach(k=>{if(b[k]===undefined){b[k]=LAB_BASE[k];ch=true;}});if(ch)sv();}}
   if(!ST.labs.some(l=>l.date===LAB_SEP.date)){ST.labs.push({...LAB_SEP});sv();}if(!ST.meas)ST.meas=[];if(!ST.meas.some(m=>m.date==='2026-08-01')){ST.meas.push({date:'2026-08-01',peso:'64.4',cuello:'',brazo:'',cintura:'86',abdomen:'',cadera:'',gluteo:'',muslo:''});ST.meas.sort((a,b)=>a.date<b.date?-1:1);sv();}rHome();rFases();}
 function sv(){try{localStorage.setItem('kf5',JSON.stringify(ST));}catch(e){}}
