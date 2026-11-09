@@ -334,7 +334,7 @@ ul.fr li{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:3px;}
   <div id="f-body"></div>
   <div class="slbl">Porciones con la mano</div>
   <div class="sbox"><table class="fpt">
-    <tr><td>Proteína</td><td>1 a 1½ palmas en almuerzo y cena · 2 huevos + 2 claras en el desayuno (≥ 20 g por comida principal) · ½ palma en meriendas · whey: 1 scoop al día (25 g) · meta diaria ≈ 105–145 g (1,6–2,2 g/kg)</td></tr>
+    <tr><td>Proteína</td><td>1 a 1½ palmas en almuerzo y cena · desayuno: 2 huevos + ½ scoop de whey o 2 claras (≥ 20 g por comida principal) · ½ palma en meriendas · whey: 1 scoop al día (25 g) · meta diaria ≈ 105–145 g (1,6–2,2 g/kg)</td></tr>
     <tr><td>Carbohidrato</td><td>1 puño · un poco más en días de entreno · 2 tajadas de pan ≈ 1 puño</td></tr>
     <tr><td>Verdura</td><td>2 puños · es un mínimo</td></tr>
     <tr><td>Grasa</td><td>1 pulgar: ¼ de aguacate o 1 cucharada de aceite de oliva</td></tr>
@@ -664,7 +664,7 @@ const FIBER_TGT=20;
 // Porciones con la mano · sin pesar · proteína primero (semaglutida)
 const DTYPE=['dom','ent','ent','ent','ent','vie','sab']; // dom..sáb → tipo de día
 const PL_P='Proteína 1–1½ palmas',PL_C='Carbohidrato 1 puño',PL_V='Verdura 2 puños',PL_G='Grasa 1 pulgar',PL_S='Proteína ½ palma';
-const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['2 huevos + 2 claras','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (½ taza de harina de avena, 2 huevos, 2 claras, 1 cucharada de agua, ½ cucharadita de polvo de hornear y canela) con 1 taza de fresas picadas o 1 manzana.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
+const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['2 huevos + ½ scoop de whey','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (½ taza de harina de avena, 2 huevos, ½ scoop de whey, 3 cucharadas de agua, ½ cucharadita de polvo de hornear y canela) con 1 taza de fresas picadas o 1 manzana.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
 const MER_AM={n:'Merienda',h:'9:30 am',ll:[PL_S,'Fruta 1 unidad'],op:['<b>A.</b> Yogur griego sin azúcar con 1 taza de fresas o manzana picada y canela.','<b>B.</b> 3 tostadas de arroz con ½ lata de atún y 1 manzana.'],nota:'Nueces de Brasil: 1 o 2 al día, máximo. No reemplazan la porción de grasa.'};
 const PRE_PM={n:'Preentreno',h:'4:00 pm',ll:[PL_S,'Carbohidrato 1 puño'],op:['<b>A.</b> 2 o 3 tostadas de arroz, 2 bananos chiros y un batido de whey.','<b>B.</b> Yogur griego con banano.'],nota:'Poca grasa y poca fibra para que no te caiga pesado al entrenar.'};
 const CENA_ENT={n:'Cena',h:'7:00–8:00 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Carne molida con papa y brócoli.','<b>B.</b> Cerdo en tiras con papa, ensalada de lechugas con tomate cherry, vinagreta y encurtido de repollo.'],nota:'Molida lunes, miércoles y viernes; cerdo martes y jueves.'};
@@ -766,7 +766,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-11-08.7';
+const APP_VER='2026-11-08.8';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
