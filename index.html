@@ -664,7 +664,7 @@ const FIBER_TGT=20;
 // Porciones con la mano · sin pesar · proteína primero (semaglutida)
 const DTYPE=['dom','ent','ent','ent','ent','vie','sab']; // dom..sáb → tipo de día
 const PL_P='Proteína 1–1½ palmas',PL_C='Carbohidrato 1 puño',PL_V='Verdura 2 puños',PL_G='Grasa 1 pulgar',PL_S='Proteína ½ palma';
-const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['Proteína 1 palma','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (1 taza de harina de avena, 2 huevos, 1 banano, canela y 1 scoop de whey) con fruta.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
+const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['Proteína 1 palma','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (½ taza de harina de avena, 2 huevos, 1 scoop de whey, 4 cucharadas de agua, ½ cucharadita de polvo de hornear y canela) con 1 taza de fresas picadas o 1 manzana.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
 const MER_AM={n:'Merienda',h:'9:30 am',ll:[PL_S,'Fruta 1 unidad'],op:['<b>A.</b> Yogur griego sin azúcar con manzana picada y canela.','<b>B.</b> 1 manzana con un batido de whey.'],nota:'Nueces de Brasil: 1 o 2 al día, máximo. No reemplazan la porción de grasa.'};
 const PRE_PM={n:'Preentreno',h:'4:00 pm',ll:[PL_S,'Carbohidrato 1 puño'],op:['<b>A.</b> 2 o 3 tostadas de arroz, 2 bananos chiros y un batido de whey.','<b>B.</b> Yogur griego con banano.'],nota:'Poca grasa y poca fibra para que no te caiga pesado al entrenar.'};
 const CENA_ENT={n:'Cena',h:'7:00–8:00 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Carne molida con papa y brócoli.','<b>B.</b> Cerdo en tiras con papa, ensalada de lechugas con tomate cherry, vinagreta y encurtido de repollo.'],nota:'Molida lunes, miércoles y viernes; cerdo martes y jueves.'};
@@ -766,7 +766,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-11-08.4';
+const APP_VER='2026-11-08.5';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
