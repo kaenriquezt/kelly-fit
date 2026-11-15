@@ -334,13 +334,24 @@ ul.fr li{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:3px;}
   <div id="f-body"></div>
   <div class="slbl">Porciones con la mano</div>
   <div class="sbox"><table class="fpt">
-    <tr><td>Proteína</td><td>1 palma en almuerzo y cena · desayuno: 2 huevos + ½ scoop de whey o 2 claras (≥ 20 g por comida principal) · ½ palma en meriendas · whey: 1 scoop al día (25 g) · meta diaria ≈ 120–130 g (~1,9 g/kg)</td></tr>
+    <tr><td>Proteína</td><td>Meta: ~105–115 g al día (1,6–1,75 g/kg) · 4 tomas de ~25 g (desayuno, almuerzo, preentreno, cena) + merienda de ~10 g · máximo 1½ scoops de whey al día</td></tr>
     <tr><td>Carbohidrato</td><td>1 puño · un poco más en días de entreno · 2 tajadas de pan ≈ 1 puño</td></tr>
     <tr><td>Verdura</td><td>2 puños · es un mínimo</td></tr>
     <tr><td>Grasa</td><td>1 pulgar: ¼ de aguacate o 1 cucharada de aceite de oliva</td></tr>
     <tr><td>Fruta</td><td>1 unidad · bananos chiros de a 2</td></tr>
     <tr><td>Nueces de Brasil</td><td>Máximo 2 al día por el selenio · no cuentan como porción de grasa</td></tr>
   </table></div>
+  <div class="slbl">Equivalencias de proteína · ~25 g</div>
+  <div class="sbox"><table class="fpt">
+    <tr><td>Pechuga de pollo</td><td>~80 g cocida · 31 g por 100 g</td></tr>
+    <tr><td>Muslo de pollo sin piel</td><td>~95 g cocido · 26 g por 100 g</td></tr>
+    <tr><td>Carne molida 90/10</td><td>~100 g cocida · 26 g por 100 g</td></tr>
+    <tr><td>Lomo de cerdo</td><td>~90 g cocido · 29 g por 100 g</td></tr>
+    <tr><td>Atún en agua</td><td>1 lata escurrida · ~25 g</td></tr>
+    <tr><td>Whey</td><td>1 scoop · 25 g (½ scoop ≈ 12,5 g)</td></tr>
+    <tr><td>Huevo</td><td>~6 g por unidad · 2 huevos + ½ scoop ≈ 25 g</td></tr>
+    <tr><td>Yogur actual</td><td>9 g por unidad de 160 g</td></tr>
+  </table><div class="ffood" style="margin-top:6px;">Valores aproximados de tablas de composición. Pesa la proteína cocida 1 o 2 veces para calibrar el ojo; después, a la vista.</div></div>
   <div class="slbl">Alimentos</div>
   <div class="sbox">
     <div class="ffood"><b>Proteína:</b> pollo sin piel, res magra (molida 90/10), lomo de cerdo, atún en agua, huevo, yogur griego sin azúcar, whey</div>
@@ -663,16 +674,16 @@ const FIBER_TGT=20;
 // ═══════ PLAN DE COMIDAS POR TIPO DE DÍA (desde 2026-11-08) ═══════
 // Porciones con la mano · sin pesar · proteína primero (semaglutida)
 const DTYPE=['dom','ent','ent','ent','ent','vie','sab']; // dom..sáb → tipo de día
-const PL_P='Proteína 1 palma',PL_C='Carbohidrato 1 puño',PL_V='Verdura 2 puños',PL_G='Grasa 1 pulgar',PL_S='Proteína ½ palma';
-const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['2 huevos + ½ scoop de whey','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (½ taza de harina de avena, 2 huevos, ½ scoop de whey, 3 cucharadas de agua, ½ cucharadita de polvo de hornear y canela) con 1 taza de fresas picadas o 1 manzana.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
+const PL_P='Proteína ~25 g',PL_C='Carbohidrato 1 puño',PL_V='Verdura 2 puños',PL_G='Grasa 1 pulgar',PL_S='Proteína ~10 g',PL_W='Proteína ~25 g (1 scoop)';
+const DESAYUNO={n:'Desayuno',h:'7:00 am',ll:['Proteína ~25 g (2 huevos + ½ scoop)','Carbohidrato 1 puño','Fruta 1 unidad'],op:['<b>A.</b> Pancakes de avena (½ taza de harina de avena, 2 huevos, ½ scoop de whey, 3 cucharadas de agua, ½ cucharadita de polvo de hornear y canela) con 1 taza de fresas picadas o 1 manzana.','<b>B.</b> 2 huevos y 2 claras revueltos con tomate cherry y lechugas, 2 tostadas de arroz con ¼ de aguacate y 1 manzana.'],nota:'El jugo verde, sin colar y con más verdura que fruta, va aquí. De lunes a viernes, a las 7:00 la levotiroxina ya tuvo su tiempo.'};
 const MER_AM={n:'Merienda',h:'9:30 am',ll:[PL_S,'Fruta 1 unidad'],op:['<b>A.</b> Yogur griego sin azúcar con 1 taza de fresas o manzana picada y canela.','<b>B.</b> 3 tostadas de arroz con ½ lata de atún y 1 manzana.'],nota:'Nueces de Brasil: 1 o 2 al día, máximo. No reemplazan la porción de grasa.'};
-const PRE_PM={n:'Preentreno',h:'4:00 pm',ll:[PL_S,'Carbohidrato 1 puño'],op:['<b>A.</b> 2 o 3 tostadas de arroz, 2 bananos chiros y un batido de whey.','<b>B.</b> Yogur griego con banano.'],nota:'Poca grasa y poca fibra para que no te caiga pesado al entrenar.'};
-const CENA_ENT={n:'Cena',h:'7:00–8:00 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Carne molida con papa y brócoli.','<b>B.</b> Cerdo en tiras con papa, ensalada de lechugas con tomate cherry, vinagreta y encurtido de repollo.'],nota:'Molida lunes, miércoles y viernes; cerdo martes y jueves.'};
+const PRE_PM={n:'Preentreno',h:'4:00 pm',ll:[PL_W,'Carbohidrato 1 puño'],op:['<b>A.</b> 3 tostadas de arroz, 2 bananos chiros y un batido de whey (1 scoop).','<b>B.</b> Yogur con ½ scoop de whey mezclado y 1 banano.'],nota:'Poca grasa y poca fibra para que no te caiga pesado al entrenar.'};
+const CENA_ENT={n:'Cena',h:'7:00–8:00 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Carne molida (~100 g cocida) con papa y brócoli.','<b>B.</b> Cerdo en tiras (~90 g cocido) con papa, ensalada de lechugas con tomate cherry, vinagreta y encurtido de repollo.'],nota:'Molida lunes, miércoles y viernes; cerdo martes y jueves.'};
 const PH={
 ent:{n:'Entreno',cls:'fz3',dias:'Lunes a jueves',corto:'Lun–Jue',lema:'Proteína en cada comida · carbohidrato alrededor del entreno',
  reglas:['Proteína primero en el plato, aunque no tengas hambre. Si una comida no entra, cámbiala por un batido de whey; no la saltes.','Mismo menú de lunes a viernes; rota la verdura y la fruta cada semana.','La grasa (aguacate, vinagreta) se agrega el día que comes, no en el recipiente.'],
  meals:[DESAYUNO,MER_AM,
-  {n:'Almuerzo',h:'12:00 m',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Pollo con arroz parbolizado, verduras asadas (calabacín, pimentón, cebolla morada y zanahoria) y ¼ de aguacate.','<b>B.</b> Pollo con papa, brócoli y ensalada de lechugas con vinagreta.']},
+  {n:'Almuerzo',h:'12:00 m',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Pollo (~80 g de pechuga cocida) con arroz parbolizado, verduras asadas (calabacín, pimentón, cebolla morada y zanahoria) y ¼ de aguacate.','<b>B.</b> Pollo con papa, brócoli y ensalada de lechugas con vinagreta.']},
   PRE_PM,CENA_ENT]},
 vie:{n:'Descanso',cls:'fz2',dias:'Viernes',corto:'Vie',lema:'Igual que entre semana · menos carbohidrato en la tarde y la noche',
  reglas:['El preentreno pasa a ser una merienda normal.','En la cena, la papa se cambia por más verdura.','La proteína se mantiene igual.'],
@@ -691,7 +702,7 @@ sab:{n:'Libre',cls:'fz1',dias:'Sábado',corto:'Sáb',lema:'En casa o afuera · p
 dom:{n:'Entreno AM',cls:'fz3',dias:'Domingo',corto:'Dom',lema:'Entreno a las 11 · preentreno a media mañana · batch cooking',
  reglas:['El preentreno va a las 9:30, por lo menos 1 hora antes de entrenar.','Después de entrenar, el almuerzo lleva proteína y carbohidrato.','En la tarde o noche: batch cooking de la semana.'],
  meals:[DESAYUNO,
-  {n:'Preentreno',h:'9:30 am',ll:[PL_S,'Carbohidrato 1 puño'],op:['<b>A.</b> 2 o 3 tostadas de arroz, 2 bananos chiros y un batido de whey.','<b>B.</b> Yogur griego con banano.'],nota:'Entrenas a las 11: come por lo menos 1 hora antes.'},
+  {n:'Preentreno',h:'9:30 am',ll:[PL_W,'Carbohidrato 1 puño'],op:['<b>A.</b> 3 tostadas de arroz, 2 bananos chiros y un batido de whey (1 scoop).','<b>B.</b> Yogur con ½ scoop de whey mezclado y 1 banano.'],nota:'Entrenas a las 11: come por lo menos 1 hora antes.'},
   {n:'Almuerzo post-entreno',h:'12:30 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> En casa: proteína con arroz o papa, verduras y aguacate.','<b>B.</b> Afuera: proteína a la plancha con arroz o papa y ensalada.']},
   {n:'Merienda',h:'4:00 pm',ll:[PL_S,'Fruta 1 unidad'],op:['<b>A.</b> Yogur griego con manzana y canela.','<b>B.</b> Tostadas de arroz con atún y 1 manzana.']},
   {n:'Cena',h:'7:00–8:00 pm',ll:[PL_P,PL_C,PL_V,PL_G],op:['<b>A.</b> Algo de lo que acabas de cocinar en el batch.','<b>B.</b> Huevos revueltos con verduras y tostadas de arroz.']}]}
@@ -766,7 +777,7 @@ let wD=todayDow(),wDate=dk();
 let homeDay=todayDow(),recDay=todayDow(),recDate=dk();
 let currentCDay='pm',currentCMeal={pm:'des',am:'pre',rest:'des'};
 
-const APP_VER='2026-11-08.9';
+const APP_VER='2026-11-15.1';
 const RESET_TOKEN='inicio-limpio-2026-08-09';
 let curDay=null;
 
